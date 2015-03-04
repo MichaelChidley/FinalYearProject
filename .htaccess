@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(([\e].*)?([0-9].*)?([a-z].*)?(\.*)?([?>\s\?\!\"\%A3\$\%\^\//\:\&\*\(\)\_\+\=\`\?\|\\-].*)?)*$ index.php [nc]
