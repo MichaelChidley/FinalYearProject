@@ -8,6 +8,8 @@
 
 	$configArray['API_KEY'] = "CxcgOD9E9drJdnemNFbsBB8j2yNftWv+44w+e8PkmylQzsNz2RzPdxdMiE6tjCCB";
 
+	$configArray['FALL_BACK'] = $configArray['SITE_URL'];
+
 
 	//WEBSITE STYLING SETTINGS: CSS, JS ETC
 	$styleArray = array();
@@ -19,5 +21,8 @@
 	$styleArray['BOOTSTRAP_JS'] = $configArray['SITE_URL']."theme/bootstrap/js/bootstrap.js";
 
 
+
+
+	$configPages = array("");
 
 ?>
