@@ -188,6 +188,8 @@ Class API
 				----------------------------------------------------------------------------------*/
 				private function handleAPIPostCall()
 				{
+						$objSecurity = new Security();
+						$_POST = $objSecurity->decryptInformation($_POST['data']);
 						if(is_array($_POST))
 						{
 

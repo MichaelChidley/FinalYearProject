@@ -48,8 +48,10 @@ $strRequestMethod = $_SERVER['REQUEST_METHOD'];
 $API = new API();
 $API->setMethod($strRequestMethod);
 
+
+$objSecurity = new Security();
 //Return the response to the page
-echo $API->getAPIResponse();
+echo $objSecurity->encryptInformation($API->getAPIResponse());
 
 
 ?>

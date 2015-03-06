@@ -10,9 +10,32 @@ include_once("includes/config.php");
 //TRYING TO INCLUDE CLASSES ETC
 
 include_once("includes/classes/page/clsPage.php");
+include_once("includes/classes/security/clsSecurity.php");
+include_once("includes/classes/api/clsAPI.php");
+
+
+$objSecurity = new Security();
+
+$API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
 $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
+
+
+//testing gets work
+//$API->handleAPICall(array(),"bug","1");	//working
+//echo $API->getAPIResponse();				//working
+
+//post to create bug, working.
+//$array = array("module"=>"bug","operation"=>"create","data" => array("bug" => array( array("title"=>"title","description"=>"desc","line"=>"101","reportedby"=>"MJC","fixed"=>"0","deleted"=>"0"))),"APIKey"=>$configArray['API_KEY']);
+
+//$encrypted = $objSecurity->encryptInformation($array);		//works!
+//$decrypted = $objSecurity->decryptInformation($encrypted);	//works"
+//echo $encrypted;
+//print_r($decrypted);
+
+//$API->handleAPICall($array);		//works
+//echo $API->getAPIResponse();		//works
 
 ?>
 
