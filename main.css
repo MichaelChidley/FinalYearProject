@@ -3,12 +3,13 @@ body
 	margin: 0px;
 	padding: 0px;
 
-	font-family: Verdana;
+	font-family: 'Open Sans', sans-serif;
+
 }
 
 #menu
 {
-	background: #08567e;
+	background: #154971;
 
 	width: 100%;
 
@@ -48,5 +49,100 @@ body
 
 #menu #menuItemSelected
 {
+	height: 80px;
 	background: #0c77ae;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.navbar-default {
+    background-color: #144971;
+    border-color: #144971;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover
+{
+	color: #FFF;
+}
+
+
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #144971;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #FFF;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFF;
+    background-color: #0c77ae;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #FFF;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #FFF;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #FFF;
+    }
+}
+
+
+#loginBox
+{
+	background: url(images/loginBackgroundGradient.png) repeat-x;
+	background-color: #144971;
+
+	width: 100%;
+	height: 100%;
+
+	min-height: 100%;
+}
+
+#loginBox #loginLogo
+{
+	background: url(images/pmclogo.png) no-repeat;
+	width: 200px;
+	height: 197px;
+	position: relative;
+}
+
+#loginBox #loginContent
+{
+	height: 300px;
+	position: absolute;
+}
+
+#loginCredentials input
+{
+        width: 388px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: normal;
+        border: solid 1px #e7e7e7;
+        padding-left: 8px;
+        color: #091e2e;
+        margin-top:15px;
+
+}
+
+#loginBox #loginresultholder
+{
+	color: red;
+	padding-top: 10px;
 }

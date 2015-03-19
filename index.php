@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once("includes/config.php");
 
 
@@ -37,6 +39,21 @@ $strRequestedPage = $objPage->getRequestedPage();
 //$API->handleAPICall($array);		//works
 //echo $API->getAPIResponse();		//works
 
+
+//LOGIN FUNCTIONALITY WORKING
+//$array = $API->buildAPIRequest("login","login",array("login" => array( array("username"=>"joe.bloggs@gmail.com","password"=>"password"))));
+//$API->handleAPICall($array);
+//if($API->isSuccessful($API->getAPIResponse()))
+//{
+//	echo "Log in stuff";
+//}
+
+//unset($_SESSION['postcheck']);
+//unset($_SESSION['username']);
+//unset($_SESSION['authentication']);
+
+//print_r($_SESSION);
+
 ?>
 
 <html>
@@ -49,19 +66,64 @@ $strRequestedPage = $objPage->getRequestedPage();
 		<link rel='stylesheet' type='text/css' href="<?= $styleArray['BOOTSTRAP_CSS']; ?>" />
 		<link rel='stylesheet' type='text/css' href="<?= $styleArray['MAIN_CSS']; ?>" />
 
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+
 	</head>
 
 	<body>
 
-		<div id='container'>
+		<div id='container-fluid'>
+
+		<?php
+
+			if(!isset($_SESSION['authentication']))
+			{
+				?>
+
+				<div id='loginBox'>
 
 
-			<div id='menu'>
-				<div id='menuLogo'></div>
-				<div class='menuLeftMargin'></div>
-				<div class='menuItem' id='menuItemSelected'>HOME</div>
-				<div class='menuItem'>HOME</div>
-			</div>
+					<div id='loginContent'>
+						<div id='loginLogo'></div>
+
+						<div id='loginCredentials'>
+							<div><input type='text' name='username' id='loginUser' value='USERNAME'></div>
+							<div><input type='password' name='password' id='loginPass' value='PASSWORD'></div>
+							<div id='loginresultholder'></div>
+						</div>
+					</div>
+
+
+				</div>
+				<?php
+				die;
+			}
+
+
+		?>
+
+
+      		<nav class="navbar navbar-default">
+				  <div class="navbarStyle">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+				      	</button>
+				      	<a class="navbar-brand" href="#">Project Management Console</a>
+				    </div>
+
+      				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="#">Projects</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 
 			<div id='pageContent'>
 				<?php

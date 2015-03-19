@@ -30,11 +30,11 @@ include("includes/classes/security/clsSecurity.php");
 
 
 
-
 //////// INCLUDE MODULE CLASSES /////////
 include("includes/classes/bug/clsBug.php");
 include("includes/classes/user/clsUser.php");
 include("includes/classes/team/clsTeam.php");
+include("includes/classes/login/clsLogin.php");
 
 
 
@@ -42,7 +42,6 @@ include("includes/classes/team/clsTeam.php");
 
 //Obtain the requested message sent via HTTP (GET/POST/PUT/DELETE)
 $strRequestMethod = $_SERVER['REQUEST_METHOD'];
-
 
 //Create a new instance of the API class
 $API = new API();

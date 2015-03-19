@@ -91,6 +91,12 @@ class API
 
 		$returnData = curl_exec($curl);
 
+
+
+/******* DEBUG TO OUTPUT API INFORMATION USE VARIABLE BELOW!! ***************/
+		//echo $returnData;
+
+
 		curl_close($curl);
 
 		$this->APIResponse = $returnData;
@@ -144,6 +150,21 @@ class API
 		$objSecurity = new Security();
 
 		return $objSecurity->decryptInformation($this->APIResponse);
+	}
+
+
+	public function buildAPIRequest($strModule,$strOperation,$arrData)
+	{
+		return array("module"=>$strModule,"operation"=>$strOperation,"data" => $arrData,"APIKey"=>$this->APIKEY);
+	}
+
+	public function isSuccessful($jsonString)
+	{
+		if(strpos($jsonString, "Operation Successful") !==false )
+		{
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -231,6 +231,13 @@ Class API
 																		break;
 
 
+																		case 'login':
+																				$objLogin = new Login();
+																				$this->objFeedback->setFeedback($objLogin->init($_POST['operation'],$_POST['data']));
+																				return $this->APIResponse();
+																		break;
+
+
 																		default:
 																				$this->objFeedback->setFeedback("Invalid method type");
 																				return $this->APIResponse();
