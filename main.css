@@ -146,3 +146,47 @@ body
 	color: red;
 	padding-top: 10px;
 }
+
+
+.span12
+{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+
+
+
+
+
+/********** BLOCK STYLING *****************/
+.headingBlock
+{
+	background-color: #ededed;
+	color: #505050;
+	padding: 5px;
+	font-size: 22px;
+
+}
+.blockContent
+{
+	padding: 5px;
+	border: solid 2px #ededed;
+}
+
+.activityContent
+{
+	padding: 5px;
+	border-top: solid 1px #ededed;
+}
+
+.activityContent:first-of-type
+{
+	border-top: none;
+}
+
+.recentActivityProjTitle
+{
+	font-size: 12px;
+	float: right;
+}

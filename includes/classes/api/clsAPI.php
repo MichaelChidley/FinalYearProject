@@ -53,7 +53,7 @@ class API
 
 	Out:	bool 	true
 	----------------------------------------------------------------------------------*/
-	public function handleAPICall($arrPostInfo=array(),$strModule=0,$intID=0)
+	public function handleAPICall($arrPostInfo=array(),$strModule=0,$method=0,$intID=0)
 	{
 		if(count($arrPostInfo) > 0)
 		{
@@ -63,7 +63,7 @@ class API
 		else
 		{
 			//otherwise it is going to be a get.
-			return $this->handleAPIGet($strModule,$intID);
+			return $this->handleAPIGet($strModule,$method,$intID);
 		}
 	}
 
@@ -115,7 +115,7 @@ class API
 
 	Out:	bool 	true
 	----------------------------------------------------------------------------------*/
-	public function handleAPIGet($strModule, $intID)
+	public function handleAPIGet($strModule, $strMethod, $intID)
 	{
 		//using curl to handle requests!
 		//url: baseurl/key/module/id
@@ -123,7 +123,7 @@ class API
 		$curl = curl_init();
 		$timeout = 5;
 
-		curl_setopt($curl, CURLOPT_URL, $this->APIURL.$this->APIKEY."/".$strModule."/".$intID);
+		curl_setopt($curl, CURLOPT_URL, $this->APIURL.$this->APIKEY."/".$strModule."/".$strMethod."/".$intID);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
 
@@ -149,6 +149,7 @@ class API
 	{
 		$objSecurity = new Security();
 
+		//return $this->convertJsonArrayToArray($objSecurity->decryptInformation($this->APIResponse));
 		return $objSecurity->decryptInformation($this->APIResponse);
 	}
 
@@ -165,6 +166,12 @@ class API
 			return true;
 		}
 		return false;
+	}
+
+
+	public function convertJsonArrayToArray($jsonString)
+	{
+		return json_decode($jsonString, true);
 	}
 
 }

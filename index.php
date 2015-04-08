@@ -24,6 +24,11 @@ $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
 
 
+
+//INCLUDE MODULES
+include_once("includes/classes/project/clsProject.php");
+include_once("includes/classes/activity/clsActivity.php");
+
 //testing gets work
 //$API->handleAPICall(array(),"bug","1");	//working
 //echo $API->getAPIResponse();				//working
@@ -125,7 +130,7 @@ $strRequestedPage = $objPage->getRequestedPage();
 				</div>
 			</nav>
 
-			<div id='pageContent'>
+			<div id='pageContent' class='span12'>
 				<?php
 					if($strRequestedPage)
 					{

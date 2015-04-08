@@ -158,6 +158,32 @@ Class Database
                 return false;
         }
 
+
+        public function returnAllRows($strTable)
+        {
+            //return "IN THE API SIDE, DATABASE CLASS. RETURN ALL ROWS METHOD NOT WORKING!!";
+            $strQry = "SELECT * FROM ".$strTable;
+            //return $strQry;
+            $result = $this->result($strQry);
+
+            $info = array();
+
+            while($row = mysqli_fetch_array($result, MYSQL_ASSOC))
+            {
+                $tempArray = array();
+                foreach($row as $field => $value)
+                {
+                  $tempArray[$field] = $value;
+                  //array_push($tempArray, array($field => $value));
+                }
+                array_push($info, $tempArray);
+            }
+
+            return $info;
+
+
+        }
+
         /*----------------------------------------------------------------------------------
       	Function:	returnSingleData
       	Overview:	Function to return a single cell from the specified table

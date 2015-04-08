@@ -35,13 +35,14 @@ include("includes/classes/bug/clsBug.php");
 include("includes/classes/user/clsUser.php");
 include("includes/classes/team/clsTeam.php");
 include("includes/classes/login/clsLogin.php");
-
-
+include("includes/classes/project/clsProject.php");
+include("includes/classes/activity/clsActivity.php");
 
 
 
 //Obtain the requested message sent via HTTP (GET/POST/PUT/DELETE)
 $strRequestMethod = $_SERVER['REQUEST_METHOD'];
+
 
 //Create a new instance of the API class
 $API = new API();
@@ -49,6 +50,9 @@ $API->setMethod($strRequestMethod);
 
 
 $objSecurity = new Security();
+
+//echo $API->getAPIResponse();
+
 //Return the response to the page
 echo $objSecurity->encryptInformation($API->getAPIResponse());
 

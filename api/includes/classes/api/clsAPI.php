@@ -93,6 +93,7 @@ Class API
 				----------------------------------------------------------------------------------*/
 				private function handleAPIGetCall()
 				{
+
 								$requestedPage = $_SERVER["REQUEST_URI"];
 
 								$requestedPage = str_replace($this->location, '', $requestedPage);
@@ -116,10 +117,15 @@ Class API
 										{
 												$requestedModule = $arrPages[1];
 
-												if(isset($arrPages[2]))
+												$requestedMethod = $arrPages[2];
+												if(isset($arrPages[3]))
 												{
-														$id = $arrPages[2];
+														$id = $arrPages[3];
 												}
+
+
+												//$this->objFeedback->setFeedback($requestedMethod);
+												//return $this->APIResponse();
 
 												switch($requestedModule)
 												{
@@ -140,9 +146,24 @@ Class API
 																		$objTeam = new Team();
 																		$this->objFeedback->setFeedback($objTeam->getTeam($id));
 																		return $this->APIResponse();
+														break;
+
+
+														case "project":
+																		$objProject = new Project();
+																		$this->objFeedback->setFeedback($objProject->init($requestedMethod, $id));
+																		return $this->APIResponse();
+														break;
+
+
+														case "activity":
+																		$objActivity = new Activity();
+																		$this->objFeedback->setFeedback($objActivity->init($requestedMethod,$id));
+																		return $this->APIResponse();
+														break;
 
 														default:
-																		$this->objFeedback->setFeedback("Invalid method type");
+																		$this->objFeedback->setFeedback("Invalid get method type");
 																		return $this->APIResponse();
 														break;
 												}
@@ -239,7 +260,7 @@ Class API
 
 
 																		default:
-																				$this->objFeedback->setFeedback("Invalid method type");
+																				$this->objFeedback->setFeedback("Invalid post method type");
 																				return $this->APIResponse();
 																		break;
 																}
