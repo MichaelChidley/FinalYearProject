@@ -4,7 +4,7 @@ session_start();
 
 include_once("includes/config.php");
 
-
+//unset($_SESSION['authentication']);
 //INCLUDE ALL THE CLASSES HERE
 //EVERY PAGE IS REWRITTEN TO USE THIS SINGLE PAGE
 //THEREFORE, ONLY NEED TO INCLUDE CLASSES THE ONCE
@@ -17,6 +17,8 @@ include_once("includes/classes/api/clsAPI.php");
 
 
 $objSecurity = new Security();
+$objSecurity->secureUrl();
+
 
 $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
@@ -28,6 +30,8 @@ $strRequestedPage = $objPage->getRequestedPage();
 //INCLUDE MODULES
 include_once("includes/classes/project/clsProject.php");
 include_once("includes/classes/activity/clsActivity.php");
+include_once("includes/classes/employee/clsEmployee.php");
+include_once("includes/classes/comment/clsComment.php");
 
 //testing gets work
 //$API->handleAPICall(array(),"bug","1");	//working
@@ -125,6 +129,14 @@ include_once("includes/classes/activity/clsActivity.php");
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#">Home</a></li>
 							<li><a href="#">Projects</a></li>
+							<?php
+								//$objEmployee = new Employee($API);
+								//$accountType = $objEmployee->getEmployeeAccountType($_SESSION['authenticationID']);
+								//if($objEmployee->isAdmin($accountType))
+								//{
+								//	echo "ADMIN";
+								//}
+							?>
 						</ul>
 					</div>
 				</div>
@@ -134,6 +146,12 @@ include_once("includes/classes/activity/clsActivity.php");
 				<?php
 					if($strRequestedPage)
 					{
+						$arrUrlExp = explode("/",$strRequestedPage);
+
+						(!empty($arrUrlExp[1])) ? $strRequestedPage = $arrUrlExp[0] : '';
+						(!empty($arrUrlExp[1])) ? $strGetAction = $arrUrlExp[1] : '';
+						(!empty($arrUrlExp[2])) ? $intGetID = $arrUrlExp[2] : '';
+
 						if(in_array($strRequestedPage, $configPages))
 						{
 							include("site_structure/".$strRequestedPage."/index.php");

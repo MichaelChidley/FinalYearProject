@@ -77,6 +77,27 @@ class Security
 
 		return $arrInformation;
 	}
+
+
+	public function secureUrl()
+	{
+		global $configArray;
+
+		$url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+		$arrIllegal = array("'",'"');
+
+		foreach($arrIllegal as $arrIndIllegal)
+		{
+			$pos = strpos($url, $arrIndIllegal);
+
+			if($pos !== false)
+			{
+				die(header("Location: ".$configArray['FALL_BACK']));
+			}
+		}
+
+	}
 }
 
 ?>

@@ -136,7 +136,7 @@ Class Database
                  $strFieldWhereValue    String          Field value to check
 
       	Out:     $arrInfo               Array           Array of information
-	----------------------------------------------------------------------------------*/
+	     ----------------------------------------------------------------------------------*/
         public function returnRow($strTable, $strFieldWhere, $strFieldWhereValue)
         {
                 $strQry = "SELECT * FROM ".$strTable." WHERE ".$strFieldWhere." = '".$strFieldWhereValue."'";

@@ -156,7 +156,20 @@ body
 
 
 
+.clear
+{
+	clear:both;
+}
 
+.hidden
+{
+	display: none;
+}
+
+.show
+{
+	display: block;
+}
 
 
 /********** BLOCK STYLING *****************/
@@ -168,10 +181,25 @@ body
 	font-size: 22px;
 
 }
+
+.secondLevelHeading
+{
+	color: #505050;
+	padding: 5px;
+	font-size:18px;
+	padding-left:0px;
+	font-weight: 600;
+}
+
 .blockContent
 {
 	padding: 5px;
 	border: solid 2px #ededed;
+}
+
+.pageContent
+{
+	padding: 5px;
 }
 
 .activityContent
@@ -189,4 +217,60 @@ body
 {
 	font-size: 12px;
 	float: right;
+}
+
+
+.contentOffsetTop
+{
+	margin-top:15px;
+}
+
+
+
+/************ PROJECT TABLE STYLING ********/
+.projectsTable td
+{
+	font-size: 14px;
+}
+
+
+.low
+{
+	background-color: red;
+}
+
+.medium
+{
+	background-color: #FFC200;
+}
+
+.high
+{
+	background-color: #9CFF00;
+}
+
+
+
+.projectComment
+{
+	padding-bottom: 5px;
+}
+
+
+
+.projectComment .projectCommentOwner
+{
+	font-size: 12px;
+}
+
+
+.projectProgressBackground
+{
+	background-color: #bababa;
+	width: 30%;
+}
+
+.projectProgressForeground
+{
+	padding-left: 30%;
 }

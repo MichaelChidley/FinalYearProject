@@ -15,7 +15,7 @@ Uses:
 
 */
 
-Class Activity
+Class Comment
 {
 
 	private $ActivityID;
@@ -32,8 +32,8 @@ Class Activity
 			{
 				switch($operation)
 				{
-					case "returnAllActivity":
-						return $this->returnAllActivity();
+					case "returnAllComments":
+						return $this->returnAllComments();
 					break;
 
 
@@ -80,10 +80,10 @@ Class Activity
 		}
 
 
-		public function returnAllActivity()
+		public function returnAllComments()
 		{
 			$objDatabase = new Database();
-			return $objDatabase->returnAllRows("activity");
+			return $objDatabase->returnAllRows("comments");
 		}
 
 		public function getSingleActivity($id)

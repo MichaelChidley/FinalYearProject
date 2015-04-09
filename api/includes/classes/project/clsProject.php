@@ -45,6 +45,10 @@ Class Project
 					case "returnSingleProject":
 						return $this->returnSingleProject($intID);
 					break;
+
+					case "getProjectUsers":
+						return $this->returnProjectUsers($intID);
+					break;
 				}
 			}
 
@@ -93,6 +97,32 @@ Class Project
 		{
 			$objDatabase = new Database();
 			return $objDatabase->returnRow("projects","projectID",$id);
+		}
+
+
+		public function returnProjectUsers($id)
+		{
+			$objDatabase = new Database();
+			$query = "SELECT projectteam.projectID, projectteam.teamID, employeeteams.employeeID
+						FROM projectteam
+						INNER JOIN employeeteams
+						ON projectteam.teamID=employeeteams.teamID
+						WHERE projectteam.projectID = '".$id."'";
+			$dbSet = $objDatabase->result($query);
+
+
+			$arrProjectUsers = array();
+			if($objDatabase->exists($dbSet))
+			{
+				while($row = mysqli_fetch_array($dbSet, MYSQL_ASSOC))
+				{
+                	array_push($arrProjectUsers, $row['employeeID']);
+				}
+
+                return $arrProjectUsers;
+			}
+
+			return false;
 		}
 
 

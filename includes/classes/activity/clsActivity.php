@@ -23,6 +23,12 @@ Class Activity
 		return $this->API->getAPIResponse();
 	}
 
+	public function getActivityByProjectID($id)
+	{
+		$this->API->handleAPICall(array(),"activity","returnSingleActivityByPrjID",$id);
+		return $this->API->getAPIResponse();
+	}
+
 	public function getActivitiesRelatingToUser()
 	{
 		//Create the initial database query using inner joins to join the required tables together

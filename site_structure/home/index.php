@@ -5,7 +5,7 @@
 
 
 //
-
+//print_r($_SESSION);
 $objActivity = new Activity($API);
 $objProject = new Project($API);
 
@@ -13,6 +13,7 @@ $arrActivites = $API->convertJsonArrayToArray($objActivity->getAllActivity());
 
 $intLimit = 5;
 $intCounter = 0;
+
 
 ?>
 <div class="row-fluid">
@@ -31,7 +32,7 @@ $intCounter = 0;
 					$arrProject = $arrProject['response'];
 
 					echo "<div class='activityContent'>".$arrIndActivites['activityDescription']."  <span class='recentActivityProjTitle'>Project: ". $arrProject['projectTitle']."</span></div>";
-					echo "<div style='clear:both;'></div>";
+					echo "<div class='clear'></div>";
 					$intCounter++;
 				}
 

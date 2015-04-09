@@ -1,8 +1,10 @@
-var SITE_URL = window.location;
+var SITE_URL = "http://" + location.hostname + "/Uni/FinalYearProject/";
 
 $(document).ready(function()
 {
 	handleLogin();
+
+    handleProjectPageActivityPolling();
 
 });
 
@@ -98,4 +100,33 @@ function checkLogin()
                     }
             }
     });
+}
+
+
+
+function handleProjectPageActivityPolling()
+{
+    setInterval(handleProjectPageActivityPolling,60000);
+    if($("#projectPageActivityPolling").length > 0)
+    {
+        var projectID = $("#projectID").text();
+
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/projectpolling.php",
+            type:           "post",
+            data:           "projectID="+projectID,
+            dataType:       "text",
+            success:        function(html)
+            {
+                    if(html)
+                    {
+                            $("#projectPageActivityPolling").html(html)
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+    }
 }

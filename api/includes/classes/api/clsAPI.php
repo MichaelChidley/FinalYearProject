@@ -162,6 +162,18 @@ Class API
 																		return $this->APIResponse();
 														break;
 
+														case "employee":
+																		$objEmployee = new Employee();
+																		$this->objFeedback->setFeedback($objEmployee->init($requestedMethod,$id));
+																		return $this->APIResponse();
+														break;
+
+														case "comments":
+																		$objComment = new Comment();
+																		$this->objFeedback->setFeedback($objComment->init($requestedMethod,$id));
+																		return $this->APIResponse();
+														break;
+
 														default:
 																		$this->objFeedback->setFeedback("Invalid get method type");
 																		return $this->APIResponse();

@@ -21,6 +21,7 @@ session_start();
 include_once("../config.php");
 include_once("../classes/security/clsSecurity.php");
 include_once("../classes/api/clsAPI.php");
+include_once("../classes/employee/clsEmployee.php");
 
 if((isset($_POST['user'])) && (isset($_POST['pass'])))
 {
@@ -31,6 +32,13 @@ if((isset($_POST['user'])) && (isset($_POST['pass'])))
 
         if($API->isSuccessful($API->getAPIResponse()))
         {
+        		//get userID from database and set it as a session.
+        		$objEmployee = new Employee($API);
+        		$arrEmployee = $API->convertJsonArrayToArray($objEmployee->getSingleEmployeeByEmail($_POST['user']));
+
+        		$intEmployeeID = $arrEmployee['response']['employeeID'];
+
+        		$_SESSION['authenticationID'] = $intEmployeeID;
                 $_SESSION['authentication'] = $_POST['user'];
                 echo "true";
         }
