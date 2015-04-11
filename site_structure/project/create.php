@@ -97,7 +97,7 @@
 
 						foreach($arrTeams as $arrIndTeams)
 						{
-							echo "<option value='".$arrIndTeams['teamTitle']."'>".$arrIndTeams['teamTitle']."</option>";
+							echo "<option id=".$arrIndTeams['teamID']." value='".$arrIndTeams['teamTitle']."'>".$arrIndTeams['teamTitle']."</option>";
 						}
 					?>Z
 
@@ -145,7 +145,7 @@
 			<tr>
 				<td><div class="fourthLevelHeading">Total Project Days: <span id='createSprintInfoTotalPrjDays'></span></div></td>
 				<td><div class="fourthLevelHeading">Total Sprints: <span id='createSprintInfoTotalSprints'></span></div></td>
-				<td><div class="fourthLevelHeading">Days Per Sprint: <span id='createSprintInfoTotalSprintDays'></span></div></td>
+				<td><div class="fourthLevelHeading">Days Per Sprint <small>(Est)</small> : <span id='createSprintInfoTotalSprintDays'></span></div></td>
 
 			</tr>
 
@@ -244,9 +244,11 @@
 
 
 			<table class="table createSprintInfoXP">
-				<tr>
-					<td>XP STUFF TABLE</td>
+				<tr class='createPP'>
+					<td><div class="fourthLevelHeading">Pair Programming</div></td>
 				</tr>
+
+
 
 			</table>
 

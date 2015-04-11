@@ -52,6 +52,11 @@ Class Team
 								case "getProjectUsers":
 									return $this->returnProjectUsers($intID);
 								break;
+
+
+								case "returnTeamMembersByTeamID":
+									return $this->returnTeamMembersByTeamID($intID);
+								break;
 							}
 						}
 
@@ -129,6 +134,8 @@ Class Team
 
 					return false;
 				}
+
+
 
 
 				public function returnAllTeams()

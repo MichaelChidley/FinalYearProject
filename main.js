@@ -351,10 +351,34 @@ function handleToggleXPMethodologies()
     $("[name=createProjectUseXP]").click(function()
     {
         $(".createSprintInfoXP").slideToggle("slow");
+
+        handleGetTeamMembersForPP();
     });
 }
 
 
+function handleGetTeamMembersForPP()
+{
+    var teamID = $("[name=projectTeam]").find(":selected").attr("id");
+
+    $.ajax({
+            url:            SITE_URL+"/includes/lib/projectreturnteammembers.php",
+            type:           "post",
+            data:           "teamID="+teamID,
+            dataType:       "text",
+            success:        function(html)
+            {
+                    if(html)
+                    {
+                            $(".createSprintInfoXP").append(html);
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+}
 
 function handleCreateProjectCreate()
 {
@@ -363,8 +387,15 @@ function handleCreateProjectCreate()
     {
         var dataset = {};
         $('#createProjectForm').find('input, textarea, select, span').each(function(i, field) {
-            dataset[field.name] = field.value;
 
+            if(field.type == "checkbox")
+            {
+                dataset[field.name] = 1;
+            }
+            else
+            {
+                dataset[field.name] = field.value;
+            }
         });
 
 
@@ -378,7 +409,14 @@ function handleCreateProjectCreate()
             var name = "createSprintInfoSprintFinish_"+i;
             var value = $(".createSprintInfoSprintFinish_"+i).text();
             dataset[name] = value;
+
         }
+
+        var totalProjectDays = $("#createSprintInfoTotalPrjDays").text();
+        dataset['totalProjectDays'] = totalProjectDays;
+
+        var totalDaysPerSprint = $("#createSprintInfoTotalSprintDays").text();
+        dataset['totalDaysPerSprint'] = totalDaysPerSprint;
 
 
         dataset = JSON.stringify(dataset);

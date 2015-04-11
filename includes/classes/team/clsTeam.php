@@ -23,6 +23,12 @@ Class Team
 		return $this->API->getAPIResponse();
 	}
 
-
+	/*
+	public function getTeamMembersByTeamID($intTeamID)
+	{
+		$this->API->handleAPICall(array(),"team","returnTeamMembersByTeamID", $intTeamID);
+		return $this->API->getAPIResponse();
+	}
+	*/
 }
 ?>

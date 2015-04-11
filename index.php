@@ -22,6 +22,7 @@ $objSecurity->secureUrl();
 
 $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
+
 $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
 
