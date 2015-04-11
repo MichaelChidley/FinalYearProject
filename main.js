@@ -8,7 +8,10 @@ $(document).ready(function()
     handleCreateNewProjectClient();
     handleCreateProjectNextButtons();
     handleCreateAdditionalSprintBacklogItem();
+    handleCreateProjectToggles();
+    handleToggleXPMethodologies();
 
+    handleCreateProjectCreate();
 
 
 });
@@ -167,6 +170,40 @@ function handleCreateProjectNextButtons()
             $("#createProjectBlockTwo").slideDown("slow");
         });
     });
+
+
+    $("#createProjectNextStepTwo").click(function()
+    {
+        $("#createProjectBlockTwo").slideUp("slow", function()
+        {
+            $("#createProjectBlockThree").slideDown("slow");
+        });
+    });
+
+    return false;
+}
+
+
+function handleCreateProjectToggles()
+{
+    $("#createProjectToggleBlockOne").click(function()
+    {
+        $("#createProjectBlockOne").slideToggle("slow");
+    });
+
+
+    $("#createProjectToggleBlockTwo").click(function()
+    {
+        $("#createProjectBlockTwo").slideToggle("slow");
+    });
+
+
+    $("#createProjectToggleBlockThree").click(function()
+    {
+        $("#createProjectBlockThree").slideToggle("slow");
+    });
+
+
 }
 
 
@@ -182,7 +219,7 @@ function handleCreateAdditionalSprintBacklogItem()
         var moscow = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=projectSprintMoscow_1]").attr("name","projectSprintMoscow_"+(count+1));
         var comment = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=backlogComment_1]").attr("name","backlogComment_"+(count+1));
 
-
+        var planningPoker = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=createSprintInfoSprintPokerVal_1]").attr("name","createSprintInfoSprintPokerVal_"+(count+1));
     });
 }
 
@@ -213,7 +250,73 @@ function handleSprintCalculation()
     $("#createSprintInfoTotalSprintDays").text(totalSprintDays);
     $("#createSprintInfoTotalSprints").text(totalSprints);
 
+    handleCreatingSprintGoals();
+    handleCreateSprintDates();
     //alert(totalSprintDays);
+}
+
+function handleCreatingSprintGoals()
+{
+    var totalSprints = $("#createSprintInfoTotalSprints").text();
+
+    for (i = 2; i <= totalSprints; i++)
+    {
+        var x = $(".createSprintInfoSprintGoal_1").clone().attr("class","createSprintInfoSprintGoal createSprintInfoSprintGoal_"+i).appendTo(".createSprintInfoDetails");
+        var input = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintGoalText").text("Sprint "+i+" Goal: ");
+        var textarea = $(".createSprintInfoSprintGoal_"+i).find("textarea").attr("class","createSprintInfoSprintDesc_"+i);
+
+
+        var sprintStart = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintStart").attr("class","createSprintInfoSprintStart_"+i);
+        var sprintFinish = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintFinish").attr("class","createSprintInfoSprintFinish_"+i);
+        //var select = $(".createSprintInfoSprintGoal_"+i).find("select").attr("name","createSprintInfoSprintPokerVal_"+i);
+
+    }
+}
+
+function handleCreateSprintDates()
+{
+    var prjStart = $("[name=projectStartDate]").val();
+
+    var totalDays = parseInt($("#createSprintInfoTotalPrjDays").text());
+    var totalSprints = parseInt($("[name=projectSprints]").find(":selected").text());
+
+    var totalSprintDays = Math.floor(totalDays/totalSprints);
+
+    var text = returnSprintDates(prjStart,totalSprintDays);
+
+    $(".createSprintInfoSprintStart_1").text(prjStart);
+    $(".createSprintInfoSprintFinish_1").text(text);
+
+
+    //Get the total number of sprint elements
+    var totalNumberOfSprintItems = $(".createSprintInfoSprintGoal").length;
+
+
+    //get the first date to start from within the iteration
+    //this date is populated in the few lines above
+    //we start from this date as the initial offset
+    //Basically is end date of first sprint
+    var startIterationDate = $(".createSprintInfoSprintFinish_1").text();
+
+    //start loop offset at 2, go until max number of elements
+    for(i = 2; i <= totalNumberOfSprintItems; i++)
+    {
+        //find the current start element
+        //createSprintInfoSprintGoal_2
+        //etc
+        //find the start date in the element
+        //createSprintInfoSprintStart_2
+        //set the start date to be the finish date of the previous element
+        //createSprintInfoSprintFinish_1
+
+        var previousEndDate = $(".createSprintInfoSprintGoal_"+(i-1)).find(".createSprintInfoSprintFinish_"+(i-1)).text();
+        $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintStart_"+i).text(previousEndDate);
+
+        var newFinishDate = returnSprintDates(previousEndDate,totalSprintDays);
+        $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintFinish_"+i).text(newFinishDate);
+
+    }
+
 }
 
 function showDays(firstDate,secondDate)
@@ -228,5 +331,77 @@ function showDays(firstDate,secondDate)
 
     // Round down.
     return Math.floor(days);
+
+}
+
+function returnSprintDates(startDate,days)
+{
+    var startDay = new Date(startDate);
+    var endDate = new Date(startDay);
+
+    endDate.setDate(startDay.getDate()+days);
+
+
+    return endDate.toLocaleDateString("en-US");
+}
+
+
+function handleToggleXPMethodologies()
+{
+    $("[name=createProjectUseXP]").click(function()
+    {
+        $(".createSprintInfoXP").slideToggle("slow");
+    });
+}
+
+
+
+function handleCreateProjectCreate()
+{
+
+    $("#create").click(function()
+    {
+        var dataset = {};
+        $('#createProjectForm').find('input, textarea, select, span').each(function(i, field) {
+            dataset[field.name] = field.value;
+
+        });
+
+
+        var totalSprints = $("#createSprintInfoTotalSprints").text();
+        for(i = 1; i <= totalSprints; i++)
+        {
+            var name = "createSprintInfoSprintStart_"+i;
+            var value = $(".createSprintInfoSprintStart_"+i).text();
+            dataset[name] = value;
+
+            var name = "createSprintInfoSprintFinish_"+i;
+            var value = $(".createSprintInfoSprintFinish_"+i).text();
+            dataset[name] = value;
+        }
+
+
+        dataset = JSON.stringify(dataset);
+
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/createproject.php",
+            type:           "post",
+            data:           "data="+dataset,
+            dataType:       "text",
+            success:        function(html)
+            {
+                console.log(html);
+                    if(html)
+                    {
+                            //$("#projectPageActivityPolling").html(html)
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+        //console.log(data);
+    });
 
 }

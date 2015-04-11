@@ -8,8 +8,9 @@
 <div class="row-fluid contentOffsetTop">
 
 
-	<div class='createProjectBlocks'>Step 1 <span class='fright' id='createProjectToggleBlockOne'>V</span></div>
+	<div class='createProjectBlocks'>Step 1: Inital Project Information <span class='fright' id='createProjectToggleBlockOne'>V</span></div>
 
+	<form id='createProjectForm' name='createProject' onsubmit="return false;">
 	<div class='createProjectBlockContent table-responsive' id='createProjectBlockOne'>
 		<table class="table createProjectTable">
 
@@ -134,7 +135,7 @@
 
 
 
-		<div class='createProjectBlocks'>Step 2 <span class='fright' id='createProjectToggleBlockTwo'>V</span></div>
+		<div class='createProjectBlocks'>Step 2: Sprint Planning <span class='fright' id='createProjectToggleBlockTwo'>V</span></div>
 
 
 		<div class='createProjectBlockContent table-responsive' id='createProjectBlockTwo'>
@@ -148,6 +149,14 @@
 
 			</tr>
 
+			<tr class='createSprintInfoSprintGoal createSprintInfoSprintGoal_1'>
+				<td><div class="fourthLevelHeading createSprintInfoSprintGoalText">Sprint 1 Goal: </div></td>
+				<td><textarea class='createSprintInfoSprintDesc_1' name='createSprintInfoSprintDesc_1'></textarea></td>
+
+				<td>Start: <span class='createSprintInfoSprintStart createSprintInfoSprintStart_1' name='createSprintInfoSprintStart_1'></span></td>
+				<td>Finish: <span class='createSprintInfoSprintFinish createSprintInfoSprintFinish_1' name='createSprintInfoSprintFinish_1'></span></td>
+			</tr>
+
 		</table>
 
 
@@ -157,6 +166,7 @@
 				<th><div class="fourthLevelHeading">Backlog Item</div></th>
 				<th><div class="fourthLevelHeading">MoSCoW</div></th>
 				<th><div class="fourthLevelHeading">Comment</div></th>
+				<th><div class='fourthLevelHeading'>Planning Poker Value</div></th>
 			</tr>
 
 			<tr class='createSprintInfoBacklogItem createSprintInfoBacklogItem_1'>
@@ -175,6 +185,24 @@
 				<td><input type='text' name='backlogComment_1'></td>
 
 
+				<td>
+					<select name='createSprintInfoSprintPokerVal_1'>
+						<option value='0'>0</option>
+						<option value='1'>1</option>
+						<option value='2'>2</option>
+						<option value='3'>3</option>
+						<option value='5'>5</option>
+						<option value='8'>8</option>
+						<option value='13'>13</option>
+						<option value='20'>20</option>
+						<option value='40'>40</option>
+						<option value='100'>100</option>
+
+
+					</select>
+
+				</td>
+
 			</tr>
 
 		</table>
@@ -186,10 +214,48 @@
 				<td><button id='createSprintInfoAddBacklogItem'>Add</button></td>
 			</tr>
 
+			<tr>
+				<td><button id='createProjectNextStepTwo'>Proceed To Next Step</button></td>
+			</tr>
+
 		</table>
 
 
 		</div>
+
+
+
+
+
+
+
+
+		<div class='createProjectBlocks'>Step 3: Agile <span class='fright' id='createProjectToggleBlockThree'>V</span></div>
+
+
+		<div class='createProjectBlockContent table-responsive' id='createProjectBlockThree'>
+
+			<table class="table createSprintInfoUseXP">
+				<tr>
+					<td><div class="fourthLevelHeading">Use XP Methodologies? <input type='checkbox' name='createProjectUseXP'></div></td>
+				</tr>
+
+			</table>
+
+
+			<table class="table createSprintInfoXP">
+				<tr>
+					<td>XP STUFF TABLE</td>
+				</tr>
+
+			</table>
+
+
+		</div>
+
+		</form>
+
+		<button id='create'>Create</button>
 
 
 		<div class='clear'></div>
