@@ -172,6 +172,28 @@ body
 }
 
 
+.green
+{
+	color: green;
+}
+
+.red
+{
+	color: red;
+}
+
+
+.fright
+{
+	float: right;
+}
+
+.fleft
+{
+	float: left;
+}
+
+
 /********** BLOCK STYLING *****************/
 .headingBlock
 {
@@ -187,6 +209,15 @@ body
 	color: #505050;
 	padding: 5px;
 	font-size:18px;
+	padding-left:0px;
+	font-weight: 600;
+}
+
+.fourthLevelHeading
+{
+	color: #505050;
+	padding: 5px;
+	font-size:16px;
 	padding-left:0px;
 	font-weight: 600;
 }
@@ -273,4 +304,50 @@ body
 .projectProgressForeground
 {
 	padding-left: 30%;
+}
+
+.projectBugs
+{
+	padding-bottom: 5px;
+}
+
+
+
+/******* CREATE PROJECTS STYLING **********/
+.createProjectBlocks
+{
+	background-color: #f3f3f3;
+	color: #505050;
+	padding: 2px;
+	font-size: 18px;
+	padding-right:5px;
+	padding-left: 5px;
+
+	margin-top: 20px;
+}
+
+.createProjectBlocks span
+{
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.createProjectBlockContent
+{
+	border: solid 2px #ededed;
+}
+
+.createProjectTable td, .createSprintInfo td, .createSprintInfoAdd td
+{
+	border-top: none !important;
+}
+
+.projectOwnerDetails
+{
+	display: none;
+}
+
+#createProjectBlockTwo
+{
+	display: none;
 }

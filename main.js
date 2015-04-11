@@ -5,6 +5,11 @@ $(document).ready(function()
 	handleLogin();
 
     handleProjectPageActivityPolling();
+    handleCreateNewProjectClient();
+    handleCreateProjectNextButtons();
+    handleCreateAdditionalSprintBacklogItem();
+
+
 
 });
 
@@ -106,7 +111,7 @@ function checkLogin()
 
 function handleProjectPageActivityPolling()
 {
-    setInterval(handleProjectPageActivityPolling,60000);
+    //setInterval(handleProjectPageActivityPolling,60000);
     if($("#projectPageActivityPolling").length > 0)
     {
         var projectID = $("#projectID").text();
@@ -129,4 +134,99 @@ function handleProjectPageActivityPolling()
             }
         });
     }
+}
+
+
+
+function handleCreateNewProjectClient()
+{
+    $("[name=projectCreateNewClientCb]").click(function()
+    {
+        if($(".projectOwnerDetails").css("display") == "none")
+        {
+            $(".projectOwnerDetails").fadeIn();
+        }
+        else
+        {
+            $(".projectOwnerDetails").hide();
+        }
+    });
+}
+
+
+
+
+function handleCreateProjectNextButtons()
+{
+    $("#createProjectNextStepOne").click(function()
+    {
+        handleSprintDateDifference();
+        handleSprintCalculation();
+        $("#createProjectBlockOne").slideUp("slow", function()
+        {
+            $("#createProjectBlockTwo").slideDown("slow");
+        });
+    });
+}
+
+
+function handleCreateAdditionalSprintBacklogItem()
+{
+    $("#createSprintInfoAddBacklogItem").click(function()
+    {
+        var count = parseInt($(".createSprintInfoBacklogItem").length);
+        //alert(count);
+        var x = $(".createSprintInfoBacklogItem_1").clone().attr("class","createSprintInfoBacklogItem createSprintInfoBacklogItem_"+(count+1)).appendTo(".createSprintInfo");
+
+        var input = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=backlogItem_1]").attr("name","backlogItem_"+(count+1));
+        var moscow = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=projectSprintMoscow_1]").attr("name","projectSprintMoscow_"+(count+1));
+        var comment = $(".createSprintInfoBacklogItem_"+(count+1)).find("[name=backlogComment_1]").attr("name","backlogComment_"+(count+1));
+
+
+    });
+}
+
+
+
+function handleSprintDateDifference()
+{
+
+    var prjStart = $("[name=projectStartDate]").val();
+    var prjEnd = $("[name=projectEndDate]").val();
+
+    var dayDifference = showDays(prjEnd,prjStart);
+
+    $("#createSprintInfoTotalPrjDays").text(dayDifference);
+
+}
+
+function handleSprintCalculation()
+{
+    var totalDays = parseInt($("#createSprintInfoTotalPrjDays").text());
+    var totalSprints = parseInt($("[name=projectSprints]").find(":selected").text());
+
+    console.log("Total Days" + totalDays);
+    console.log("Total Sprints" + totalSprints);
+
+    var totalSprintDays = Math.floor(totalDays/totalSprints);
+
+    $("#createSprintInfoTotalSprintDays").text(totalSprintDays);
+    $("#createSprintInfoTotalSprints").text(totalSprints);
+
+    //alert(totalSprintDays);
+}
+
+function showDays(firstDate,secondDate)
+{
+
+    var startDay = new Date(firstDate);
+    var endDay = new Date(secondDate);
+    var millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+    var millisBetween = startDay.getTime() - endDay.getTime();
+    var days = millisBetween / millisecondsPerDay;
+
+    // Round down.
+    return Math.floor(days);
+
 }

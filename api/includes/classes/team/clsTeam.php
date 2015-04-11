@@ -31,11 +31,32 @@ Class Team
 
 				Out:     true/false      bool
 				----------------------------------------------------------------------------------*/
-				public function init($operation,$arrTeamInfo)
+				public function init($operation,$intID=0,$arrTeamInformation=array())
 				{
-								$objFeedback = new Feedback();
+						$objFeedback = new Feedback();
 
-								$arrTeam = $arrTeamInfo['team'];
+						if(count($arrTeamInformation)<1)
+						{
+							switch($operation)
+							{
+								case "returnAllTeams":
+									return $this->returnAllTeams();
+								break;
+
+
+
+								case "returnSingleTeamMembers":
+									return $this->returnSingleTeamMembers($intID);
+								break;
+
+								case "getProjectUsers":
+									return $this->returnProjectUsers($intID);
+								break;
+							}
+						}
+
+
+								$arrTeam = $arrTeamInformation['team'];
 
 								foreach($arrTeam as $arrIndTeam)
 								{
@@ -80,6 +101,42 @@ Class Team
 								}
 
 				}
+
+
+
+				public function returnSingleTeamMembers($id)
+				{
+					$objDatabase = new Database();
+					$query = "SELECT employeeteams.employeeID, employees.firstname, employees.lastname, employees.email
+								FROM employeeteams
+								INNER JOIN employees
+								ON employeeteams.employeeID=employees.employeeID
+								WHERE employeeteams.teamID = '".$id."'";
+					$dbSet = $objDatabase->result($query);
+
+
+					$arrProjectTeamMembers = array();
+					if($objDatabase->exists($dbSet))
+					{
+						while($row = mysqli_fetch_array($dbSet, MYSQL_ASSOC))
+						{
+
+		                	array_push($arrProjectTeamMembers, array("employeeID" => $row['employeeID'], "firstname" => $row['firstname'], "lastname" => $row['lastname'], "email" => $row['email']));
+						}
+
+		                return $arrProjectTeamMembers;
+					}
+
+					return false;
+				}
+
+
+				public function returnAllTeams()
+				{
+					$objDatabase = new Database();
+					return $objDatabase->returnAllRows("teams");
+				}
+
 
 				/*----------------------------------------------------------------------------------
 				Function:	createTeam

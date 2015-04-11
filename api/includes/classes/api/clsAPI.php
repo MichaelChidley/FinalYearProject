@@ -131,7 +131,7 @@ Class API
 												{
 														case 'bug':
 																		$objBug = new Bug();
-																		$this->objFeedback->setFeedback($objBug->getBug($id));
+																		$this->objFeedback->setFeedback($objBug->init($requestedMethod, $id));
 																		return $this->APIResponse();
 														break;
 
@@ -144,7 +144,7 @@ Class API
 
 														case "team":
 																		$objTeam = new Team();
-																		$this->objFeedback->setFeedback($objTeam->getTeam($id));
+																		$this->objFeedback->setFeedback($objTeam->init($requestedMethod, $id));
 																		return $this->APIResponse();
 														break;
 

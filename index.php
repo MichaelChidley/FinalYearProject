@@ -32,6 +32,8 @@ include_once("includes/classes/project/clsProject.php");
 include_once("includes/classes/activity/clsActivity.php");
 include_once("includes/classes/employee/clsEmployee.php");
 include_once("includes/classes/comment/clsComment.php");
+include_once("includes/classes/team/clsTeam.php");
+include_once("includes/classes/bug/clsBug.php");
 
 //testing gets work
 //$API->handleAPICall(array(),"bug","1");	//working

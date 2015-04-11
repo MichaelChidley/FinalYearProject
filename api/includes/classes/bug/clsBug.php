@@ -37,11 +37,21 @@ Class Bug
 
       	Out:     true/false      bool
 	----------------------------------------------------------------------------------*/
-        public function init($operation,$arrBugInfo)
+        public function init($operation,$intID=0,$arrBugInformation=array())
         {
-                $objFeedback = new Feedback();
+            $objFeedback = new Feedback();
 
-                $arrBug = $arrBugInfo['bug'];
+            if(count($arrBugInformation)<1)
+            {
+              switch($operation)
+              {
+                case "returnProjectBugs":
+                  return $this->returnBugsByProjectID($intID);
+                break;
+              }
+            }
+
+                $arrBug = $arrBugnformation['bug'];
 
                 foreach($arrBug as $arrIndBug)
                 {
@@ -82,6 +92,15 @@ Class Bug
 
                 }
 
+        }
+
+
+
+
+        public function returnBugsByProjectID($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->returnAllRowsWhere("bugs","projectID",$id);
         }
 
         /*----------------------------------------------------------------------------------
