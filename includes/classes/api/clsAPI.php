@@ -58,7 +58,7 @@ class API
 		if(count($arrPostInfo) > 0)
 		{
 			//we know if the array has info it is a post method..
-			return $this->handleAPIPost($arrPostInfo);
+			return $this->handleAPIPost($arrPostInfo, $strModule, $method);
 		}
 		else
 		{
@@ -76,13 +76,20 @@ class API
 
 	Out:	bool 	true
 	----------------------------------------------------------------------------------*/
-	public function handleAPIPost($arrayData)
+	public function handleAPIPost($arrayData, $strModule, $strMethod)
 	{
 		$objSecurity = new Security();
+
+		$arrayData["APIKey"] = $this->APIKEY;
+		$arrayData["module"] = $strModule;
+		$arrayData["method"] = $strMethod;
+
 		$arrayData = $objSecurity->encryptInformation($arrayData);
 
 		$curl = curl_init();
 		$timeout = 5;
+
+
 
 		curl_setopt($curl,CURLOPT_URL, $this->APIURL);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -117,11 +124,13 @@ class API
 	----------------------------------------------------------------------------------*/
 	public function handleAPIGet($strModule, $strMethod, $intID)
 	{
+
 		//using curl to handle requests!
 		//url: baseurl/key/module/id
 
 		$curl = curl_init();
 		$timeout = 5;
+
 
 		curl_setopt($curl, CURLOPT_URL, $this->APIURL.$this->APIKEY."/".$strModule."/".$strMethod."/".$intID);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

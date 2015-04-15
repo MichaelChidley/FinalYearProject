@@ -351,6 +351,23 @@ Class Database
         }
 
 
+
+        public function getHighestIDOnTable($id, $strTable)
+        {
+
+            $strQuery = "SELECT MAX(".$id.") FROM ".$strTable;
+
+                  $resultset = $this->result($strQuery);
+
+                while($row = mysqli_fetch_array($resultset))
+                {
+                        return $row[0];
+                }
+                $this->setError(__METHOD__. " - Unable To Get Data");
+                return false;
+        }
+
+
         /*----------------------------------------------------------------------------------
       	Function:	setError
       	Overview:	Function to set errors

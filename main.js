@@ -264,6 +264,7 @@ function handleCreatingSprintGoals()
         var x = $(".createSprintInfoSprintGoal_1").clone().attr("class","createSprintInfoSprintGoal createSprintInfoSprintGoal_"+i).appendTo(".createSprintInfoDetails");
         var input = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintGoalText").text("Sprint "+i+" Goal: ");
         var textarea = $(".createSprintInfoSprintGoal_"+i).find("textarea").attr("class","createSprintInfoSprintDesc_"+i);
+        var textareaname = $(".createSprintInfoSprintGoal_"+i).find("textarea").attr("name","createSprintInfoSprintDesc_"+i);
 
 
         var sprintStart = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintStart").attr("class","createSprintInfoSprintStart_"+i);

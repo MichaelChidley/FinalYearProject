@@ -39,6 +39,8 @@ include("includes/classes/project/clsProject.php");
 include("includes/classes/activity/clsActivity.php");
 include("includes/classes/employee/clsEmployee.php");
 include("includes/classes/comment/clsComment.php");
+include("includes/classes/client/clsClient.php");
+include("includes/classes/sprint/clsSprint.php");
 
 
 

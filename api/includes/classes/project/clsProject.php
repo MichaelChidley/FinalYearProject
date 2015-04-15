@@ -29,7 +29,6 @@ Class Project
         public function init($operation,$intID=0,$arrProjectInformation=array())
         {
 
-
 			$objFeedback = new Feedback();
 
 			if(count($arrProjectInformation)<1)
@@ -49,32 +48,49 @@ Class Project
 					case "getProjectUsers":
 						return $this->returnProjectUsers($intID);
 					break;
+
+
+					case "getNewProjectID":
+						return $this->getNewProjectID();
+					break;
+
+
+					default:
+						return "METHOD NOT DEFINED IN GET clsProject.php API Side";
+					break;
 				}
 			}
 
-			$arrProject = $arrProjectInformation['project'];
+			//$arrProject = $arrProjectInformation['project'];
 
-			foreach($arrProject as $arrIndProject)
-			{
+			//foreach($arrProject as $arrIndProject)
+			//{
 							$bFormFailed = false;
+//return $arrProjectInformation;
 
-							(isset($arrIndProject['ID'])) ? $this->setProjectID($arrIndProject['ID']) : '';
+							(isset($arrProjectInformation['ID'])) ? $this->setProjectID($arrProjectInformation['ID']) : '';
 
-							(isset($arrIndProject['projectOwner'])) ? $this->setProjectOwner($arrIndProject['projectOwner']) : $bFormFailed = true;
-							(isset($arrIndProject['projectTitle'])) ? $this->setProjectTitle($arrIndProject['projectTitle']) : $bFormFailed = true;
-							(isset($arrIndProject['projectDescription'])) ? $this->setProjectDescription($arrIndProject['projectDescription']) : $bFormFailed = true;
-							(isset($arrIndProject['projectStart'])) ? $this->setProjectStart($arrIndProject['projectStart']) : $bFormFailed = true;
-							(isset($arrIndProject['projectFinish'])) ? $this->setProjectFinish($arrIndProject['projectFinish']) : $bFormFailed = true;
-							(isset($arrIndProject['projectImportance'])) ? $this->setProjectImportance($arrIndProject['projectImportance']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectOwner'])) ? $this->setProjectOwner($arrProjectInformation['projectOwner']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectTitle'])) ? $this->setProjectTitle($arrProjectInformation['projectTitle']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectDescription'])) ? $this->setProjectDescription($arrProjectInformation['projectDescription']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectStart'])) ? $this->setProjectStart($arrProjectInformation['projectStart']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectFinish'])) ? $this->setProjectFinish($arrProjectInformation['projectFinish']) : $bFormFailed = true;
+							(isset($arrProjectInformation['projectImportance'])) ? $this->setProjectImportance($arrProjectInformation['projectImportance']) : $bFormFailed = true;
 
 
 							if($bFormFailed)
 							{
+
 									return false;
 							}
 
 							switch($operation)
 							{
+								case 'createProject':
+
+									return $this->createProject();
+								break;
+
 
 								case 'getAllProjects':
 									return $this->returnAllProjects();
@@ -82,14 +98,29 @@ Class Project
 
 							}
 
-			}
+			//}
 		}
 
+		public function createProject()
+		{
+			$arrFields = array("projectOwner","projectTitle","projectDescription","projectStart","projectFinish","projectImportance");
+            $arrValues = array($this->projectOwner, $this->projectTitle, $this->projectDescription, $this->projectStart, $this->projectFinish, $this->projectImportance);
+
+
+            $objDatabase = new Database();
+            $objFeedback = new Feedback();
+
+            if($objDatabase->insert('projects',$arrFields,$arrValues))
+            {
+                    return true;
+            }
+            return false;
+		}
 
 		public function returnAllProjects()
 		{
 			$objDatabase = new Database();
-			return $objDatabase->returnAllRows("projects");
+
 		}
 
 
@@ -97,6 +128,14 @@ Class Project
 		{
 			$objDatabase = new Database();
 			return $objDatabase->returnRow("projects","projectID",$id);
+		}
+
+
+
+		public function getNewProjectID()
+		{
+			$objDatabase = new Database();
+			return $objDatabase->getHighestIDOnTable("projectID", "projects");
 		}
 
 
@@ -129,28 +168,40 @@ Class Project
 		public function setProjectID($intProjectID)
 		{
 			return $this->projectID = $intProjectID;
+
+			return true;
 		}
 
 		public function setProjectOwner($intProjectOwnerID)
 		{
 			return $this->projectOwner = $intProjectOwnerID;
+			return true;
 		}
 
 		public function setProjectTitle($strProjectTitle)
 		{
 			return $this->projectTitle = $strProjectTitle;
+			return true;
 		}
 		public function setProjectDescription($setProjectDescription)
 		{
 			return $this->projectDescription = $setProjectDescription;
+			return true;
 		}
 		public function setProjectStart($strProjectStart)
 		{
 			return $this->projectStart = $strProjectStart;
+			return true;
 		}
 		public function setProjectFinish($strProjectFinish)
 		{
 			return $this->projectFinish = $strProjectFinish;
+			return true;
+		}
+		public function setProjectImportance($strImportance)
+		{
+			return $this->projectImportance = $strImportance;
+			return true;
 		}
 
 

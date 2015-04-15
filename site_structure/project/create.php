@@ -31,8 +31,25 @@
 			</tr>
 
 			<tr>
-				<td><div class="fourthLevelHeading">New Client?</div>SELECT CLIENT</td>
-				<td><input type='checkbox' name='projectCreateNewClientCb'></td>
+				<td><div class="fourthLevelHeading">New Client?</div><input type='checkbox' name='projectCreateNewClientCb'></td>
+				<td>
+					<select name='projectClient'>
+					<option value='default'>Select An Existing Client</option>
+					<?php
+					$objClient = new Client($API);
+					$arrClients = $API->convertJsonArrayToArray($objClient->getAllClients());
+					$arrClients = $arrClients['response'];
+
+
+					foreach($arrClients as $arrIndClients)
+					{
+
+						echo "<option value='".$arrIndClients['clientID']."'>".$arrIndClients['clientTitle']." ".$arrIndClients['clientFirstname']." ".$arrIndClients['clientLastname']."</option>";
+					}
+
+					?>
+					</select>
+				</td>
 
 				<td><div class="fourthLevelHeading">No. Sprints</div></td>
 				<td>
@@ -108,9 +125,9 @@
 				<td><div class="fourthLevelHeading">Importance</div></td>
 				<td>
 					<select name='projectImportance'>
-						<option value='low'>Low</option>
-						<option value='medium'>Medium</option>
-						<option value='high'>High</option>
+						<option value='1'>Low</option>
+						<option value='2'>Medium</option>
+						<option value='3'>High</option>
 
 					</select>
 				</td>

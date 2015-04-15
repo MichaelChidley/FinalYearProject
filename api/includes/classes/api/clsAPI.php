@@ -174,6 +174,19 @@ Class API
 																		return $this->APIResponse();
 														break;
 
+
+														case "client":
+
+																		$objClient = new Client();
+																		$this->objFeedback->setFeedback($objClient->init($requestedMethod,$id));
+																		return $this->APIResponse();
+
+														case "sprint":
+
+																		$objSprint = new Sprint();
+																		$this->objFeedback->setFeedback($objSprint->init($requestedMethod,$id));
+																		return $this->APIResponse();
+
 														default:
 																		$this->objFeedback->setFeedback("Invalid get method type");
 																		return $this->APIResponse();
@@ -226,6 +239,7 @@ Class API
 						if(is_array($_POST))
 						{
 
+
 								//**POST ELEMENTS
 								//APIKEY - API KEY
 								//MODULE - MODULE
@@ -237,12 +251,16 @@ Class API
 										{
 												$this->receivedAPIKey = $_POST['APIKey'];
 												$this->requestedFeature = $_POST['module'];
-
+												$this->method = $_POST['method'];
+//$this->objFeedback->setFeedback($_POST);
+//																return $this->APIResponse();
 
 												if($this->checkKeyValidation())
 												{
-														 if((isset($_POST['module'])) && (isset($_POST['data'])))
-														 {
+
+														 //if((isset($this->requestedFeature))
+														// {
+
 																switch($_POST['module'])
 																{
 																		case 'bug':
@@ -270,6 +288,23 @@ Class API
 																				return $this->APIResponse();
 																		break;
 
+																		case 'client':
+																			$objClient = new Client();
+																				$this->objFeedback->setFeedback($objClient->init($this->method,0,$_POST));
+																			return $this->APIResponse();
+
+
+																		case 'project':
+																			$objProject = new Project();
+																				$this->objFeedback->setFeedback($objProject->init($this->method,0,$_POST));
+																			return $this->APIResponse();
+
+
+																		case 'sprint':
+																			$objSprint = new Sprint();
+																				$this->objFeedback->setFeedback($objSprint->init($this->method,0,$_POST));
+																			return $this->APIResponse();
+
 
 																		default:
 																				$this->objFeedback->setFeedback("Invalid post method type");
@@ -277,12 +312,12 @@ Class API
 																		break;
 																}
 
-														 }
+														 /*}
 														 else
 														 {
 																$this->objFeedback->setFeedback("Action Is Not Defined");
 																return $this->APIResponse();
-														 }
+														 }*/
 												}
 												else
 												{
@@ -298,7 +333,8 @@ Class API
 								}
 								else
 								{
-										 $this->objFeedback->setFeedback("API Key not set");
+										//$this->objFeedback->setFeedback("API Key not set");
+										$this->objFeedback->setFeedback($_POST);
 										return $this->APIResponse();
 								}
 
