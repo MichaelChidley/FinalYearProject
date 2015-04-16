@@ -20,6 +20,7 @@ class Sprint extends Agile
 
 	private $sprintStart;
 	private $sprintFinish;
+	private $sprintGoal;
 
 
 	public function Sprint($API)
@@ -34,7 +35,7 @@ class Sprint extends Agile
 		$id = $this->API->convertJsonArrayToArray($objProject->getNewProjectID());
 		$id = $id['response'];
 
-		$this->API->handleAPICall(array("startdate" => $this->sprintStart, "enddate" => $this->sprintFinish, "projectID" => $id),"sprint","createSprintDates");
+		$this->API->handleAPICall(array("startdate" => $this->sprintStart, "enddate" => $this->sprintFinish, "projectID" => $id, "goal" => $this->sprintGoal),"sprint","createSprintDates");
 		return $this->API->getAPIResponse();
 	}
 
@@ -49,6 +50,13 @@ class Sprint extends Agile
 	public function setSprintFinish($finish)
 	{
 		$this->sprintFinish = $finish;
+
+		return true;
+	}
+
+	public function setSprintGoal($goal)
+	{
+		$this->sprintGoal = $goal;
 
 		return true;
 	}

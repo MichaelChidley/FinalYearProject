@@ -42,21 +42,7 @@ Class Client
 					case "getNewClientID":
 						return $this->getNewClientID();
 					break;
-					/*
-					case "returnAllActivity":
-						return $this->returnAllActivity();
-					break;
 
-
-					case "returnSingleActivity":
-						return $this->getSingleActivity($intID);
-					break;
-
-
-					case "returnSingleActivityByPrjID":
-						return $this->getSingleActivityByPrjID($intID);
-					break;
-					*/
 				}
 			}
 

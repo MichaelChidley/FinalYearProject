@@ -22,6 +22,7 @@ Class Sprint
 	private $projectID;
 	private $startdate;
 	private $enddate;
+	private $goal;
 
         public function init($operation,$intID=0,$arrSprintInformation=array())
         {
@@ -45,7 +46,7 @@ Class Sprint
 			(isset($arrSprintInformation['startdate'])) ? $this->setStartDate($arrSprintInformation['startdate']) : $bFormFailed = true;
 			(isset($arrSprintInformation['enddate'])) ? $this->setEndDate($arrSprintInformation['enddate']) : $bFormFailed = true;
 			(isset($arrSprintInformation['projectID'])) ? $this->setProjectID($arrSprintInformation['projectID']) : $bFormFailed = true;
-
+			(isset($arrSprintInformation['goal'])) ? $this->setSprintGoal($arrSprintInformation['goal']) : $bFormFailed = true;
 
 			if($bFormFailed)
 			{
@@ -69,9 +70,8 @@ Class Sprint
 		public function createSprintDates()
 		{
 
-
-			$arrFields = array("sprintStart","sprintFinish","projectID");
-            $arrValues = array($this->startdate, $this->enddate, $this->projectID);
+			$arrFields = array("sprintStart","sprintFinish","projectID","sprintGoal");
+            $arrValues = array($this->startdate, $this->enddate, $this->projectID, $this->goal);
 
 
             $objDatabase = new Database();
@@ -111,6 +111,13 @@ Class Sprint
 		public function setEndDate($date)
 		{
 			$this->enddate = $date;
+
+			return true;
+		}
+
+		public function setSprintGoal($goal)
+		{
+			$this->goal = $goal;
 
 			return true;
 		}

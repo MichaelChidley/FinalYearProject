@@ -187,6 +187,12 @@ Class API
 																		$this->objFeedback->setFeedback($objSprint->init($requestedMethod,$id));
 																		return $this->APIResponse();
 
+														case "backlog":
+
+																		$objBacklog = new Backlog();
+																		$this->objFeedback->setFeedback($objBacklog->init($requestedMethod,$id));
+																		return $this->APIResponse();
+
 														default:
 																		$this->objFeedback->setFeedback("Invalid get method type");
 																		return $this->APIResponse();
@@ -303,6 +309,11 @@ Class API
 																		case 'sprint':
 																			$objSprint = new Sprint();
 																				$this->objFeedback->setFeedback($objSprint->init($this->method,0,$_POST));
+																			return $this->APIResponse();
+
+																		case 'backlog':
+																			$objBacklog = new Backlog();
+																				$this->objFeedback->setFeedback($objBacklog->init($this->method,0,$_POST));
 																			return $this->APIResponse();
 
 

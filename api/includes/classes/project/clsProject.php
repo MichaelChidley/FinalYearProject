@@ -80,14 +80,13 @@ Class Project
 
 							if($bFormFailed)
 							{
-
+									//return "Unable to set all required fields!".__METHOD__;
 									return false;
 							}
 
 							switch($operation)
 							{
 								case 'createProject':
-
 									return $this->createProject();
 								break;
 
@@ -120,7 +119,7 @@ Class Project
 		public function returnAllProjects()
 		{
 			$objDatabase = new Database();
-
+			return $objDatabase->returnAllRows("projects");
 		}
 
 

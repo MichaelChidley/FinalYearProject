@@ -10,6 +10,7 @@ if($_POST['data'])
 	include_once("../classes/api/clsAPI.php");
 	include_once("../classes/agile/clsAgile.php");
 	include_once("../classes/sprint/clsSprint.php");
+	include_once("../classes/backlog/clsBacklog.php");
 	include_once("../classes/client/clsClient.php");
 	include_once("../classes/team/clsTeam.php");
 	include_once("../classes/project/clsProject.php");
@@ -19,7 +20,7 @@ if($_POST['data'])
 	$data = $_POST['data'];
 	$arrData = json_decode($data,true);
 
-
+	//print_r($arrData);
 
 
 	$strProjectTitle = $arrData['projectTitle'];
@@ -57,8 +58,9 @@ if($_POST['data'])
 	{
 		$sprintStart = $arrData['createSprintInfoSprintStart_'.$intStart];
 		$sprintFinish = $arrData['createSprintInfoSprintFinish_'.$intStart];
+		$sprintGoal = $arrData['createSprintInfoSprintDesc_'.$intStart];
 
-		$array = array("start" => $sprintStart, "finish" => $sprintFinish);
+		$array = array("start" => $sprintStart, "finish" => $sprintFinish, "goal" => $sprintGoal);
 
 		array_push($arrSprintInfoDates, $array);
 	}
@@ -195,15 +197,42 @@ if($_POST['data'])
 	$objSprint = new Sprint($API);
 	$arrSprintDateID = array();
 
-	foreach($arrSprintInfoDates as $arrSpringIndDates)
+
+	foreach($arrSprintInfoDates as $arrSprintIndDates)
 	{
-		$strLoopStartDate = $arrSpringIndDates["start"];
-		$strLoopFinishDate = $arrSpringIndDates["finish"];
+		$strLoopStartDate = $arrSprintIndDates["start"];
+		$strLoopFinishDate = $arrSprintIndDates["finish"];
+		$strLoopGoal = $arrSprintIndDates["goal"];
 
 		$objSprint->setSprintStart($strLoopStartDate);
 		$objSprint->setSprintFinish($strLoopFinishDate);
+		$objSprint->setSprintGoal($strLoopGoal);
 
 		$objSprint->createSprintDates();
+	}
+
+
+	$intStart = 1;
+	$intMax = count($arrBacklogItems);
+
+	$objBacklog = new Backlog($API);
+
+	for($intStart; $intStart<=$intMax; $intStart++)
+	{
+		$strIndBacklogItem = $arrBacklogItems[$intStart];
+		$strIndMoscowVal = $arrMoscowItems[$intStart];
+		$strIndBacklogComments = $arrBacklogComments[$intStart];
+		$strIndBacklogPP = $arrPokerValues[$intStart];
+
+
+		$objBacklog->setBacklogItem($strIndBacklogItem);
+		$objBacklog->setBacklogMoscow($strIndMoscowVal);
+		$objBacklog->setBacklogComment($strIndBacklogComments);
+		$objBacklog->setBacklogPP($strIndBacklogPP);
+
+		echo $objBacklog->createBacklogItem();
+		$objBacklog->createLinkProjectBacklog();
+
 	}
 
 }
