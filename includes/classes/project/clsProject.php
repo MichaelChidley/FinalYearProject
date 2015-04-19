@@ -11,7 +11,7 @@ Class Project
 	private $startDate;
 	private $finishDate;
 	private $importance;
-
+	private $projectTeam;
 
 	public function Project($API)
 	{
@@ -69,11 +69,10 @@ Class Project
 
 
 
-
 	public function createProject()
 	{
 		$this->API->handleAPICall(array("projectOwner" => $this->ownerID, "projectTitle" => $this->title, "projectDescription" => $this->description, "projectStart" => $this->startDate,
-			"projectFinish" => $this->finishDate, "projectImportance" => $this->importance),"project","createProject");
+			"projectFinish" => $this->finishDate, "projectImportance" => $this->importance, "projectTeam" => $this->projectTeam),"project","createProject");
 		return $this->API->getAPIResponse();
 	}
 
@@ -115,6 +114,14 @@ Class Project
 	public function setProjectImportance($importance)
 	{
 		$this->importance = $importance;
+
+		return true;
+	}
+
+
+	public function setProjectTeam($strTeam)
+	{
+		$this->projectTeam = $strTeam;
 
 		return true;
 	}

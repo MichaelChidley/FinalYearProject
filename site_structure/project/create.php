@@ -125,9 +125,9 @@
 				<td><div class="fourthLevelHeading">Importance</div></td>
 				<td>
 					<select name='projectImportance'>
-						<option value='1'>Low</option>
+						<option value='3'>Low</option>
 						<option value='2'>Medium</option>
-						<option value='3'>High</option>
+						<option value='1'>High</option>
 
 					</select>
 				</td>
@@ -260,9 +260,20 @@
 			</table>
 
 
-			<table class="table createSprintInfoXP">
+			<table class="table createSprintInfoXP PPusers">
 				<tr class='createPP'>
 					<td><div class="fourthLevelHeading">Pair Programming</div></td>
+				</tr>
+
+
+
+			</table>
+
+
+
+			<table class="table createUnitTesting">
+				<tr>
+					<td><div class="fourthLevelHeading">Unit Testing <input type='checkbox' name='createUnitTesting'></div></td>
 				</tr>
 
 

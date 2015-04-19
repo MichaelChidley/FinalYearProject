@@ -4,7 +4,7 @@
 if($_POST['data'])
 {
 
-	//print_r($_POST);
+	print_r($_POST);
 	include_once("../config.php");
 	include_once("../classes/security/clsSecurity.php");
 	include_once("../classes/api/clsAPI.php");
@@ -14,6 +14,7 @@ if($_POST['data'])
 	include_once("../classes/client/clsClient.php");
 	include_once("../classes/team/clsTeam.php");
 	include_once("../classes/project/clsProject.php");
+	include_once("../classes/agile/xp/pairprogramming/clsPairProgramming.php");
 
 	$API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
@@ -38,7 +39,7 @@ if($_POST['data'])
 	$strProjectOwnerEmail = $arrData['projectOwnerEmail'];
 	$strProjectOwnerContact = $arrData['projectOwnerContact'];
 
-	$strProjectTeam = $arrData['projectTeam'];
+	$strProjectTeam = $arrData['teamID'];
 	$strProjectImportance = $arrData['projectImportance'];
 
 	$boolProjectUseXP = $arrData['createProjectUseXP'];
@@ -47,6 +48,8 @@ if($_POST['data'])
 	$intProjectDays = $arrData['totalProjectDays'];
 	$intDaysPerSprint = $arrData['totalDaysPerSprint'];
 
+	(isset($arrData['useXP'])) ? $bUseXP = true : '';
+	(isset($arrData['useUnitTesting'])) ? $bUseUnitTesting = true : '';
 
 	//sprint date information
 
@@ -90,6 +93,8 @@ if($_POST['data'])
 	$arrPokerValues = array();
 
 
+	$strPairProgrammingUsers = "PPUsers_";
+	$arrPairProgrammingUsers = array();
 
 
 	//loop through the array of data to make it easier handle multiple
@@ -141,8 +146,18 @@ if($_POST['data'])
 			$strNumber = $strPokerItems[1];
 			$arrPokerValues[$strNumber] = $value;
 		}
+
+
+		$PairProgrammingValuepos = strpos($intKey,$strPairProgrammingUsers);
+		if($PairProgrammingValuepos !== false)
+		{
+			$strPPUserItems = explode("_", $intKey);
+			$strNumber = $strPPUserItems[1];
+			$arrPairProgrammingUsers[$strNumber] = $value;
+		}
 	}
 
+	//print_r($arrPairProgrammingUsers);
 	//print_r($arrSprintInfoItems);
 	//print_r($arrBacklogItems);
 	//print_r($arrMoscowItems);
@@ -178,6 +193,30 @@ if($_POST['data'])
 
 
 
+	if($bUseXP)
+	{
+		//print_r($arrPairProgrammingUsers);
+
+		$objPairProgramming = new PairProgramming($API);
+		//handle creation of XP - PP - Unit testing handler
+
+		$intUserPPOneID = $arrPairProgrammingUsers[1];
+		$intUserPPTwoID = $arrPairProgrammingUsers[2];
+
+		$objPairProgramming->setPairProgrammerOne($intUserPPOneID);
+		$objPairProgramming->setPairProgrammerTwo($intUserPPTwoID);
+
+		echo $objPairProgramming->createPairProgrammingPair();
+
+
+
+		if($bUseUnitTesting)
+		{
+
+		}
+	}
+
+
 	if($strProjectOwnerID != "default")
 	{
 		$objProject->setProjectOwner($strProjectOwnerID);
@@ -187,11 +226,12 @@ if($_POST['data'])
 	$objProject->setProjectStart($strStartDate);
 	$objProject->setProjectFinish($strEndDate);
 	$objProject->setProjectImportance($strProjectImportance);
+	$objProject->setProjectTeam($strProjectTeam);
 
 	$bCreateProject = $objProject->createProject();
 
 
-	//echo $bCreateProject;
+	echo $bCreateProject;
 
 
 	$objSprint = new Sprint($API);
@@ -230,7 +270,7 @@ if($_POST['data'])
 		$objBacklog->setBacklogComment($strIndBacklogComments);
 		$objBacklog->setBacklogPP($strIndBacklogPP);
 
-		echo $objBacklog->createBacklogItem();
+		$objBacklog->createBacklogItem();
 		$objBacklog->createLinkProjectBacklog();
 
 	}

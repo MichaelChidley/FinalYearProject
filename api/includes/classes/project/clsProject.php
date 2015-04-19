@@ -24,6 +24,7 @@ Class Project
 		private $projectStart;
 		private $projectFinish;
 		private $projectImportance;
+		private $projectTeam;
 
 
         public function init($operation,$intID=0,$arrProjectInformation=array())
@@ -76,7 +77,7 @@ Class Project
 							(isset($arrProjectInformation['projectStart'])) ? $this->setProjectStart($arrProjectInformation['projectStart']) : $bFormFailed = true;
 							(isset($arrProjectInformation['projectFinish'])) ? $this->setProjectFinish($arrProjectInformation['projectFinish']) : $bFormFailed = true;
 							(isset($arrProjectInformation['projectImportance'])) ? $this->setProjectImportance($arrProjectInformation['projectImportance']) : $bFormFailed = true;
-
+							(isset($arrProjectInformation['projectTeam'])) ? $this->setProjectTeam($arrProjectInformation['projectTeam']) : $bFormFailed = true;
 
 							if($bFormFailed)
 							{
@@ -111,7 +112,15 @@ Class Project
 
             if($objDatabase->insert('projects',$arrFields,$arrValues))
             {
-                    return true;
+                    $arrFields = array("projectID", "teamID");
+                    $arrValues = array($this->getNewProjectID(),$this->projectTeam);
+
+                    if($objDatabase->insert('projectteam', $arrFields, $arrValues))
+                    {
+                    	return true;
+                    }
+
+                    return false;
             }
             return false;
 		}
@@ -200,6 +209,11 @@ Class Project
 		public function setProjectImportance($strImportance)
 		{
 			return $this->projectImportance = $strImportance;
+			return true;
+		}
+		public function setProjectTeam($strTeam)
+		{
+			return $this->projectTeam = $strTeam;
 			return true;
 		}
 

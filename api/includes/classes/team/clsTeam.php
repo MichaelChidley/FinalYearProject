@@ -33,6 +33,7 @@ Class Team
 				----------------------------------------------------------------------------------*/
 				public function init($operation,$intID=0,$arrTeamInformation=array())
 				{
+
 						$objFeedback = new Feedback();
 
 						if(count($arrTeamInformation)<1)
@@ -56,6 +57,12 @@ Class Team
 
 								case "returnTeamMembersByTeamID":
 									return $this->returnTeamMembersByTeamID($intID);
+								break;
+
+
+								case "returnTeamIDByName":
+
+									return $this->returnTeamIDByName($intID);
 								break;
 							}
 						}
@@ -142,6 +149,12 @@ Class Team
 				{
 					$objDatabase = new Database();
 					return $objDatabase->returnAllRows("teams");
+				}
+
+				public function returnTeamIDByName($strTeamName)
+				{
+					$objDatabase = new Database();
+					return $objDatabase->returnSingleData("teamID", "teams", "teamTitle", $strTeamName);
 				}
 
 

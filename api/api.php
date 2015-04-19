@@ -42,6 +42,9 @@ include("includes/classes/comment/clsComment.php");
 include("includes/classes/client/clsClient.php");
 include("includes/classes/sprint/clsSprint.php");
 include("includes/classes/backlog/clsBacklog.php");
+include("includes/classes/agile/xp/pairprogramming/clsPairProgramming.php");
+include("includes/classes/agile/xp/unittesting/clsUnitTesting.php");
+
 
 
 

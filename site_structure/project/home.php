@@ -15,7 +15,7 @@
 	  		$intProjectID = $arrIndProjects['projectID'];
 
 	  		$arrUsersInProject = $API->convertJsonArrayToArray($objProject->getProjectUsers($intProjectID));
-
+	  		//print_r($arrUsersInProject['response']);
 	  		if(in_array($_SESSION['authenticationID'], $arrUsersInProject['response']))
 	  		{
 	  			echo "<tr>";
@@ -37,7 +37,6 @@
 		  				case $arrIndProjects['projectProgress'] > 75:
 		  					$tableDataStyle = "high";
 		  				break;
-
 
 		  				default:
 		  					$tableDataStyle = "low";

@@ -94,6 +94,7 @@ Class API
 				private function handleAPIGetCall()
 				{
 
+
 								$requestedPage = $_SERVER["REQUEST_URI"];
 
 								$requestedPage = str_replace($this->location, '', $requestedPage);
@@ -193,6 +194,12 @@ Class API
 																		$this->objFeedback->setFeedback($objBacklog->init($requestedMethod,$id));
 																		return $this->APIResponse();
 
+														case "pairprogramming":
+
+																		$objPairProgramming = new PairProgramming();
+																		$this->objFeedback->setFeedback($objPairProgramming->init($requestedMethod,$id));
+																		return $this->APIResponse();
+
 														default:
 																		$this->objFeedback->setFeedback("Invalid get method type");
 																		return $this->APIResponse();
@@ -240,6 +247,7 @@ Class API
 				----------------------------------------------------------------------------------*/
 				private function handleAPIPostCall()
 				{
+
 						$objSecurity = new Security();
 						$_POST = $objSecurity->decryptInformation($_POST['data']);
 						if(is_array($_POST))
@@ -314,6 +322,12 @@ Class API
 																		case 'backlog':
 																			$objBacklog = new Backlog();
 																				$this->objFeedback->setFeedback($objBacklog->init($this->method,0,$_POST));
+																			return $this->APIResponse();
+
+
+																		case 'pairprogramming':
+																			$objPairProgramming = new PairProgramming();
+																				$this->objFeedback->setFeedback($objPairProgramming->init($this->method,0,$_POST));
 																			return $this->APIResponse();
 
 

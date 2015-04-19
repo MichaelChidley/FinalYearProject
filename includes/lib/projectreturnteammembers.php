@@ -36,7 +36,7 @@ $count = 1;
 foreach($arrTeamMembers as $arrIndTeamMembers)
 {
 	//make it email them konwing they have been assigned?!?
-	echo "<tr><td><input name=\"createSprintInfoXPPP_".$count."\" type='checkbox' id='".$arrIndTeamMembers['employeeID']."'> ".$arrIndTeamMembers['firstname']." ".$arrIndTeamMembers['lastname']."</td></tr>";
+	echo "<tr><td><input name=\"createSprintInfoXPPP_".$count."\" type='checkbox' id='".$arrIndTeamMembers['employeeID']."' value='".$arrIndTeamMembers['employeeID']."'> ".$arrIndTeamMembers['firstname']." ".$arrIndTeamMembers['lastname']."</td></tr>";
 
 	$count++;
 }

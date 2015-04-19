@@ -227,6 +227,7 @@ Class Database
         {
                 $strQuery = "SELECT ".$strField." FROM ".$strTable." WHERE ".$strWhere." = '".$strValue."'";
 
+
                 $resultset = $this->result($strQuery);
 
                 while($row = mysqli_fetch_array($resultset))

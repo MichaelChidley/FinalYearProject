@@ -352,6 +352,7 @@ function handleToggleXPMethodologies()
     $("[name=createProjectUseXP]").click(function()
     {
         $(".createSprintInfoXP").slideToggle("slow");
+        $(".createUnitTesting").slideToggle("slow");
 
         handleGetTeamMembersForPP();
     });
@@ -418,6 +419,42 @@ function handleCreateProjectCreate()
 
         var totalDaysPerSprint = $("#createSprintInfoTotalSprintDays").text();
         dataset['totalDaysPerSprint'] = totalDaysPerSprint;
+
+
+        var teamID = $("select[name=projectTeam]").find("option:selected").attr("id");
+        dataset['teamID'] = teamID;
+
+
+
+        //find all the checked users for PP and add them to the dataset array
+        ///count number of elements begining with createSprintInfoXPPP_
+        var XPUsers = $("input[name^='createSprintInfoXPPP_'").length;
+       // alert(XPUsers);
+        for(i = 1; i <= XPUsers; i++)
+        {
+            //alert("LOOP " + i);
+            if($("input[name=createSprintInfoXPPP_"+i+"]").is(':checked'))
+            {
+                    //alert("CHECKED "+i);
+                dataset["PPUsers_"+i] = $("input[name=createSprintInfoXPPP_"+i+"]").attr("id");
+            }
+        }
+
+        if($("input[name=createProjectUseXP]").is(":checked"))
+        {
+            dataset["useXP"] = "true";
+        }
+
+        if($("input[name=createUnitTesting]").is(":checked"))
+        {
+            dataset['useUnitTesting'] = "true";
+        }
+
+
+        //console.log(dataset);
+
+
+
 
 
         dataset = JSON.stringify(dataset);
