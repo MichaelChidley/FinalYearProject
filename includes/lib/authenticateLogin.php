@@ -27,8 +27,11 @@ if((isset($_POST['user'])) && (isset($_POST['pass'])))
 {
         $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
-        $array = $API->buildAPIRequest("login","login",array("login" => array( array("username"=>$_POST['user'],"password"=>$_POST['pass']))));
-        $API->handleAPICall($array);
+        //$this->API->handleAPICall(array("pairprogrammerone" => $this->programmerOne, "pairprogrammertwo" => $this->programmerTwo),"pairprogramming","createPairProgrammingPair");
+
+        $API->handleAPICall(array("username"=>$_POST['user'],"password"=>$_POST['pass']), "login", "login");
+        $API->getAPIResponse();
+
 
         if($API->isSuccessful($API->getAPIResponse()))
         {

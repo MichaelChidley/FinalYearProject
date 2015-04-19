@@ -31,18 +31,19 @@ Class Login
 
       	Out:     true/false      bool
 	----------------------------------------------------------------------------------*/
-    public function init($operation,$arrLoginInfo)
+    public function init($operation,$intID=0,$arrLoginInformation=array())
     {
+
             $objFeedback = new Feedback();
 
-            $arrLogin = $arrLoginInfo['login'];
+            //$arrLogin = $arrLoginInformation['login'];
 
-            foreach($arrLogin as $arrIndLogin)
-            {
+            //foreach($arrLogin as $arrIndLogin)
+            //{
                     $bFormFailed = false;
 
-                    (isset($arrIndLogin['username'])) ? $this->setUsername($arrIndLogin['username']) : $bFormFailed = true;
-                    (isset($arrIndLogin['password'])) ? $this->setPassword($arrIndLogin['password']) : $bFormFailed = true;
+                    (isset($arrLoginInformation['username'])) ? $this->setUsername($arrLoginInformation['username']) : $bFormFailed = true;
+                    (isset($arrLoginInformation['password'])) ? $this->setPassword($arrLoginInformation['password']) : $bFormFailed = true;
 
                     if($bFormFailed)
                     {
@@ -57,7 +58,7 @@ Class Login
                             break;
                     }
 
-            }
+            //}
 
     }
 

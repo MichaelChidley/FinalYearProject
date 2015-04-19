@@ -18,7 +18,7 @@
 	  		//print_r($arrUsersInProject['response']);
 	  		if(in_array($_SESSION['authenticationID'], $arrUsersInProject['response']))
 	  		{
-	  			echo "<tr>";
+	  			echo "<tr class='projectHomeClick' id='".$arrIndProjects['projectID']."'>";
 		  			echo "<td>".$arrIndProjects['projectTitle']."</td>";
 		  			echo "<td>".$arrIndProjects['projectDescription']."</td>";
 		  			echo "<td>".$objProject->returnProjectImportanceType($arrIndProjects['projectImportance'])."</td>";

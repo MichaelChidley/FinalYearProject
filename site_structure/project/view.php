@@ -1,6 +1,7 @@
 <?php
 
 		$arrProject =  $API->convertJsonArrayToArray($objProject->getProjectByID($intGetID));
+
 		$arrProject = $arrProject['response'];
 		//print_r($arrProject);
 		if(count($arrProject)>1)
@@ -109,9 +110,9 @@
 			  				<?php
 
 			  					$objTeam = new Team($API);
-			  					$arrGetSingleTeamMembers = $API->convertJsonArrayToArray($objTeam->getSingleTeamMembers($arrProject['projectID']));
+			  					$arrGetSingleTeamMembers = $API->convertJsonArrayToArray($objTeam->returnTeamMembersByProjectID($arrProject['projectID']));
 			  					$arrGetSingleTeamMembers = $arrGetSingleTeamMembers['response'];
-
+			  					//print_r($arrGetSingleTeamMembers);
 			  					$arrEmailHolder = array();
 
 			  					if(count($arrGetSingleTeamMembers)>1)

@@ -269,11 +269,14 @@ Class API
 //$this->objFeedback->setFeedback($_POST);
 //																return $this->APIResponse();
 
+
 												if($this->checkKeyValidation())
 												{
 
+
 														 //if((isset($this->requestedFeature))
 														// {
+
 
 																switch($_POST['module'])
 																{
@@ -298,7 +301,7 @@ Class API
 
 																		case 'login':
 																				$objLogin = new Login();
-																				$this->objFeedback->setFeedback($objLogin->init($_POST['operation'],$_POST['data']));
+																				$this->objFeedback->setFeedback($objLogin->init($this->method,0,$_POST));
 																				return $this->APIResponse();
 																		break;
 

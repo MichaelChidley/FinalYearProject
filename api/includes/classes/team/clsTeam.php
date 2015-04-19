@@ -64,6 +64,11 @@ Class Team
 
 									return $this->returnTeamIDByName($intID);
 								break;
+
+
+								case "returnTeamMembersByProjectID":
+									return $this->returnTeamMembersByProjectID($intID);
+								break;
 							}
 						}
 
@@ -124,6 +129,37 @@ Class Team
 								INNER JOIN employees
 								ON employeeteams.employeeID=employees.employeeID
 								WHERE employeeteams.teamID = '".$id."'";
+					$dbSet = $objDatabase->result($query);
+
+
+					$arrProjectTeamMembers = array();
+					if($objDatabase->exists($dbSet))
+					{
+						while($row = mysqli_fetch_array($dbSet, MYSQL_ASSOC))
+						{
+
+		                	array_push($arrProjectTeamMembers, array("employeeID" => $row['employeeID'], "firstname" => $row['firstname'], "lastname" => $row['lastname'], "email" => $row['email']));
+						}
+
+		                return $arrProjectTeamMembers;
+					}
+
+					return false;
+				}
+
+
+
+
+				public function returnTeamMembersByProjectID($id)
+				{
+					$objDatabase = new Database();
+					$query = "SELECT projectteam.projectID, projectteam.teamID, employeeteams.teamID, employeeteams.employeeID, employees.firstname, employees.lastname, employees.email
+					FROM projectteam
+					INNER JOIN employeeteams
+					ON employeeteams.teamID = projectteam.teamID
+					INNER JOIN employees
+					ON employees.employeeID = employeeteams.employeeID
+					WHERE projectteam.projectID = '".$id."'";
 					$dbSet = $objDatabase->result($query);
 
 

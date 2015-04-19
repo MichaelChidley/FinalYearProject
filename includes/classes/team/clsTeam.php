@@ -17,6 +17,13 @@ Class Team
 	}
 
 
+	public function returnTeamMembersByProjectID($intProjectID)
+	{
+		$this->API->handleAPICall(array(),"team","returnTeamMembersByProjectID", $intProjectID);
+		return $this->API->getAPIResponse();
+	}
+
+
 	public function getAllTeams()
 	{
 		$this->API->handleAPICall(array(),"team","returnAllTeams");

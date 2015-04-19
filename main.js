@@ -12,6 +12,7 @@ $(document).ready(function()
     handleToggleXPMethodologies();
 
     handleCreateProjectCreate();
+    handleProjectClickView();
 
 
 });
@@ -78,6 +79,8 @@ function checkLogin()
 	//check login stuff through ajax
 	var username = $("#loginUser").val();
 	var password = $("#loginPass").val();
+
+
 
 	$.ajax({
             url:            SITE_URL+"/includes/lib/authenticateLogin.php",
@@ -480,4 +483,16 @@ function handleCreateProjectCreate()
         //console.log(data);
     });
 
+}
+
+
+
+function handleProjectClickView()
+{
+    $(".projectHomeClick").click(function()
+    {
+        var id = $(this).attr("id");
+
+        window.location = SITE_URL + "project/view/" + id;
+    });
 }

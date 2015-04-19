@@ -256,6 +256,11 @@ body
 	margin-top:15px;
 }
 
+.contentLargeOffset
+{
+	margin-top: 30px;
+}
+
 
 
 /************ PROJECT TABLE STYLING ********/
@@ -355,4 +360,10 @@ body
 .createSprintInfoXP, .createUnitTesting
 {
 	display: none;
+}
+
+
+.col-sm-4
+{
+	padding-left: 0px;
 }

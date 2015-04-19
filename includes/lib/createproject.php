@@ -15,6 +15,7 @@ if($_POST['data'])
 	include_once("../classes/team/clsTeam.php");
 	include_once("../classes/project/clsProject.php");
 	include_once("../classes/agile/xp/pairprogramming/clsPairProgramming.php");
+	include_once("../classes/agile/xp/unittesting/clsUnitTesting.php");
 
 	$API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
@@ -212,6 +213,11 @@ if($_POST['data'])
 
 		if($bUseUnitTesting)
 		{
+			//add stuff to the unit testing table to create a link between stuff
+			//insert into agile_unittesting_xp
+			//insert into agile_xp(PPID, unitTesting_xp_ID)
+			$objUnitTesting = new UnitTesting($API);
+
 
 		}
 	}
