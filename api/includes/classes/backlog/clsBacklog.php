@@ -43,6 +43,10 @@ class Backlog extends Sprint
 						return $this->getNewBacklogID();
 					break;
 
+					case "getBacklogItemByProjectID":
+						return $this->getBacklogItemByProjectID($intID);
+					break;
+
 				}
 			}
 
@@ -82,6 +86,31 @@ class Backlog extends Sprint
 
 			}
 		}
+
+
+	public function getBacklogItemByProjectID($id)
+	{
+		$strQry = "SELECT projectbacklog.projectID, projectbacklog.backlogID, backlog.backlogID, backlog.backlogItemDesc, backlog.backlogProgress FROM projectbacklog INNER JOIN backlog ON projectbacklog.backlogID=backlog.backlogID WHERE projectbacklog.projectID = ".$id;
+
+		$objDatabase = new Database();
+		$dbSet = $objDatabase->result($strQry);
+
+		$arrBacklogItems = array();
+
+		if($objDatabase->exists($dbSet))
+		{
+
+			while($row = mysqli_fetch_array($dbSet, MYSQL_ASSOC))
+			{
+            	array_push($arrBacklogItems, array("desc" => $row['backlogItemDesc'], "progress" => $row['backlogProgress']));
+			}
+
+            return $arrBacklogItems;
+		}
+
+		return false;
+
+	}
 
 	public function createBacklogItem()
 	{

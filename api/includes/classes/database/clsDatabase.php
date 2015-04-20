@@ -369,6 +369,18 @@ Class Database
         }
 
 
+        public function countSpecificRows($field, $table, $where, $value, $secondWhere, $secondValue)
+        {
+          $strQuery = "SELECT COUNT(".$field.") FROM ".$table." WHERE ".$where." = '".$value."' AND ".$secondWhere." = '".$secondValue."'";
+          $resultset = $this->result($strQuery);
+
+          while($row = mysqli_fetch_array($resultset))
+          {
+                  return $row[0];
+          }
+        }
+
+
         /*----------------------------------------------------------------------------------
       	Function:	setError
       	Overview:	Function to set errors

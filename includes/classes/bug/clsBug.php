@@ -16,6 +16,17 @@ Class Bug
 		return $this->API->getAPIResponse();
 	}
 
+	public function getFixedBugsByProjectID($intProjectID)
+	{
+		$this->API->handleAPICall(array(),"bug","getFixedBugsByProject", $intProjectID);
+		return $this->API->getAPIResponse();
+	}
+
+	public function getUnfixedBugsByProject($intProjectID)
+	{
+		$this->API->handleAPICall(array(),"bug","getUnfixedBugsByProject", $intProjectID);
+		return $this->API->getAPIResponse();
+	}
 
 }
 ?>

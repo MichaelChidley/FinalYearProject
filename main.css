@@ -244,6 +244,7 @@ body
 	border-top: none;
 }
 
+
 .recentActivityProjTitle
 {
 	font-size: 12px;
@@ -262,6 +263,28 @@ body
 }
 
 
+/******* HOMEPAGE STYLING ***************/
+.homepageSprintProgress
+{
+	margin-bottom: 20px;
+	background-color: #bababa;
+	width: 80%;
+}
+
+.homepageSprintProgressForeground
+{
+	padding-left: 30%;
+}
+
+.homepageSprintProgress:first-of-type
+{
+	margin-top: 20px;
+}
+
+.projectBacklogProgress
+{
+	margin-top: 20px;
+}
 
 /************ PROJECT TABLE STYLING ********/
 .projectsTable td

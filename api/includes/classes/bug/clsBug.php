@@ -48,6 +48,16 @@ Class Bug
                 case "returnProjectBugs":
                   return $this->returnBugsByProjectID($intID);
                 break;
+
+                case "getFixedBugsByProject":
+                  return $this->getFixedBugsByProject($intID);
+                break;
+
+                case "getUnfixedBugsByProject":
+                  return $this->getUnfixedBugsByProject($intID);
+                break;
+
+
               }
             }
 
@@ -95,7 +105,17 @@ Class Bug
         }
 
 
+        public function getFixedBugsByProject($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->countSpecificRows("bugID", "bugs","projectID",$id,"bugFixed",1);
+        }
 
+        public function getUnfixedBugsByProject($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->countSpecificRows("bugID", "bugs","projectID",$id,"bugFixed",0);
+        }
 
         public function returnBugsByProjectID($id)
         {

@@ -36,6 +36,9 @@ include_once("includes/classes/comment/clsComment.php");
 include_once("includes/classes/team/clsTeam.php");
 include_once("includes/classes/bug/clsBug.php");
 include_once("includes/classes/client/clsClient.php");
+include_once("includes/classes/agile/clsAgile.php");
+include_once("includes/classes/sprint/clsSprint.php");
+include_once("includes/classes/backlog/clsBacklog.php");
 
 //testing gets work
 //$API->handleAPICall(array(),"bug","1");	//working
@@ -78,6 +81,11 @@ include_once("includes/classes/client/clsClient.php");
 
 		<link rel='stylesheet' type='text/css' href="<?= $styleArray['BOOTSTRAP_CSS']; ?>" />
 		<link rel='stylesheet' type='text/css' href="<?= $styleArray['MAIN_CSS']; ?>" />
+		<link rel="stylesheet" href="layout\animatedprogressbar\css\progress.css">
+
+
+		<script src="layout\animatedprogressbar\src\jquery-asPieProgress.js"></script>
+
 
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
