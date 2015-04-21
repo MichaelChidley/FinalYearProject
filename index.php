@@ -18,14 +18,17 @@ include_once("includes/classes/api/clsAPI.php");
 
 $objSecurity = new Security();
 $objSecurity->secureUrl();
-
+if(!$objSecurity->CSRFCheck())
+{
+	die;
+}
+$_SESSION['CSRF_CHECK'] = mt_rand();
 
 $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
 
 $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
-
 
 
 //INCLUDE MODULES
@@ -95,6 +98,8 @@ include_once("includes/classes/backlog/clsBacklog.php");
 
 		<div id='container-fluid'>
 
+		<div class='messageBox'>MESSAGE</div>
+
 		<?php
 
 			if(!isset($_SESSION['authentication']))
@@ -163,6 +168,9 @@ include_once("includes/classes/backlog/clsBacklog.php");
 						(!empty($arrUrlExp[1])) ? $strRequestedPage = $arrUrlExp[0] : '';
 						(!empty($arrUrlExp[1])) ? $strGetAction = $arrUrlExp[1] : '';
 						(!empty($arrUrlExp[2])) ? $intGetID = $arrUrlExp[2] : '';
+
+
+						$strRequestedPage = str_replace("/",'',$strRequestedPage);
 
 						if(in_array($strRequestedPage, $configPages))
 						{

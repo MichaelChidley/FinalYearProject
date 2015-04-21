@@ -4,6 +4,8 @@ $(document).ready(function()
 {
 	handleLogin();
 
+    handleMessageBoxStyle();
+
     handleProjectPageActivityPolling();
     handleCreateNewProjectClient();
     handleCreateProjectNextButtons();
@@ -13,15 +15,14 @@ $(document).ready(function()
 
     handleCreateProjectCreate();
     handleProjectClickView();
+    handleBugClick();
+    handleBugMarkFixed();
+    handleBugCreateClick();
 
-    handleHomePageProjectProgressSwitching();
 
     $('.pie_progress, .pie_progress_bug').asPieProgress({
             'namespace': 'pie_progress'
     });
-
-
-
 
 
 });
@@ -30,12 +31,14 @@ $(document).ready(function()
 $(window).load(function()
 {
      $('.pie_progress').asPieProgress('start');
+     handleHomePageProjectProgressSwitching();
 })
 
 
 $(window).resize(function()
 {
 	handleLoginStyle();
+    handleMessageBoxStyle();
 
 });
 
@@ -63,6 +66,31 @@ function handleLoginStyle()
     $("#loginLogo").css("left", logoOffset+"px");
 
 
+}
+
+function handleMessageBoxStyle()
+{
+    var windowHeight = $(window).height();
+    var windowWidth = $(window).width();
+
+
+    var xOffset = windowWidth/2 - $(".messageBox").width()/2;
+    var yOffset = windowHeight/2 - $(".messageBox").height()/2;
+
+    $(".messageBox").css("left", ""+xOffset+"px");
+    //$(".messageBox").css("top", ""+yOffset+"px");
+
+}
+
+function handleMessageBoxEffect(text,redirect)
+{
+    console.log(redirect);
+    $(".messageBox").text(text);
+    handleMessageBoxStyle();
+    $(".messageBox").fadeIn(1000).delay(5000).fadeOut(2000, function()
+        {
+            window.location = redirect;
+        });
 }
 
 function handleLoginFunctionality()
@@ -468,13 +496,6 @@ function handleCreateProjectCreate()
             dataset['useUnitTesting'] = "true";
         }
 
-
-        //console.log(dataset);
-
-
-
-
-
         dataset = JSON.stringify(dataset);
 
         $.ajax({
@@ -487,6 +508,7 @@ function handleCreateProjectCreate()
                 console.log(html);
                     if(html)
                     {
+                            handleMessageBoxEffect("Project Successfully Created", SITE_URL+"project/");
                             //$("#projectPageActivityPolling").html(html)
                     }
                     else
@@ -510,6 +532,16 @@ function handleProjectClickView()
 
         window.location = SITE_URL + "project/view/" + id;
     });
+}
+
+function handleBugClick()
+{
+    $(".bugHomeClick").click(function()
+    {
+        var id = $(this).attr("id");
+
+        window.location = SITE_URL + "bug/view/" + id;
+    })
 }
 
 
@@ -551,9 +583,86 @@ function handleHomepageProgress(element)
                 {
                     $(element).asPieProgress('start');
                     handleHomePageProjectProgressSwitching();
-                });
-            })
+                }).dequeue();
+
+
+            }).dequeue();
         }
     });
+}
 
+
+function handleBugMarkFixed()
+{
+    $("#bugMarkOption").click(function()
+    {
+        var bugID = $("#bugID").text();
+
+        var method = "fixed";
+        if($(".projectBugsStatus").text() == "Fixed")
+        {
+            method = "unfix";
+        }
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/handlebug.php",
+            type:           "post",
+            data:           "method="+method+"&id="+bugID,
+            dataType:       "text",
+            success:        function(html)
+            {
+                console.log(html);
+                if(html)
+                {
+                        handleMessageBoxEffect("Bug Successfully Updated", location);
+                }
+                else
+                {
+                        console.log("FAILED");
+                }
+            }
+        });
+        //console.log(data);
+    });
+}
+
+
+function handleBugCreateClick()
+{
+    $("#btnCreateBug").click(function()
+    {
+        var dataset = {};
+        $('#createBugForm').find('input, textarea, select, span').each(function(i, field)
+        {
+            dataset[field.name] = field.value;
+        });
+
+        dataset['bugProjectID'] = $("select[name=bugProjectID]").find(":selected").attr("name");
+
+
+        console.log(dataset);
+
+        dataset = JSON.stringify(dataset);
+
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/createbug.php",
+            type:           "post",
+            data:           "data="+dataset,
+            dataType:       "text",
+            success:        function(html)
+            {
+                console.log(html);
+                    if(html)
+                    {
+                            handleMessageBoxEffect("Bug Successfully Created", SITE_URL+"bug/");
+                            //$("#projectPageActivityPolling").html(html)
+                            $("#createBugForm :input").prop("disabled", true);
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+
+    });
 }

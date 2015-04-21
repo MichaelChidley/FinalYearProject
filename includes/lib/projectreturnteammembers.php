@@ -24,6 +24,12 @@ include_once("../classes/api/clsAPI.php");
 include_once("../classes/project/clsProject.php");
 include_once("../classes/team/clsTeam.php");
 
+$objSecurity = new Security();
+if(!$objSecurity->CSRFCheck())
+{
+	die;
+}
+
 $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 $objTeam = new Team($API);
 

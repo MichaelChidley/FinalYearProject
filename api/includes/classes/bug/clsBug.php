@@ -39,6 +39,8 @@ Class Bug
 	----------------------------------------------------------------------------------*/
         public function init($operation,$intID=0,$arrBugInformation=array())
         {
+
+
             $objFeedback = new Feedback();
 
             if(count($arrBugInformation)<1)
@@ -58,23 +60,38 @@ Class Bug
                 break;
 
 
+                case "returnSingleBug":
+                  return $this->getSingleBug($intID);
+                break;
+
+                case "markBugAsFixed":
+                  return $this->markBugAsFixed($intID);
+                break;
+
+                case "markBugAsUnfix":
+                  return $this->markBugAsUnfix($intID);
+                break;
+
               }
             }
 
-                $arrBug = $arrBugnformation['bug'];
 
-                foreach($arrBug as $arrIndBug)
-                {
+                //$arrBug = $arrBugnformation['bug'];
+
+                //foreach($arrBug as $arrIndBug)
+                //{
                         $bFormFailed = false;
 
-                        (isset($arrIndBug['ID'])) ? $this->setBugID($arrIndBug['ID']) : '';
+                        (isset($arrBugInformation['ID'])) ? $this->setBugID($arrBugInformation['ID']) : '';
 
-                        (isset($arrIndBug['title'])) ? $this->setBugTitle($arrIndBug['title']) : $bFormFailed = true;
-                        (isset($arrIndBug['description'])) ? $this->setBugDescription($arrIndBug['description']) : $bFormFailed = true;
-                        (isset($arrIndBug['line'])) ? $this->setBugLine($arrIndBug['line']) : $bFormFailed = true;
-                        (isset($arrIndBug['reportedby'])) ? $this->setBugReportedBy($arrIndBug['reportedby']) : $bFormFailed = true;
-                        (isset($arrIndBug['fixed'])) ? $this->setBugFixed($arrIndBug['fixed']) : $bFormFailed = true;
-                        (isset($arrIndBug['deleted'])) ? $this->setBugDeleted($arrIndBug['deleted']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugTitle'])) ? $this->setBugTitle($arrBugInformation['bugTitle']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugDescription'])) ? $this->setBugDescription($arrBugInformation['bugDescription']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugLine'])) ? $this->setBugLine($arrBugInformation['bugLine']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugReportedBy'])) ? $this->setBugReportedBy($arrBugInformation['bugReportedBy']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugFixed'])) ? $this->setBugFixed($arrBugInformation['bugFixed']) : $bFormFailed = true;
+                        (isset($arrBugInformation['bugDeleted'])) ? $this->setBugDeleted($arrBugInformation['bugDeleted']) : $bFormFailed = true;
+                        (isset($arrBugInformation['projectID'])) ? $this->setBugProject($arrBugInformation['projectID']) : $bFormFailed = true;
+
 
                         if($bFormFailed)
                         {
@@ -84,7 +101,7 @@ Class Bug
                         switch($operation)
                         {
 
-                                case 'create':
+                                case 'createBug':
                                         return $this->createBug();
                                 break;
 
@@ -100,8 +117,27 @@ Class Bug
 
                         }
 
-                }
+                //}
 
+        }
+
+        public function markBugAsFixed($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->update("bugs", "bugFixed", 1, "bugID", $id);
+        }
+
+        public function markBugAsUnfix($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->update("bugs", "bugFixed", 0, "bugID", $id);
+        }
+
+
+        public function getSingleBug($id)
+        {
+          $objDatabase = new Database();
+          return $objDatabase->returnRow("bugs", "bugID", $id);
         }
 
 
@@ -134,8 +170,8 @@ Class Bug
 	----------------------------------------------------------------------------------*/
         public function createBug()
         {
-                $arrFields = array("bugTitle","bugDescription","bugLine","bugReportedBy","bugFixed","bugDeleted");
-                $arrValues = array($this->getBugTitle(),$this->getBugDescription(),$this->getBugLine(),$this->getBugReportedBy(),$this->getBugFixed(),$this->getBugDeleted());
+                $arrFields = array("bugTitle","bugDescription","bugLine","bugReportedBy","bugFixed","bugDeleted", "projectID");
+                $arrValues = array($this->getBugTitle(),$this->getBugDescription(),$this->getBugLine(),$this->getBugReportedBy(),$this->getBugFixed(),$this->getBugDeleted(), $this->bugProjectID);
 
                 $objDatabase = new Database();
                 $objFeedback = new Feedback();
@@ -453,6 +489,13 @@ Class Bug
                 {
                         return $this->bugDeleted;
                 }
+        }
+
+
+        public function setBugProject($id)
+        {
+          $this->bugProjectID = $id;
+          return true;
         }
 
 

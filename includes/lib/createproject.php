@@ -4,7 +4,8 @@
 if($_POST['data'])
 {
 
-	print_r($_POST);
+
+	//print_r($_POST);
 	include_once("../config.php");
 	include_once("../classes/security/clsSecurity.php");
 	include_once("../classes/api/clsAPI.php");
@@ -16,6 +17,8 @@ if($_POST['data'])
 	include_once("../classes/project/clsProject.php");
 	include_once("../classes/agile/xp/pairprogramming/clsPairProgramming.php");
 	include_once("../classes/agile/xp/unittesting/clsUnitTesting.php");
+
+
 
 	$API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
@@ -280,6 +283,8 @@ if($_POST['data'])
 		$objBacklog->createLinkProjectBacklog();
 
 	}
+
+	echo "true";
 
 }
 

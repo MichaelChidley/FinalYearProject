@@ -26,11 +26,16 @@ include_once("../classes/activity/clsActivity.php");
 
 if((isset($_POST['projectID'])))
 {
+        $objSecurity = new Security();
+        if(!$objSecurity->CSRFCheck())
+        {
+                die;
+        }
         $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
         $objActivity = new Activity($API);
 
-        $arrActivity = $API->convertJsonArrayToArray($objActivity->getAllActivity());
+        $arrActivity = $API->convertJsonArrayToArray($objActivity->getActivityByProjectID($_POST['projectID']));
         $arrActivity = array_reverse($arrActivity['response']);
 
         $intLimit = 3;
@@ -38,10 +43,13 @@ if((isset($_POST['projectID'])))
 
         foreach($arrActivity as $arrIndActivities)
         {
-                if($intCounter < $intLimit)
+                if($arrIndActivities['activityProject'] == $_POST['projectID'])
                 {
-                        echo "<div class='activityContent'>".$arrIndActivities['activityDescription']."</div>";
-                        $intCounter++;
+                        if($intCounter < $intLimit)
+                        {
+                                echo "<div class='activityContent'>".$arrIndActivities['activityDescription']."</div>";
+                                $intCounter++;
+                        }
                 }
         }
 

@@ -8,8 +8,9 @@
 		{
 
 			$arrUsersInProject = $API->convertJsonArrayToArray($objProject->getProjectUsers($intGetID));
+			$arrUsersInProject = $arrUsersInProject['response'];
 
-	  		if(in_array($_SESSION['authenticationID'], $arrProject))
+	  		if(in_array($_SESSION['authenticationID'], $arrUsersInProject))
 	  		{
 
 			?>
@@ -146,8 +147,8 @@
 			  					$arrProjectBugs = $API->convertJsonArrayToArray($objBug->getProjectBugs($arrProject['projectID']));
 			  					$arrProjectBugs = array_reverse($arrProjectBugs['response']);
 
-			  					//print_r($arrProjectBugs);
-			  					if(count($arrProjectBugs)>1)
+
+			  					if(count($arrProjectBugs)>=1)
 			  					{
 				  					foreach($arrProjectBugs as $arrProjectIndBugs)
 				  					{

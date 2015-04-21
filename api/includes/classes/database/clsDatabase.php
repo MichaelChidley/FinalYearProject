@@ -85,7 +85,7 @@ Class Database
 
 
         /*----------------------------------------------------------------------------------
-      	Function:	updateExists
+      	Function:	specificExists
       	Overview:	Function to check whether the row exists before updating
 
       	In:      $strTable              String          Table name

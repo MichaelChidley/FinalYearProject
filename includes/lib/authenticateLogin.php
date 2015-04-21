@@ -25,6 +25,12 @@ include_once("../classes/employee/clsEmployee.php");
 
 if((isset($_POST['user'])) && (isset($_POST['pass'])))
 {
+        $objSecurity = new Security();
+        if(!$objSecurity->CSRFCheck())
+        {
+                die;
+        }
+
         $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
         //$this->API->handleAPICall(array("pairprogrammerone" => $this->programmerOne, "pairprogrammertwo" => $this->programmerTwo),"pairprogramming","createPairProgrammingPair");

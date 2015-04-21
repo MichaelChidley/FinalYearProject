@@ -88,7 +88,7 @@ $intCounter = 0;
 				$style = "block";
 			}
 
-			echo "<div id='".$intCounter."' class='pie_progress projectProgress' role='progressbar' data-goal='".$intProjectProgress."' style='margin-top:20px;display:".$style."'>
+			echo "<div id='".$intCounter."' class='pie_progress projectProgress' role='progressbar' data-goal='".$intProjectProgress."' style='margin-top:60px;margin-bottom:60px;display:".$style."'>
 				<div class='pie_progress__number'>0%</div>
 	  			<div class='pie_progress__label'>Project Completion</div>
 
@@ -211,7 +211,7 @@ $intCounter = 0;
 				{
 					$style = "block";
 				}
-				echo "<div id='".$intCounter."' class='pie_progress bugProgress' role='progressbar' data-goal='".$dblFixedBugs."' style='margin-top:20px;display:".$style."'>
+				echo "<div id='".$intCounter."' class='pie_progress bugProgress' role='progressbar' data-goal='".$dblFixedBugs."' style='margin-top:60px;margin-bottom:60px;display:".$style."'>
 					<div class='pie_progress__number'>0%</div>
 		  			<div class='pie_progress__label'>Bugs Fixed</div>
 				</div>";

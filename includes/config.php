@@ -21,8 +21,6 @@
 	$styleArray['BOOTSTRAP_JS'] = $configArray['SITE_URL']."theme/bootstrap/js/bootstrap.js";
 
 
-
-
-	$configPages = array("project");
+	$configPages = array("project","bug");
 
 ?>

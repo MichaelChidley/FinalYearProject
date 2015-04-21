@@ -98,6 +98,16 @@ class Security
 		}
 
 	}
+
+
+	public function CSRFCheck()
+	{
+		if((isset($_POST)) && (count($_POST)>0) && (!isset($_SESSION['CSRF_CHECK'])))
+		{
+			return false;
+		}
+		return true;
+	}
 }
 
 ?>

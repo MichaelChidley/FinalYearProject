@@ -281,8 +281,9 @@ Class API
 																switch($_POST['module'])
 																{
 																		case 'bug':
+
 																				$objBug = new Bug();
-																				$this->objFeedback->setFeedback($objBug->init($_POST['operation'],$_POST['data']));
+																				$this->objFeedback->setFeedback($objBug->init($this->method,0,$_POST));
 																				return $this->APIResponse();
 																		break;
 
