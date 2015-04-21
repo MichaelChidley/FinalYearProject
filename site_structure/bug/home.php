@@ -1,6 +1,6 @@
 <div class='headingBlock'>Current Bugs</div>
 	<div class="table-responsive">
-	  <table class="table projectsTable">
+	  <table class="table table-hover projectsTable" >
 
 	  <tr>
 		<th>Title</th>
@@ -39,10 +39,10 @@
 
 						$bBugFixed = $arrIndBugs['bugFixed'];
 
-						$rowStyle = "tblRowRed";
+						$rowStyle = "danger";
 						if($bBugFixed == 1)
 						{
-							$rowStyle = "tblRowGreen";
+							$rowStyle = "success";
 						}
 
 						echo "<tr class='bugHomeClick ".$rowStyle."' id='".$arrIndBugs['bugID']."'>";
@@ -60,4 +60,7 @@
 
 	  ?>
 	  </table>
+
+	  <div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>bug/create"><button class="btn btn-primary">Create Bug</button></a></div>
+
 	</div>

@@ -33,7 +33,7 @@ Class Employee
 				switch($operation)
 				{
 					case "returnAllEmployees":
-						return $this->returnAllEmployee();
+						return $this->returnAllEmployees();
 					break;
 
 
@@ -44,6 +44,14 @@ Class Employee
 
 					case "returnSingleEmployeeByEmail":
 						return $this->getEmployeeByEmail($intID);
+					break;
+
+					case "returnEmployeeAccountTypeName":
+						return $this->returnEmployeeAccountTypeName($intID);
+					break;
+
+					case "deleteEmployee":
+						return $this->deleteEmployee($intID);
 					break;
 				}
 			}
@@ -74,16 +82,31 @@ Class Employee
 							return $this->returnAllEmployees();
 						break;
 
+						case "createEmployee":
+							return $this->createEmployee();
+						break;
+
 					}
 
 			}
 		}
 
-
-		public function returnAllEmployee()
+		public function deleteEmployee($id)
 		{
 			$objDatabase = new Database();
-			return $objDatabase->returnAllRows("employee");
+			return $objDatabase->delete("employees", "employeeID", $id);
+		}
+
+		public function returnEmployeeAccountTypeName($id)
+		{
+			$objDatabase = new Database();
+			return $objDatabase->returnSingleData("accountType","accounttype", "accounttypeID", $id);
+		}
+
+		public function returnAllEmployees()
+		{
+			$objDatabase = new Database();
+			return $objDatabase->returnAllRows("employees");
 		}
 
 		public function getSingleEmployee($id)

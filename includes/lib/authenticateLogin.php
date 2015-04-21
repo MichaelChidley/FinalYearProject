@@ -33,27 +33,24 @@ if((isset($_POST['user'])) && (isset($_POST['pass'])))
 
         $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
-        //$this->API->handleAPICall(array("pairprogrammerone" => $this->programmerOne, "pairprogrammertwo" => $this->programmerTwo),"pairprogramming","createPairProgrammingPair");
 
-        $API->handleAPICall(array("username"=>$_POST['user'],"password"=>$_POST['pass']), "login", "login");
+        $API->handleAPICall(array("username"=>$_POST['user'],"password"=>md5($_POST['pass'])), "login", "login");
         $API->getAPIResponse();
 
 
         if($API->isSuccessful($API->getAPIResponse()))
         {
-        		//get userID from database and set it as a session.
-        		$objEmployee = new Employee($API);
-        		$arrEmployee = $API->convertJsonArrayToArray($objEmployee->getSingleEmployeeByEmail($_POST['user']));
+        	//get userID from database and set it as a session.
+        	$objEmployee = new Employee($API);
+        	$arrEmployee = $API->convertJsonArrayToArray($objEmployee->getSingleEmployeeByEmail($_POST['user']));
 
-        		$intEmployeeID = $arrEmployee['response']['employeeID'];
+        	$intEmployeeID = $arrEmployee['response']['employeeID'];
 
-        		$_SESSION['authenticationID'] = $intEmployeeID;
+        	$_SESSION['authenticationID'] = $intEmployeeID;
                 $_SESSION['authentication'] = $_POST['user'];
                 echo "true";
         }
 
 }
-
-
 
 ?>

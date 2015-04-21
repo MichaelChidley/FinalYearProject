@@ -79,7 +79,7 @@
 		  			}
 
 		  			?>
-		  			<div style='margin-top: 20px;'><button id='bugMarkOption'>Mark As <?=$text;?></button></div>
+		  			<div style='margin-top: 20px;'><button class="btn btn-primary" id='bugMarkOption'>Mark As <?=$text;?></button></div>
 		  		</div>
 
 

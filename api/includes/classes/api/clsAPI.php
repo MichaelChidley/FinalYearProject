@@ -289,7 +289,7 @@ Class API
 
 																		case 'user':
 																				$objUser = new User();
-																				$this->objFeedback->setFeedback($objUser->init($_POST['operation'],$_POST['data']));
+																				$this->objFeedback->setFeedback($objUser->init($this->method,0,$_POST));
 																				return $this->APIResponse();
 																		break;
 

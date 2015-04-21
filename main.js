@@ -18,6 +18,12 @@ $(document).ready(function()
     handleBugClick();
     handleBugMarkFixed();
     handleBugCreateClick();
+    handleDeleteEmployee();
+
+    handleEmployeeViewClick();
+    handleEmployeeAddClick();
+
+
 
 
     $('.pie_progress, .pie_progress_bug').asPieProgress({
@@ -84,12 +90,14 @@ function handleMessageBoxStyle()
 
 function handleMessageBoxEffect(text,redirect)
 {
-    console.log(redirect);
     $(".messageBox").text(text);
     handleMessageBoxStyle();
-    $(".messageBox").fadeIn(1000).delay(5000).fadeOut(2000, function()
+    $(".messageBox").fadeIn(500).delay(2000).fadeOut(500, function()
         {
-            window.location = redirect;
+            if(redirect !== "")
+            {
+                window.location = redirect;
+            }
         });
 }
 
@@ -433,6 +441,11 @@ function handleCreateProjectCreate()
 
     $("#create").click(function()
     {
+         if(!handleFormSubmit())
+        {
+            return false;
+        }
+
         var dataset = {};
         $('#createProjectForm').find('input, textarea, select, span').each(function(i, field) {
 
@@ -445,6 +458,7 @@ function handleCreateProjectCreate()
                 dataset[field.name] = field.value;
             }
         });
+
 
 
         var totalSprints = $("#createSprintInfoTotalSprints").text();
@@ -544,6 +558,16 @@ function handleBugClick()
     })
 }
 
+function handleEmployeeViewClick()
+{
+    $(".employeeClick").click(function()
+    {
+        var id = $(this).attr("id");
+
+        window.location = SITE_URL + "employee/view/" + id;
+    });
+}
+
 
 function handleHomePageProjectProgressSwitching()
 {
@@ -630,6 +654,11 @@ function handleBugCreateClick()
 {
     $("#btnCreateBug").click(function()
     {
+        if(!handleFormSubmit())
+        {
+            return false;
+        }
+
         var dataset = {};
         $('#createBugForm').find('input, textarea, select, span').each(function(i, field)
         {
@@ -665,4 +694,95 @@ function handleBugCreateClick()
         });
 
     });
+}
+
+function handleEmployeeAddClick()
+{
+    $("#addEmployee").click(function()
+    {
+        if(!handleFormSubmit())
+        {
+            return false;
+        }
+
+        var dataset = {};
+        $('#addEmployeeForm').find('input, textarea, select, span').each(function(i, field)
+        {
+            dataset[field.name] = field.value;
+        });
+
+        dataset['employeeTeam'] = $("select[name=employeeTeam]").find(":selected").attr("name");
+
+
+        console.log(dataset);
+
+        dataset = JSON.stringify(dataset);
+
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/addemployee.php",
+            type:           "post",
+            data:           "data="+dataset,
+            dataType:       "text",
+            success:        function(html)
+            {
+                    console.log(html);
+                    if(html)
+                    {
+                            handleMessageBoxEffect("Employee Successfully Created", SITE_URL+"employee/");
+
+                            $("#addEmployeeForm :input").prop("disabled", true);
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+
+    });
+
+}
+
+function handleDeleteEmployee()
+{
+    $(".deleteEmployee").click(function()
+    {
+        if(confirm("Are you sure you want to delete this employee?"))
+        {
+            return true;
+        }
+        return false;
+    });
+
+}
+
+
+
+function handleFormSubmit()
+{
+    var has_empty = false;
+    var numberErrors = 0;
+    var strFields = "";
+
+    $("form").find('input,select,textarea').each(function ()
+    {
+        if($(this).attr("skipvalidation") != "true")
+        {
+            if ($(this).val().trim() == "")
+            {
+                numberErrors++;
+                strFields += $(this).attr("name") + "\n";
+
+            }
+        }
+    });
+
+    if(numberErrors > 0)
+    {
+        handleMessageBoxEffect("ERROR: "+strFields+" are empty!","");
+        return false;
+    }
+
+    return true;
+
 }

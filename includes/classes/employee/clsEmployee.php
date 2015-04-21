@@ -40,6 +40,27 @@ Class Employee
 
 	}
 
+	public function returnEmployeeAccountTypeName($id)
+	{
+		$this->API->handleAPICall(array(),"employee","returnEmployeeAccountTypeName",$id);
+		return $this->API->getAPIResponse();
+	}
+
+
+	public function deleteEmployee($id)
+	{
+		$this->API->handleAPICall(array(),"employee","deleteEmployee",$id);
+		return $this->API->getAPIResponse();
+	}
+
+
+	public function addEmployee()
+	{
+		$this->API->handleAPICall(array("firstname" => $this->firstname, "lastname" => $this->lastname, "email" => $this->email,
+			"password" => md5($this->password), "dob" => $this->dob, "homenumber" => $this->homenumber, "mobilenumber" => $this->mobilenumber,
+			"team" => $this->team), "user", "createEmployee");
+		return $this->API->getAPIResponse();
+	}
 
 	public function isAdmin($id)
 	{
@@ -89,8 +110,60 @@ Class Employee
 
 
 
+	public function setFirstname($firstname)
+	{
+		$this->firstname = $firstname;
 
+		return true;
+	}
 
+	public function setLastname($lastname)
+	{
+		$this->lastname = $lastname;
+
+		return true;
+	}
+
+	public function setEmail($email)
+	{
+		$this->email = $email;
+
+		return true;
+	}
+
+	public function setPassword($password)
+	{
+		$this->password = $password;
+
+		return true;
+	}
+
+	public function setDOB($dob)
+	{
+		$this->dob = $dob;
+
+		return true;
+	}
+
+	public function setHomeNumber($homenumber)
+	{
+		$this->homenumber = $homenumber;
+
+		return true;
+	}
+
+	public function setMobileNumber($mobilenumber)
+	{
+		$this->mobilenumber = $mobilenumber;
+
+		return true;
+	}
+
+	public function setTeam($team)
+	{
+		$this->team = $team;
+		return true;
+	}
 
 }
 

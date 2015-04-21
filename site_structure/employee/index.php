@@ -1,15 +1,12 @@
 <?php
 
 
-$objProject = new Project($API);
-$arrProjects = $API->convertJsonArrayToArray($objProject->getAllProjects());
+//$objProject = new Project($API);
+//$arrProjects = $API->convertJsonArrayToArray($objProject->getAllProjects());
+//$arrProjects = array_reverse($arrProjects['response']);
 
-
-$arrProjects = array_reverse($arrProjects['response']);
-
-
-$objBug = new Bug($API);
 $objEmployee = new Employee($API);
+
 
 
 //If no action or id is set, we are on the homepage, show the content.
@@ -31,6 +28,12 @@ else
 	{
 		include_once("delete.php");
 	}
+	elseif ($strGetAction == 'edit')
+	{
+		include_once("edit.php");
+	}
+
+
 }
 
 ?>

@@ -365,7 +365,7 @@ body
 	border: solid 2px #ededed;
 }
 
-.createProjectTable td, .createSprintInfo td, .createSprintInfoAdd td, .createSprintInfoDetails td, .createSprintInfoXP td, .createUnitTesting td, .createBugTable td
+.createProjectTable td, .createSprintInfo td, .createSprintInfoAdd td, .createSprintInfoDetails td, .createSprintInfoXP td, .createUnitTesting td, .createBugTable td, .addEmployeeTable td, .eddEmployeeTable td
 {
 	border-top: none !important;
 }
@@ -391,19 +391,19 @@ body
 	padding-left: 0px;
 }
 
-.projectHomeClick, .bugHomeClick
+.projectHomeClick, .bugHomeClick, .employeeClick
 {
 	cursor: pointer;
 }
 
 .tblRowGreen
 {
-	background-color: #66FF33;
+	background-color: #4F8A10;
 }
 
 .tblRowRed
 {
-	background-color: red;
+	background-color: #D8000C;
 }
 
 
@@ -416,4 +416,13 @@ body
 	background-color: #5bc0de;
 	margin-top: 10px;
 	display: none;
+}
+
+.danger
+{
+}
+
+.success
+{
+
 }

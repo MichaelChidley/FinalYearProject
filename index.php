@@ -144,8 +144,47 @@ include_once("includes/classes/backlog/clsBacklog.php");
 
       				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#">Projects</a></li>
+
+							<?php
+
+								echo "<li ";
+								if($strRequestedPage == "")
+								{
+									echo " class='active'";
+								}
+								echo "><a href=".$configArray['SITE_URL'].">Home</a></li>";
+
+
+								echo "<li ";
+								if(strpos($strRequestedPage, "project") !== false)
+								{
+									echo " class='active'";
+								}
+								echo "><a href=".$configArray['SITE_URL']."project/>Projects</a></li>";
+
+								echo "<li ";
+								if(strpos($strRequestedPage, "bug") !== false)
+								{
+									echo " class='active'";
+								}
+								echo "><a href=".$configArray['SITE_URL']."bug/>Bug</a></li>";
+
+
+								echo "<li ";
+								if(strpos($strRequestedPage, "employee") !== false)
+								{
+									echo " class='active'";
+								}
+								echo "><a href=".$configArray['SITE_URL']."employee/>Employee</a></li>";
+
+								echo "<li ";
+								if(strpos($strRequestedPage, "team") !== false)
+								{
+									echo " class='active'";
+								}
+								echo "><a href=".$configArray['SITE_URL']."team/>Team</a></li>";
+							?>
+
 							<?php
 								//$objEmployee = new Employee($API);
 								//$accountType = $objEmployee->getEmployeeAccountType($_SESSION['authenticationID']);
@@ -161,6 +200,7 @@ include_once("includes/classes/backlog/clsBacklog.php");
 
 			<div id='pageContent' class='span12'>
 				<?php
+
 					if($strRequestedPage)
 					{
 						$arrUrlExp = explode("/",$strRequestedPage);

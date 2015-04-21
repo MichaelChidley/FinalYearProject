@@ -26,6 +26,7 @@ Class User
 				private $userDOB;
 				private $userHomeNumber;
 				private $userMobileNumber;
+				private $teamID;
 
 
 				/*----------------------------------------------------------------------------------
@@ -37,58 +38,58 @@ Class User
 
 
 				Out:     true/false      bool
-	----------------------------------------------------------------------------------*/
-				public function init($operation,$arrUserInfo)
+				----------------------------------------------------------------------------------*/
+				public function init($operation,$intID=0,$arrIndUser=array())
 				{
-								$objFeedback = new Feedback();
+					$objFeedback = new Feedback();
 
-								$arrUser = $arrUserInfo['user'];
+					//foreach($arrUser as $arrIndUser)
+					//{
+						$bFormFailed = false;
 
-								foreach($arrUser as $arrIndUser)
-								{
-												$bFormFailed = false;
+						(isset($arrIndUser['ID'])) ? $this->setUserID($arrIndUser['ID']) : '';
 
-												(isset($arrIndUser['ID'])) ? $this->setUserID($arrIndUser['ID']) : '';
+						(isset($arrIndUser['firstname'])) ? $this->setUserFirstName($arrIndUser['firstname']) : $bFormFailed = true;
+						(isset($arrIndUser['lastname'])) ? $this->setUserLastName($arrIndUser['lastname']) : $bFormFailed = true;
+						(isset($arrIndUser['email'])) ? $this->setUserEmail($arrIndUser['email']) : $bFormFailed = true;
+						(isset($arrIndUser['password'])) ? $this->setUserPassword($arrIndUser['password']) : $bFormFailed = true;
+						(isset($arrIndUser['dob'])) ? $this->setUserDOB($arrIndUser['dob']) : $bFormFailed = true;
+						(isset($arrIndUser['homenumber'])) ? $this->setUserHomeNumber($arrIndUser['homenumber']) : $bFormFailed = true;
+						(isset($arrIndUser['mobilenumber'])) ? $this->setUserMobileNumber($arrIndUser['mobilenumber']) : $bFormFailed = true;
 
-												(isset($arrIndUser['firstname'])) ? $this->setUserFirstName($arrIndUser['firstname']) : $bFormFailed = true;
-												(isset($arrIndUser['lastname'])) ? $this->setUserLastName($arrIndUser['lastname']) : $bFormFailed = true;
-												(isset($arrIndUser['email'])) ? $this->setUserEmail($arrIndUser['email']) : $bFormFailed = true;
-												(isset($arrIndUser['password'])) ? $this->setUserPassword($arrIndUser['password']) : $bFormFailed = true;
-												(isset($arrIndUser['dob'])) ? $this->setUserDOB($arrIndUser['dob']) : $bFormFailed = true;
-												(isset($arrIndUser['homenumber'])) ? $this->setUserHomeNumber($arrIndUser['homenumber']) : $bFormFailed = true;
-												(isset($arrIndUser['mobilenumber'])) ? $this->setUserMobileNumber($arrIndUser['mobilenumber']) : $bFormFailed = true;
+						(isset($arrIndUser['team'])) ? $this->setUserTeam($arrIndUser['team']) : '';
 
-												if($bFormFailed)
-												{
-																return false;
-												}
+						if($bFormFailed)
+						{
+										return false;
+						}
 
-												switch($operation)
-												{
+						switch($operation)
+						{
 
-																case 'create':
-																		return $this->createUser();
-																break;
-
-
-
-																case 'update':
-																		return $this->updateUser();
-																break;
+							case 'createEmployee':
+									return $this->createUser();
+							break;
 
 
-																case 'delete':
-																		return $this->deleteUser();
-																break;
 
-																default:
-																		return false;
-																break;
+							case 'update':
+									return $this->updateUser();
+							break;
 
 
-												}
+							case 'delete':
+									return $this->deleteUser();
+							break;
 
-								}
+							default:
+									return false;
+							break;
+
+
+						}
+
+					//}
 
 				}
 
@@ -103,18 +104,29 @@ Class User
 				----------------------------------------------------------------------------------*/
 				public function createUser()
 				{
-								$arrFields = array("firstname","lastname","email","password","dob","homenumber", "mobilenumber");
-								$arrValues = array($this->getUserFirstName(),$this->getUserLastName(),$this->getUserEmail(),$this->getUserPassword(),$this->getUserDOB(),$this->getUserHomeNumber(), $this->getUserMobileNumber());
+					$arrFields = array("firstname","lastname","email","password","dob","homenumber", "mobilenumber");
+					$arrValues = array($this->getUserFirstName(),$this->getUserLastName(),$this->getUserEmail(),$this->getUserPassword(),$this->getUserDOB(),$this->getUserHomeNumber(), $this->getUserMobileNumber());
 
-								$objDatabase = new Database();
-								$objFeedback = new Feedback();
+					$objDatabase = new Database();
+					$objFeedback = new Feedback();
 
-								if($objDatabase->insert('employees',$arrFields,$arrValues))
+					if($objDatabase->insert('employees',$arrFields,$arrValues))
+					{
+								$intNewEmployeeID = $objDatabase->getHighestIDOnTable("employeeID", "employees");
+
+								$arrFields = array("employeeID", "teamID", "teamRole");
+								$arrValues = array($intNewEmployeeID, $this->teamID, 2);
+
+								if($objDatabase->insert('employeeteams',$arrFields,$arrValues))
 								{
-												return true;
-
+									return true;
 								}
+
 								return false;
+					}
+
+
+					return false;
 
 				}
 
@@ -456,6 +468,12 @@ Class User
 								{
 												return $this->userMobileNumber;
 								}
+				}
+
+				public function setUserTeam($teamID)
+				{
+					$this->teamID = $teamID;
+					return true;
 				}
 
 

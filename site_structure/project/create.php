@@ -74,7 +74,7 @@
 			<tr class='projectOwnerDetails'>
 				<td>Title</td>
 				<td>
-					<select name='projectOwnerTitle'>
+					<select name='projectOwnerTitle' skipvalidation="true">
 						<option value='Mr'>Mr</option>
 						<option value='Mrs'>Mrs</option>
 						<option value='Miss'>Miss</option>
@@ -84,22 +84,22 @@
 
 			<tr class='projectOwnerDetails'>
 				<td>Firstname</td>
-				<td><input type='text' name='projectOwnerFirstname'></td>
+				<td><input type='text' name='projectOwnerFirstname' skipvalidation="true"></td>
 			</tr>
 
 			<tr class='projectOwnerDetails'>
 				<td>Lastname</td>
-				<td><input type='text' name='projectOwnerLastname'></td>
+				<td><input type='text' name='projectOwnerLastname' skipvalidation="true"></td>
 			</tr>
 
 			<tr class='projectOwnerDetails'>
 				<td>Email</td>
-				<td><input type='text' name='projectOwnerEmail'></td>
+				<td><input type='text' name='projectOwnerEmail' skipvalidation="true"></td>
 			</tr>
 
 			<tr class='projectOwnerDetails'>
 				<td>Phone</td>
-				<td><input type='text' name='projectOwnerContact'></td>
+				<td><input type='text' name='projectOwnerContact' skipvalidation="true"></td>
 			</tr>
 
 
