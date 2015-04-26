@@ -89,7 +89,7 @@ Class API
 
 				In:
 
-				Out:
+				Out: API Response
 				----------------------------------------------------------------------------------*/
 				private function handleAPIGetCall()
 				{
@@ -229,7 +229,7 @@ Class API
 
 				In:
 
-				Out:
+				Out: API Response
 				----------------------------------------------------------------------------------*/
 				private function handleAPIDeleteCall()
 				{

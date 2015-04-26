@@ -18,32 +18,32 @@ $arrTeams = $arrTeams['response'];
 
 			<tr>
 				<td><div class="fourthLevelHeading">Firstname</div></td>
-				<td><input type='text' name='employeeFirstname'></td>
+				<td><input type='text' formMaxLength='50' name='employeeFirstname'></td>
 
 				<td><div class="fourthLevelHeading">Lastname</div></td>
-				<td><input name='employeeLastname'></td>
+				<td><input formMaxLength='50' name='employeeLastname'></td>
 			</tr>
 
 
 			<tr>
 				<td><div class="fourthLevelHeading">Email</div></td>
-				<td><input type='text' name='employeeEmail'></td>
+				<td><input type='text' formMaxLength='150' formDataType="email" name='employeeEmail'></td>
 
 				<td><div class="fourthLevelHeading">Password</div></td>
-				<td><input type='password' name='employeePassword'></td>
+				<td><input type='password' formMaxLength='50' name='employeePassword'></td>
 			</tr>
 
 			<tr>
 				<td><div class="fourthLevelHeading">DOB</div></td>
-				<td><input type='text' name='employeeDOB'></td>
+				<td><input type='text' formMaxLength='10' name='employeeDOB'></td>
 
 				<td><div class="fourthLevelHeading">Home Number</div></td>
-				<td><input type='text' name='employeeHomeNumber'></td>
+				<td><input type='text' formMaxLength='25' formDataType="number" name='employeeHomeNumber'></td>
 			</tr>
 
 			<tr>
 				<td><div class="fourthLevelHeading">Mobile Number</div></td>
-				<td><input type='text' name='employeeMobileNumber'></td>
+				<td><input type='text' formMaxLength='25' formDataType="number" name='employeeMobileNumber'></td>
 
 				<td><div class="fourthLevelHeading">Team</div></td>
 				<td>

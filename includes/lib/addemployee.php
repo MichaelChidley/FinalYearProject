@@ -8,7 +8,8 @@ session_start();
 if($_POST['data'])
 {
 
-	print_r($_POST);
+//	print_r($_POST);
+	//print_r($_SESSION);
 	include_once("../config.php");
 	include_once("../classes/security/clsSecurity.php");
 	include_once("../classes/api/clsAPI.php");
@@ -18,9 +19,10 @@ if($_POST['data'])
 
 
 	$objSecurity = new Security();
+
 	if(!$objSecurity->CSRFCheck())
 	{
-		die;
+		die("CSRF");
 	}
 
 	$API = new API($configArray['API_URL'], $configArray['API_KEY']);

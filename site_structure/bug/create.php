@@ -13,10 +13,10 @@
 
 			<tr>
 				<td><div class="fourthLevelHeading">Title</div></td>
-				<td><input type='text' name='bugTitle'></td>
+				<td><input type='text' name='bugTitle' formMaxLength='50'></td>
 
 				<td><div class="fourthLevelHeading">Description</div></td>
-				<td><textarea name='bugDescription'></textarea></td>
+				<td><textarea name='bugDescription' formMaxLength='200'></textarea></td>
 			</tr>
 
 
@@ -36,7 +36,7 @@
 				</td>
 
 				<td><div class="fourthLevelHeading">Bug Line</div></td>
-				<td><input type='text' name='bugLine'></td>
+				<td><input type='text' name='bugLine' formDataType="number" formMaxLength='100000000'></td>
 
 
 			</tr>

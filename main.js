@@ -320,32 +320,34 @@ function handleCreatingSprintGoals()
         var textarea = $(".createSprintInfoSprintGoal_"+i).find("textarea").attr("class","createSprintInfoSprintDesc_"+i);
         var textareaname = $(".createSprintInfoSprintGoal_"+i).find("textarea").attr("name","createSprintInfoSprintDesc_"+i);
 
-
         var sprintStart = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintStart").attr("class","createSprintInfoSprintStart_"+i);
         var sprintFinish = $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintFinish").attr("class","createSprintInfoSprintFinish_"+i);
-        //var select = $(".createSprintInfoSprintGoal_"+i).find("select").attr("name","createSprintInfoSprintPokerVal_"+i);
 
     }
 }
 
 function handleCreateSprintDates()
 {
+    //get project start date
     var prjStart = $("[name=projectStartDate]").val();
 
+    //get total project days and total sprints
     var totalDays = parseInt($("#createSprintInfoTotalPrjDays").text());
     var totalSprints = parseInt($("[name=projectSprints]").find(":selected").text());
 
+    //divide the total days by the number of sprints and round down to return the total
+    //number of days for each sprint
     var totalSprintDays = Math.floor(totalDays/totalSprints);
 
+    //generate the initial sprint dates
     var text = returnSprintDates(prjStart,totalSprintDays);
 
+    //set sprint dates
     $(".createSprintInfoSprintStart_1").text(prjStart);
     $(".createSprintInfoSprintFinish_1").text(text);
 
-
     //Get the total number of sprint elements
     var totalNumberOfSprintItems = $(".createSprintInfoSprintGoal").length;
-
 
     //get the first date to start from within the iteration
     //this date is populated in the few lines above
@@ -358,15 +360,16 @@ function handleCreateSprintDates()
     {
         //find the current start element
         //createSprintInfoSprintGoal_2
-        //etc
         //find the start date in the element
         //createSprintInfoSprintStart_2
         //set the start date to be the finish date of the previous element
         //createSprintInfoSprintFinish_1
 
+        //find the previous end date set as start date for next sprint
         var previousEndDate = $(".createSprintInfoSprintGoal_"+(i-1)).find(".createSprintInfoSprintFinish_"+(i-1)).text();
         $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintStart_"+i).text(previousEndDate);
 
+        //add total sprint days to start date to get new end date
         var newFinishDate = returnSprintDates(previousEndDate,totalSprintDays);
         $(".createSprintInfoSprintGoal_"+i).find(".createSprintInfoSprintFinish_"+i).text(newFinishDate);
 
@@ -768,10 +771,42 @@ function handleFormSubmit()
     {
         if($(this).attr("skipvalidation") != "true")
         {
+            var currentMaxLength = $(this).attr("formMaxLength")
+
+            var currentDataType = "string";
+            if($(this).attr("formDataType") !== "")
+            {
+                currentDataType = $(this).attr("formDataType");
+            }
+
+            if($(this).val().length > currentMaxLength)
+            {
+                numberErrors++;
+                strFields += $(this).attr("name") +" over maximum allowed length\n";
+            }
+
+            if(currentDataType == "number")
+            {
+                if(!$.isNumeric($(this).val()))
+                {
+                    numberErrors++;
+                    strFields += $(this).attr("name") +" is not the correct data type\n";
+                }
+            }
+
+            if(currentDataType == "email")
+            {
+                if(!isValidEmailAddress($(this).val()))
+                {
+                    numberErrors++;
+                    strFields += " Email Address Is Invalid";
+                }
+            }
+
             if ($(this).val().trim() == "")
             {
                 numberErrors++;
-                strFields += $(this).attr("name") + "\n";
+                strFields += $(this).attr("name") + "\n is empty!";
 
             }
         }
@@ -779,10 +814,15 @@ function handleFormSubmit()
 
     if(numberErrors > 0)
     {
-        handleMessageBoxEffect("ERROR: "+strFields+" are empty!","");
+        handleMessageBoxEffect("ERROR: "+strFields,"");
         return false;
     }
 
     return true;
 
 }
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+    return pattern.test(emailAddress);
+};

@@ -16,7 +16,7 @@
 
 			<tr>
 				<td><div class="fourthLevelHeading">Title</div></td>
-				<td><input type='text' name='projectTitle'></td>
+				<td><input type='text' formMaxLength='50' name='projectTitle'></td>
 
 				<td><div class="fourthLevelHeading">Start Date</div></td>
 				<td><input type='text' name='projectStartDate'></td>
@@ -24,7 +24,7 @@
 
 			<tr>
 				<td><div class="fourthLevelHeading">Description</div></td>
-				<td><textarea name='projectDescription'></textarea></td>
+				<td><textarea formMaxLength='500' name='projectDescription'></textarea></td>
 
 				<td><div class="fourthLevelHeading">End Date</div></td>
 				<td><input type='text' name='projectEndDate'></td>
@@ -168,7 +168,7 @@
 
 			<tr class='createSprintInfoSprintGoal createSprintInfoSprintGoal_1'>
 				<td><div class="fourthLevelHeading createSprintInfoSprintGoalText">Sprint 1 Goal: </div></td>
-				<td><textarea class='createSprintInfoSprintDesc_1' name='createSprintInfoSprintDesc_1'></textarea></td>
+				<td><textarea class='createSprintInfoSprintDesc_1' formMaxLength='255' name='createSprintInfoSprintDesc_1'></textarea></td>
 
 				<td>Start: <span class='createSprintInfoSprintStart createSprintInfoSprintStart_1' name='createSprintInfoSprintStart_1'></span></td>
 				<td>Finish: <span class='createSprintInfoSprintFinish createSprintInfoSprintFinish_1' name='createSprintInfoSprintFinish_1'></span></td>
@@ -187,7 +187,7 @@
 			</tr>
 
 			<tr class='createSprintInfoBacklogItem createSprintInfoBacklogItem_1'>
-				<td><input type='text' name='backlogItem_1'></td>
+				<td><input type='text' formMaxLength='255' name='backlogItem_1'></td>
 
 				<td>
 					<select name='projectSprintMoscow_1'>
