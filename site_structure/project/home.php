@@ -54,6 +54,13 @@
 	  ?>
 	  </table>
 
-	  <div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>project/create"><button class="btn btn-primary">Create Project</button></a></div>
-
+	  <?php
+	  if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
+	{
+		?>
+   <div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>project/create"><button class="btn btn-primary">Create Project</button></a></div>
+   <?php
+	}
+	?>
 	</div>
+

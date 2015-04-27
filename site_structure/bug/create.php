@@ -1,5 +1,7 @@
 <?php
 
+if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType)) || ($objEmployee->isDeveloper($accountType))))
+	{
 
 ?>
 
@@ -50,3 +52,10 @@
 
 	<div class='clear'></div>
 </div>
+
+<?php
+}
+else
+{
+	die(header("Location: ".$configArray['FALL_BACK']));
+}

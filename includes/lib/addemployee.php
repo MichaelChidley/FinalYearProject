@@ -5,6 +5,7 @@ session_start();
 //print_r($_SESSION);
 //add check for CSRF too with tokens etc
 //print_r($_POST);
+
 if($_POST['data'])
 {
 

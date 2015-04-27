@@ -24,7 +24,7 @@
 			  			</div>
 
 			  			<div class="col-sm-6">
-			  				<div class="secondLevelHeading">Activity</div>
+			  				<div class="secondLevelHeading">Activity <span class='linksmall'><a href="<?=$configArray['SITE_URL'];?>activity/create/<?=$arrProject['projectID'];?>">(Add)</a></span></div>
 			  				<div id='projectPageActivityPolling'></div>
 			  			</div>
 
@@ -36,7 +36,7 @@
 			  		<div class="row-fluid contentOffsetTop">
 
 			  			<div class="col-sm-6">
-			  				<div class="secondLevelHeading">Comments</div>
+			  				<div class="secondLevelHeading">Comments <span class='linksmall'><a href="<?=$configArray['SITE_URL'];?>comment/create/<?=$arrProject['projectID'];?>">(Add)</a></span></div>
 
 			  				<?php
 
@@ -140,7 +140,7 @@
 			  			</div>
 
 			  			<div class="col-sm-6">
-			  				<div class="secondLevelHeading">Bugs</div>
+			  				<div class="secondLevelHeading">Bugs <span class='linksmall'><a href="<?=$configArray['SITE_URL'];?>bug/create/">(Add)</a></span></div>
 			  				<?php
 
 			  					$objBug = new Bug($API);
@@ -174,7 +174,7 @@
 
 
 
-
+<!--
 			  		<div class="row-fluid contentOffsetTop">
 
 			  			<div class="col-sm-6">
@@ -193,7 +193,7 @@
 			  		</div>
 
 
-
+-->
 
 
 		  		<?php

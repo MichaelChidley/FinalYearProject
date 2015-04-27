@@ -72,6 +72,12 @@ body
 }
 
 
+#pageContent
+{
+	min-height: 100%;
+}
+
+
 /* mobile version */
 .navbar-default .navbar-toggle {
     border-color: #144971;
@@ -102,6 +108,15 @@ body
     }
 }
 
+
+#footer
+{
+	background-color: #154971;
+	padding: 5px;
+	color: #FFF;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 
 #loginBox
 {
@@ -425,4 +440,21 @@ body
 .success
 {
 
+}
+
+.progressbar_projName
+{
+	text-align: center;
+	font-size: 16px;
+	font-weight: 800;
+	position: absolute;
+	width: 100% !important;
+	margin-top: 210px;
+
+}
+
+
+.linksmall
+{
+	font-size: 12px;
 }

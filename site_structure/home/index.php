@@ -88,10 +88,11 @@ $intCounter = 0;
 				$style = "block";
 			}
 
+
 			echo "<div id='".$intCounter."' class='pie_progress projectProgress' role='progressbar' data-goal='".$intProjectProgress."' style='margin-top:60px;margin-bottom:60px;display:".$style."'>
 				<div class='pie_progress__number'>0%</div>
 	  			<div class='pie_progress__label'>Project Completion</div>
-
+	  			<div class='progressbar_projName'>".$arrIndProjects['projectTitle']."</div>
 			</div>";
 
 
@@ -233,3 +234,4 @@ $intCounter = 0;
 
 	<div class='clear'></div>
 </div>
+

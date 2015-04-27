@@ -4,7 +4,7 @@ session_start();
 
 include_once("includes/config.php");
 
-//unset($_SESSION['authentication']);
+
 //INCLUDE ALL THE CLASSES HERE
 //EVERY PAGE IS REWRITTEN TO USE THIS SINGLE PAGE
 //THEREFORE, ONLY NEED TO INCLUDE CLASSES THE ONCE
@@ -30,6 +30,7 @@ $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
 
+$strRequestedPageTitle = $objPage->getPageTitle($strRequestedPage);
 
 //INCLUDE MODULES
 include_once("includes/classes/project/clsProject.php");
@@ -42,6 +43,9 @@ include_once("includes/classes/client/clsClient.php");
 include_once("includes/classes/agile/clsAgile.php");
 include_once("includes/classes/sprint/clsSprint.php");
 include_once("includes/classes/backlog/clsBacklog.php");
+
+
+
 
 //testing gets work
 //$API->handleAPICall(array(),"bug","1");	//working
@@ -92,6 +96,7 @@ include_once("includes/classes/backlog/clsBacklog.php");
 
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
+		<title><?=$strRequestedPageTitle;?></title>
 	</head>
 
 	<body>
@@ -147,12 +152,17 @@ include_once("includes/classes/backlog/clsBacklog.php");
 
 							<?php
 
+								$objEmployee = new Employee($API);
+								$accountType = $objEmployee->getEmployeeAccountType($_SESSION['authenticationID']);
+
+
 								echo "<li ";
 								if($strRequestedPage == "")
 								{
 									echo " class='active'";
 								}
 								echo "><a href=".$configArray['SITE_URL'].">Home</a></li>";
+
 
 
 								echo "<li ";
@@ -177,12 +187,13 @@ include_once("includes/classes/backlog/clsBacklog.php");
 								}
 								echo "><a href=".$configArray['SITE_URL']."employee/>Employee</a></li>";
 
-								echo "<li ";
-								if(strpos($strRequestedPage, "team") !== false)
-								{
-									echo " class='active'";
-								}
-								echo "><a href=".$configArray['SITE_URL']."team/>Team</a></li>";
+
+								//echo "<li ";
+								//if(strpos($strRequestedPage, "team") !== false)
+								//{
+							//		echo " class='active'";
+						//		}
+					//			echo "><a href=".$configArray['SITE_URL']."team/>Team</a></li>";
 							?>
 
 							<?php
@@ -230,7 +241,9 @@ include_once("includes/classes/backlog/clsBacklog.php");
 			</div>
 
 			<div id='footer'>
-				THIS IS THE FOOTER..
+				<div class='fleft'>&copy; Project Management Console <?=date('Y');?></div>
+				<div class='fright'>Michael Chidley</div>
+				<div class='clear'></div>
 			</div>
 
 		</div>

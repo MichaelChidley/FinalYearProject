@@ -2,6 +2,10 @@
 
 	$objTeam = new Team($API);
 
+	if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
+	{
+
+
 ?>
 
 <div class='headingBlock'>Create Project</div>
@@ -291,3 +295,11 @@
 		<div class='clear'></div>
 	</div>
 </div>
+
+<?php
+}
+else
+{
+	die(header("Location: ".$configArray['FALL_BACK']));
+}
+?>

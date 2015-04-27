@@ -15,6 +15,23 @@ class Page
 		}
 		return false;
 	}
+
+
+	public function getPageTitle($pageName)
+	{
+		global $configArray;
+
+		$pageName = explode("/",$pageName);
+
+		$pageName = $pageName[0];
+
+		if($pageName !== "")
+		{
+			return $configArray[$pageName]['title'];
+		}
+		return $configArray['default']['title'];
+
+	}
 }
 
 ?>

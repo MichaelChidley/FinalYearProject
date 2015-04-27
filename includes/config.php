@@ -23,4 +23,10 @@
 
 	$configPages = array("project","bug","employee");
 
+	$configArray['default']['title'] = "Project Management Console";
+	$configArray["project"]['title'] = "Projects | ".$configArray['default']['title'];
+	$configArray["bug"]['title'] = "Bugs | ".$configArray['default']['title'];
+	$configArray["employee"]['title'] = "Employees | ".$configArray['default']['title'];
+	$configArray["team"]['title'] = "Teams | ".$configArray['default']['title'];
+
 ?>

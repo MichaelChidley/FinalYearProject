@@ -4,6 +4,8 @@ $objTeam = new Team($API);
 $arrTeams = $API->convertJsonArrayToArray($objTeam->getAllTeams());
 $arrTeams = $arrTeams['response'];
 
+if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
+	{
 
 //print_r($arrTeams);
 ?>
@@ -68,3 +70,10 @@ $arrTeams = $arrTeams['response'];
 
 	<div class='clear'></div>
 </div>
+
+<?php
+}
+else
+{
+	die(header("Location: ".$configArray['FALL_BACK']));
+}
