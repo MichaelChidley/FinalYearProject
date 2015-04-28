@@ -23,6 +23,16 @@ Class Comment
 	private $ActivityDescription;
 	private $ActivityProject;
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	init
+	  	Overview:	Function to initialize the request method for this module
+
+	  	In:      $operation         String          Method
+	  			 $intID 			int 			Integer of value to edit, used for post
+	  			 $arrActivityInformation	array 	Array of post information
+
+	  	Out:	 object response
+		----------------------------------------------------------------------------------*/
         public function init($operation,$intID=0,$arrActivityInformation=array())
         {
 
@@ -79,47 +89,19 @@ Class Comment
 			}
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	returnAllComments
+	  	Overview:	Function to return all comments from database
 
+	  	In:
+
+	  	Out:	 array 		array of comments
+		----------------------------------------------------------------------------------*/
 		public function returnAllComments()
 		{
 			$objDatabase = new Database();
 			return $objDatabase->returnAllRows("comments");
 		}
-
-		public function getSingleActivity($id)
-		{
-			$objDatabase = new Database();
-			return $objDatabase->returnRow("activity","activityID",$id);
-		}
-
-
-		public function getSingleActivityByPrjID($id)
-		{
-			$objDatabase = new Database();
-			return $objDatabase->returnAllRows("activity","activityProject",$id);
-		}
-
-
-
-		public function setActivityID($intActivityID)
-		{
-			return $this->ActivityID = $intActivityID;
-		}
-
-		public function setActivityOwner($intActivityOwnerID)
-		{
-			return $this->ActivityOwner = $intActivityOwnerID;
-		}
-
-		public function setActivityDescription($setActivityDescription)
-		{
-			return $this->ActivityDescription = $setActivityDescription;
-		}
-		public function setActivityProject($setActivityProject)
-		{
-			return $this->ActivityProject = $setActivityProject;
-		}
-
 
 }
 

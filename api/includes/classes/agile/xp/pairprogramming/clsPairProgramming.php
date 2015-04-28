@@ -1,5 +1,19 @@
 <?php
 
+/*
+-----------------------------------------------------------------------------------------------------------
+Class: clsPairProgramming.php
+Version: 1.0
+Release Date:
+-----------------------------------------------------------------------------------------------------------
+Overview: Class to handle pair programming information
+-----------------------------------------------------------------------------------------------------------
+History:
+07/04/2015      1.0	MJC	Created
+-----------------------------------------------------------------------------------------------------------
+Uses:
+
+*/
 
 Class PairProgramming
 {
@@ -10,6 +24,16 @@ Class PairProgramming
 
 
 
+	/*----------------------------------------------------------------------------------
+      	Function:	init
+      	Overview:	Function to initialize the request method for this module
+
+      	In:      $operation         String          Method
+      			 $intID 			int 			Integer of value to edit, used for post
+      			 $arrPPInformation	array 		Array of post information
+
+      	Out:	 object response
+		----------------------------------------------------------------------------------*/
 	public function init($operation,$intID=0,$arrPPInformation=array())
     {
 //    	return $operation;
@@ -58,7 +82,14 @@ Class PairProgramming
 	}
 
 
+	/*----------------------------------------------------------------------------------
+  	Function:	createPairProgrammingPair
+  	Overview:	Function to link pair programming pair
 
+  	In:
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function createPairProgrammingPair()
 	{
 		$arrFields = array("useroneID","usertwoID");
@@ -77,13 +108,28 @@ Class PairProgramming
 	}
 
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setPairProgrammerOne
+  	Overview:	Set ID of pair programming person 1
+
+  	In:      $intID         int          ID of user
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setPairProgrammerOne($intID)
 	{
 		$this->programmerOne = $intID;
 		return true;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setPairProgrammerTwo
+  	Overview:	Set ID of pair programming person 2
 
+  	In:      $intID         int          ID of user
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setPairProgrammerTwo($intID)
 	{
 		$this->programmerTwo = $intID;

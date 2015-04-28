@@ -121,38 +121,85 @@ Class Bug
 
         }
 
+        /*----------------------------------------------------------------------------------
+          Function: markBugAsFixed
+          Overview: Function to mark bug as fixed
+
+          In:      $id         int          Bug id
+
+          Out:   true/false      bool
+        ----------------------------------------------------------------------------------*/
         public function markBugAsFixed($id)
         {
           $objDatabase = new Database();
           return $objDatabase->update("bugs", "bugFixed", 1, "bugID", $id);
         }
 
+        /*----------------------------------------------------------------------------------
+          Function: markBugAsUnfix
+          Overview: Function to mark bug as unfixed
+
+          In:      $id         int          Bug id
+
+          Out:   true/false      bool
+        ----------------------------------------------------------------------------------*/
         public function markBugAsUnfix($id)
         {
           $objDatabase = new Database();
           return $objDatabase->update("bugs", "bugFixed", 0, "bugID", $id);
         }
 
+        /*----------------------------------------------------------------------------------
+          Function: getSingleBug
+          Overview: Function to return bug information by its id
 
+          In:      $id         int          Bug id
+
+          Out:   array
+        ----------------------------------------------------------------------------------*/
         public function getSingleBug($id)
         {
           $objDatabase = new Database();
           return $objDatabase->returnRow("bugs", "bugID", $id);
         }
 
+        /*----------------------------------------------------------------------------------
+          Function: getFixedBugsByProject
+          Overview: Function to return fixed bugs by project id
 
+          In:      $id         int          project id
+
+          Out:   int  total rows
+        ----------------------------------------------------------------------------------*/
         public function getFixedBugsByProject($id)
         {
           $objDatabase = new Database();
           return $objDatabase->countSpecificRows("bugID", "bugs","projectID",$id,"bugFixed",1);
         }
 
+
+        /*----------------------------------------------------------------------------------
+          Function: getUnfixedBugsByProject
+          Overview: Function to return total number of unfixed bugs in the system
+
+          In:      $id         int          project id
+
+          Out:   true/false      bool
+        ----------------------------------------------------------------------------------*/
         public function getUnfixedBugsByProject($id)
         {
           $objDatabase = new Database();
           return $objDatabase->countSpecificRows("bugID", "bugs","projectID",$id,"bugFixed",0);
         }
 
+        /*----------------------------------------------------------------------------------
+          Function: returnBugsByProjectID
+          Overview: Function to return bugs by project id
+
+          In:      $id         int          project id
+
+          Out:   true/false      bool
+        ----------------------------------------------------------------------------------*/
         public function returnBugsByProjectID($id)
         {
           $objDatabase = new Database();
@@ -167,7 +214,7 @@ Class Bug
 
 
       	Out:     true/false      bool
-	----------------------------------------------------------------------------------*/
+	     ----------------------------------------------------------------------------------*/
         public function createBug()
         {
                 $arrFields = array("bugTitle","bugDescription","bugLine","bugReportedBy","bugFixed","bugDeleted", "projectID");
@@ -492,6 +539,14 @@ Class Bug
         }
 
 
+        /*----------------------------------------------------------------------------------
+          Function: setBugProject
+          Overview: Set bug's project id
+
+          In:      $id         int          project id
+
+          Out:   true/false      bool
+        ----------------------------------------------------------------------------------*/
         public function setBugProject($id)
         {
           $this->bugProjectID = $id;

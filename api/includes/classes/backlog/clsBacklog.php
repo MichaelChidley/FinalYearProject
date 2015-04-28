@@ -28,6 +28,16 @@ class Backlog extends Sprint
 	private $backlogJoinID;
 
 
+	/*----------------------------------------------------------------------------------
+  	Function:	init
+  	Overview:	Function to initialize the request method for this module
+
+  	In:      $operation         String          Method
+  			 $intID 			int 			Integer of value to edit, used for post
+  			 $arrBacklogInformation	array 	Array of post information
+
+  	Out:	 object response
+	----------------------------------------------------------------------------------*/
 	public function init($operation,$intID=0,$arrBacklogInformation=array())
         {
 
@@ -87,7 +97,14 @@ class Backlog extends Sprint
 			}
 		}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	getBacklogItemByProjectID
+  	Overview:	Function that returns backlog item by project id
 
+  	In:      $id         int          Project id
+
+  	Out:	 array $arrBacklogItems
+	----------------------------------------------------------------------------------*/
 	public function getBacklogItemByProjectID($id)
 	{
 		$strQry = "SELECT projectbacklog.projectID, projectbacklog.backlogID, backlog.backlogID, backlog.backlogItemDesc, backlog.backlogProgress FROM projectbacklog INNER JOIN backlog ON projectbacklog.backlogID=backlog.backlogID WHERE projectbacklog.projectID = ".$id;
@@ -112,6 +129,14 @@ class Backlog extends Sprint
 
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	createBacklogItem
+  	Overview:	Function to enter backlog items into the database
+
+  	In:
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function createBacklogItem()
 	{
 		$arrFields = array("backlogItemDesc","moscow","backlogComment","planningPoker");
@@ -127,6 +152,14 @@ class Backlog extends Sprint
         return false;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	createLinkProjectBacklog
+  	Overview:	Function to link projects with backlog items
+
+  	In:
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function createLinkProjectBacklog()
 	{
 		$arrFields = array("projectID", "backlogID");
@@ -143,6 +176,14 @@ class Backlog extends Sprint
 
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	getNewBacklogID
+  	Overview:	Function to get newest backlog item id
+
+  	In:
+
+  	Out:	 int new backlog id
+	----------------------------------------------------------------------------------*/
 	public function getNewBacklogID()
 	{
 		$objDatabase = new Database();
@@ -150,6 +191,14 @@ class Backlog extends Sprint
 	}
 
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setProjectJoinID
+  	Overview:	Function to set project join id
+
+  	In:		$intID 	int 	project join id
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setProjectJoinID($intID)
 	{
 		$this->projectJoinID = $intID;
@@ -158,13 +207,29 @@ class Backlog extends Sprint
 	}
 
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogID
+  	Overview:	Function to set the backlog id
 
+  	In:	$intID 	int 	backlog id
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogID($intID)
 	{
 		$this->backlogID = $intID;
 
 		return true;
 	}
+
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogJoinID
+  	Overview:	Function to set backlog join id
+
+  	In:	$intID 	int 	backlog join id
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogJoinID($intID)
 	{
 		$this->backlogJoinID = $intID;
@@ -172,6 +237,14 @@ class Backlog extends Sprint
 		return true;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogItem
+  	Overview:	Function to set the backlog item
+
+  	In:		$itemname 	string 	backlog item name
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogItem($itemname)
 	{
 		$this->backlogItem = $itemname;
@@ -179,6 +252,14 @@ class Backlog extends Sprint
 		return true;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogMoscow
+  	Overview:	Function to set moscow value for backlog item
+
+  	In:		$moscow 	string 		moscow value
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogMoscow($moscow)
 	{
 		$this->backlogMoscow = $moscow;
@@ -186,6 +267,14 @@ class Backlog extends Sprint
 		return true;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogComment
+  	Overview:	Function to set backlog comment
+
+  	In:		$comment  	string  	backlog comment
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogComment($comment)
 	{
 		$this->backlogComment = $comment;
@@ -193,7 +282,14 @@ class Backlog extends Sprint
 		return true;
 	}
 
+	/*----------------------------------------------------------------------------------
+  	Function:	setBacklogPP
+  	Overview:	Function to set pair programming ID
 
+  	In:		$value    id   	pair programming id
+
+  	Out:	 true/false      bool
+	----------------------------------------------------------------------------------*/
 	public function setBacklogPP($value)
 	{
 		$this->backlogPP = $value;

@@ -20,9 +20,11 @@
 	$styleArray['MAIN_JS'] = $configArray['SITE_URL']."main.js";
 	$styleArray['BOOTSTRAP_JS'] = $configArray['SITE_URL']."theme/bootstrap/js/bootstrap.js";
 
-
+	//Allowed pages
 	$configPages = array("project","bug","employee");
 
+
+	//Basic array to store page meta information
 	$configArray['default']['title'] = "Project Management Console";
 	$configArray["project"]['title'] = "Projects | ".$configArray['default']['title'];
 	$configArray["bug"]['title'] = "Bugs | ".$configArray['default']['title'];

@@ -24,6 +24,16 @@ Class Client
 	private $email;
 	private $contact;
 
+		/*----------------------------------------------------------------------------------
+  	Function:	init
+  	Overview:	Function to initialize the request method for this module
+
+  	In:      $operation         String          Method
+  			 $intID 			int 			Integer of value to edit, used for post
+  			 $arrClientInformation	array 	Array of post information
+
+  	Out:	 object response
+	----------------------------------------------------------------------------------*/
         public function init($operation,$intID=0,$arrClientInformation=array())
         {
 
@@ -80,12 +90,28 @@ Class Client
 		}
 
 
+		/*----------------------------------------------------------------------------------
+  	Function:	getNewClientID
+  	Overview:	Function to return the newest clients id
+
+  	In:
+
+  	Out:	 int new client id
+	----------------------------------------------------------------------------------*/
 		public function getNewClientID()
 		{
 			$objDatabase = new Database();
 			return $objDatabase->getHighestIDOnTable("clientID", "clients");
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	getAllClients
+	  	Overview:	Function to return all clients
+
+	  	In:
+
+	  	Out:	 array client array
+		----------------------------------------------------------------------------------*/
 		public function getAllClients()
 		{
 			$objDatabase = new Database();
@@ -94,7 +120,14 @@ Class Client
 			return $arrClients;
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	createClient
+	  	Overview:	Function to create a client
 
+	  	In:
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
 		public function createClient()
 		{
 
@@ -113,6 +146,14 @@ Class Client
 		}
 
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	setClientTitle
+	  	Overview:	Function to set the client title
+
+	  	In:      $title         String          client title
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
 
 		public function setClientTitle($title)
 		{
@@ -121,6 +162,15 @@ Class Client
 			return true;
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	setClientFirstname
+	  	Overview:	Function to set the client first name
+
+	  	In:      $firstname         String          client first name
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
+
 		public function setClientFirstname($firstname)
 		{
 			$this->firstname = $firstname;
@@ -128,6 +178,14 @@ Class Client
 			return true;
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	setClientLastname
+	  	Overview:	Function to set the client last name
+
+	  	In:      $lastname         String          client lastname
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
 
 		public function setClientLastname($lastname)
 		{
@@ -136,12 +194,30 @@ Class Client
 			return true;
 		}
 
+		/*----------------------------------------------------------------------------------
+	  	Function:	setClientEmail
+	  	Overview:	Function to set the client email
+
+	  	In:      $email         String          Client email
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
+
 		public function setClientEmail($email)
 		{
 			$this->email = $email;
 
 			return true;
 		}
+
+		/*----------------------------------------------------------------------------------
+	  	Function:	setClientContact
+	  	Overview:	Function to set the client contact number
+
+	  	In:      $contact         String          Client contact number
+
+	  	Out:	 true/false      bool
+		----------------------------------------------------------------------------------*/
 
 		public function setClientContact($contact)
 		{

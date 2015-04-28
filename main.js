@@ -1,5 +1,7 @@
 var SITE_URL = "http://" + location.hostname + "/Uni/FinalYearProject/";
 
+
+//when the page is ready, call all of the functions listed within this block
 $(document).ready(function()
 {
 	handleLogin();
@@ -25,8 +27,6 @@ $(document).ready(function()
 
     handleFooter();
 
-
-
     $('.pie_progress, .pie_progress_bug').asPieProgress({
             'namespace': 'pie_progress'
     });
@@ -34,14 +34,14 @@ $(document).ready(function()
 
 });
 
-
+//when all elemtsn have loaded on the page, call all functions within this block
 $(window).load(function()
 {
      $('.pie_progress').asPieProgress('start');
      handleHomePageProjectProgressSwitching();
 })
 
-
+//when the window is resized, call all functions within this block
 $(window).resize(function()
 {
 	handleLoginStyle();
@@ -49,12 +49,23 @@ $(window).resize(function()
 
 });
 
+
+/*
+    Overview: route login request
+    In:
+    Out:
+*/
 function handleLogin()
 {
 	handleLoginStyle();
 	handleLoginFunctionality();
 }
 
+/*
+    Overview: Change the style of the login page, depending on the size of the viewport
+    In:
+    Out:
+*/
 function handleLoginStyle()
 {
 	var windowHeight = $(window).height();
@@ -75,6 +86,11 @@ function handleLoginStyle()
 
 }
 
+/*
+    Overview: Center the message box to the viewport
+    In:
+    Out:
+*/
 function handleMessageBoxStyle()
 {
     var windowHeight = $(window).height();
@@ -89,6 +105,12 @@ function handleMessageBoxStyle()
 
 }
 
+/*
+    Overview: Set the message box contents alongside the redirect address once complete
+    In: text - text to display in the message box
+        redirect - address to redirect to
+    Out:
+*/
 function handleMessageBoxEffect(text,redirect)
 {
     $(".messageBox").text(text);
@@ -102,6 +124,11 @@ function handleMessageBoxEffect(text,redirect)
         });
 }
 
+/*
+    Overview: handle the login operation and route the request to the ajax function
+    In:
+    Out:
+*/
 function handleLoginFunctionality()
 {
 	$("#loginUser").click(function()
@@ -126,6 +153,11 @@ function handleLoginFunctionality()
     });
 }
 
+/*
+    Overview: Perform ajax request to external library to determine authenticity of login request
+    In:
+    Out:
+*/
 function checkLogin()
 {
 	//check login stuff through ajax
@@ -166,7 +198,11 @@ function checkLogin()
 }
 
 
-
+/*
+    Overview: Return all activity elemenets every 60 seconds and display to the screen
+    In:
+    Out:
+*/
 function handleProjectPageActivityPolling()
 {
     setInterval(handleProjectPageActivityPolling,60000);
@@ -195,7 +231,11 @@ function handleProjectPageActivityPolling()
 }
 
 
-
+/*
+    Overview: Handle the button used to create an additional client
+    In:
+    Out:
+*/
 function handleCreateNewProjectClient()
 {
     $("[name=projectCreateNewClientCb]").click(function()
@@ -212,8 +252,11 @@ function handleCreateNewProjectClient()
 }
 
 
-
-
+/*
+    Overview: Handle buttons that appear in the project creation stage, buttons flow the page to the next section
+    In:
+    Out:
+*/
 function handleCreateProjectNextButtons()
 {
     $("#createProjectNextStepOne").click(function()
@@ -239,6 +282,11 @@ function handleCreateProjectNextButtons()
 }
 
 
+/*
+    Overview: Handle the toggle buttons found in the project creation stage
+    In:
+    Out:
+*/
 function handleCreateProjectToggles()
 {
     $("#createProjectToggleBlockOne").click(function()
@@ -261,7 +309,11 @@ function handleCreateProjectToggles()
 
 }
 
-
+/*
+    Overview: Function to add more backlog items
+    In:
+    Out:
+*/
 function handleCreateAdditionalSprintBacklogItem()
 {
     $("#createSprintInfoAddBacklogItem").click(function()
@@ -279,7 +331,11 @@ function handleCreateAdditionalSprintBacklogItem()
 }
 
 
-
+/*
+    Overview: Method to return the day difference between two sprint dates
+    In:
+    Out:
+*/
 function handleSprintDateDifference()
 {
 
@@ -292,6 +348,11 @@ function handleSprintDateDifference()
 
 }
 
+/*
+    Overview: Method to calculate the total number of sprints and days per each
+    In:
+    Out:
+*/
 function handleSprintCalculation()
 {
     var totalDays = parseInt($("#createSprintInfoTotalPrjDays").text());
@@ -310,6 +371,11 @@ function handleSprintCalculation()
     //alert(totalSprintDays);
 }
 
+/*
+    Overview: Handle itterations to output the correct amount of input boxes to support the total number of sprints to be undertaken
+    In:
+    Out:
+*/
 function handleCreatingSprintGoals()
 {
     var totalSprints = $("#createSprintInfoTotalSprints").text();
@@ -327,6 +393,11 @@ function handleCreatingSprintGoals()
     }
 }
 
+/*
+    Overview: Handle the dates for each sprint. Each start date will the finish date of the sprint before
+    In:
+    Out:
+*/
 function handleCreateSprintDates()
 {
     //get project start date
@@ -378,6 +449,11 @@ function handleCreateSprintDates()
 
 }
 
+/*
+    Overview: Calculate the number of days between two days
+    In:
+    Out:
+*/
 function showDays(firstDate,secondDate)
 {
 
@@ -393,6 +469,11 @@ function showDays(firstDate,secondDate)
 
 }
 
+/*
+    Overview: Return the total sprint dates
+    In:
+    Out:
+*/
 function returnSprintDates(startDate,days)
 {
     var startDay = new Date(startDate);
@@ -404,7 +485,11 @@ function returnSprintDates(startDate,days)
     return endDate.toLocaleDateString("en-US");
 }
 
-
+/*
+    Overview:Handle checkbox to toggle XP methodologies in project creation stage
+    In:
+    Out:
+*/
 function handleToggleXPMethodologies()
 {
     $("[name=createProjectUseXP]").click(function()
@@ -416,7 +501,11 @@ function handleToggleXPMethodologies()
     });
 }
 
-
+/*
+    Overview: Method to return all the teams members for the current selected team on the project creation page
+    In:
+    Out:
+*/
 function handleGetTeamMembersForPP()
 {
     var teamID = $("[name=projectTeam]").find(":selected").attr("id");
@@ -440,6 +529,11 @@ function handleGetTeamMembersForPP()
         });
 }
 
+/*
+    Overview: Function to pass all the project information to an external PHP library using ajax
+    In:
+    Out:
+*/
 function handleCreateProjectCreate()
 {
 
@@ -541,7 +635,11 @@ function handleCreateProjectCreate()
 }
 
 
-
+/*
+    Overview: Handle button to view project information
+    In:
+    Out:
+*/
 function handleProjectClickView()
 {
     $(".projectHomeClick").click(function()
@@ -552,6 +650,11 @@ function handleProjectClickView()
     });
 }
 
+/*
+    Overview: Handle button to view individial bugs
+    In:
+    Out:
+*/
 function handleBugClick()
 {
     $(".bugHomeClick").click(function()
@@ -562,6 +665,11 @@ function handleBugClick()
     })
 }
 
+/*
+    Overview: Handle button to view individial employees
+    In:
+    Out:
+*/
 function handleEmployeeViewClick()
 {
     $(".employeeClick").click(function()
@@ -572,7 +680,11 @@ function handleEmployeeViewClick()
     });
 }
 
-
+/*
+    Overview: Function to fade between different project upon the home page
+    In:
+    Out:
+*/
 function handleHomePageProjectProgressSwitching()
 {
     setTimeout("handleHomepageProgress('.projectProgress');",5000);
@@ -580,6 +692,11 @@ function handleHomePageProjectProgressSwitching()
     setTimeout("handleHomepageProgress('.projectBacklogProgress');", 5000);
 }
 
+/*
+    Overview: Fade different elements that have been passed into the function call
+    In: element - class of element to fade between
+    Out:
+*/
 function handleHomepageProgress(element)
 {
     var maxElements = $(element).length;
@@ -619,7 +736,11 @@ function handleHomepageProgress(element)
     });
 }
 
-
+/*
+    Overview: Function to call external PHP library using ajax to mark a bug as either fixed or unfixed
+    In:
+    Out:
+*/
 function handleBugMarkFixed()
 {
     $("#bugMarkOption").click(function()
@@ -653,7 +774,11 @@ function handleBugMarkFixed()
     });
 }
 
-
+/*
+    Overview: Function to return all bug information to be sent of ajax for creation
+    In:
+    Out:
+*/
 function handleBugCreateClick()
 {
     $("#btnCreateBug").click(function()
@@ -700,6 +825,11 @@ function handleBugCreateClick()
     });
 }
 
+/*
+    Overview: handle all the employee information when they are created and send using ajax
+    In:
+    Out:
+*/
 function handleEmployeeAddClick()
 {
     $("#addEmployee").click(function()
@@ -747,6 +877,11 @@ function handleEmployeeAddClick()
 
 }
 
+/*
+    Overview: handle operation that appears when the user requests to delete an employee
+    In:
+    Out:
+*/
 function handleDeleteEmployee()
 {
     $(".deleteEmployee").click(function()
@@ -761,7 +896,11 @@ function handleDeleteEmployee()
 }
 
 
-
+/*
+    Overview: Verification method that checks all the form elements for validity
+    In:
+    Out:
+*/
 function handleFormSubmit()
 {
     var has_empty = false;
@@ -823,6 +962,11 @@ function handleFormSubmit()
 
 }
 
+/*
+    Overview: Regular expression to check for a valid email address
+    In:
+    Out:
+*/
 function isValidEmailAddress(emailAddress) {
     var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
     return pattern.test(emailAddress);

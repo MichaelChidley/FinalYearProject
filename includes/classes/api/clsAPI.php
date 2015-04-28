@@ -163,12 +163,29 @@ class API
 		return $objSecurity->decryptInformation($this->APIResponse);
 	}
 
+	/*----------------------------------------------------------------------------------
+	Function: buildAPIRequest
+	Overview: Method to build an api request
 
+	In:		$strModule  	String  		Module name
+			$strOperation  	String 			Module operation
+			$arrData  		Array 			Array of information
+
+	Out:	$this->APIResponse 	String 	API Response
+	----------------------------------------------------------------------------------*/
 	public function buildAPIRequest($strModule,$strOperation,$arrData)
 	{
 		return array("module"=>$strModule,"operation"=>$strOperation,"data" => $arrData,"APIKey"=>$this->APIKEY);
 	}
 
+	/*----------------------------------------------------------------------------------
+	Function: isSuccessful
+	Overview: Method to determine if an operation was successful
+
+	In:		$jsonString 	String 	Json data
+
+	Out:	true/false 	bool
+	----------------------------------------------------------------------------------*/
 	public function isSuccessful($jsonString)
 	{
 		if(strpos($jsonString, "Operation Successful") !==false )
@@ -178,7 +195,14 @@ class API
 		return false;
 	}
 
+	/*----------------------------------------------------------------------------------
+	Function: convertJsonArrayToArray
+	Overview: Method to convert Json to a PHP array
 
+	In:		$jsonString 	String 	Json data
+
+	Out:	array PHP array
+	----------------------------------------------------------------------------------*/
 	public function convertJsonArrayToArray($jsonString)
 	{
 		return json_decode($jsonString, true);

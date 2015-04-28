@@ -15,7 +15,7 @@ include_once("includes/classes/page/clsPage.php");
 include_once("includes/classes/security/clsSecurity.php");
 include_once("includes/classes/api/clsAPI.php");
 
-
+//Create a new instance of the security object and check for CSRF
 $objSecurity = new Security();
 $objSecurity->secureUrl();
 if(!$objSecurity->CSRFCheck())
@@ -24,12 +24,14 @@ if(!$objSecurity->CSRFCheck())
 }
 $_SESSION['CSRF_CHECK'] = mt_rand();
 
+//Create a new instance of the API object and pass in the required configuration
 $API = new API($configArray['API_URL'], $configArray['API_KEY']);
 
-
+//Create new instance of the page object and determine the requested page
 $objPage = new Page();
 $strRequestedPage = $objPage->getRequestedPage();
 
+//Return the page title
 $strRequestedPageTitle = $objPage->getPageTitle($strRequestedPage);
 
 //INCLUDE MODULES
@@ -212,6 +214,7 @@ include_once("includes/classes/backlog/clsBacklog.php");
 			<div id='pageContent' class='span12'>
 				<?php
 
+					//Determine the requested page and include the content to this location
 					if($strRequestedPage)
 					{
 						$arrUrlExp = explode("/",$strRequestedPage);
