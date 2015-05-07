@@ -64,6 +64,11 @@ Class Employee
 					case "deleteEmployee":
 						return $this->deleteEmployee($intID);
 					break;
+
+
+					case "returnAllAccountTypes":
+						return $this->returnAllAccountTypes();
+					break;
 				}
 			}
 
@@ -142,6 +147,13 @@ Class Employee
 		{
 			$objDatabase = new Database();
 			return $objDatabase->returnAllRows("employees");
+		}
+
+
+		public function returnAllAccountTypes()
+		{
+			$objDatabase = new Database();
+			return $objDatabase->returnAllRows("accounttype");
 		}
 
 

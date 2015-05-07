@@ -157,6 +157,7 @@ include_once("includes/classes/backlog/clsBacklog.php");
 								$objEmployee = new Employee($API);
 								$accountType = $objEmployee->getEmployeeAccountType($_SESSION['authenticationID']);
 
+								//echo "ttest".$accountType;
 
 								echo "<li ";
 								if($strRequestedPage == "")
@@ -166,13 +167,15 @@ include_once("includes/classes/backlog/clsBacklog.php");
 								echo "><a href=".$configArray['SITE_URL'].">Home</a></li>";
 
 
-
-								echo "<li ";
-								if(strpos($strRequestedPage, "project") !== false)
-								{
-									echo " class='active'";
-								}
-								echo "><a href=".$configArray['SITE_URL']."project/>Projects</a></li>";
+								//if(($objEmployee->isProjectManager($_SESSION['authenticationID']) || ($objEmployee->isAdmin($_SESSION['authenticationID']))))
+								//{
+									echo "<li ";
+									if(strpos($strRequestedPage, "project") !== false)
+									{
+										echo " class='active'";
+									}
+									echo "><a href=".$configArray['SITE_URL']."project/>Projects</a></li>";
+								//}
 
 								echo "<li ";
 								if(strpos($strRequestedPage, "bug") !== false)
@@ -181,21 +184,25 @@ include_once("includes/classes/backlog/clsBacklog.php");
 								}
 								echo "><a href=".$configArray['SITE_URL']."bug/>Bug</a></li>";
 
+								if($objEmployee->isAdmin($_SESSION['authenticationID']))
+								{
+									echo "<li ";
+									if(strpos($strRequestedPage, "employee") !== false)
+									{
+										echo " class='active'";
+									}
+									echo "><a href=".$configArray['SITE_URL']."employee/>Employee</a></li>";
+								}
 
 								echo "<li ";
-								if(strpos($strRequestedPage, "employee") !== false)
+								if(strpos($strRequestedPage, "team") !== false)
 								{
 									echo " class='active'";
 								}
-								echo "><a href=".$configArray['SITE_URL']."employee/>Employee</a></li>";
+								echo "><a href=".$configArray['SITE_URL']."team/>Team</a></li>";
 
 
-								//echo "<li ";
-								//if(strpos($strRequestedPage, "team") !== false)
-								//{
-							//		echo " class='active'";
-						//		}
-					//			echo "><a href=".$configArray['SITE_URL']."team/>Team</a></li>";
+								echo "<li><a href=".$configArray['SITE_URL']."logout/index.php>Logout</a></li>";
 							?>
 
 							<?php

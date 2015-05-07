@@ -55,6 +55,10 @@ Class Project
 						return $this->getNewProjectID();
 					break;
 
+					case "deleteProject":
+						return $this->deleteProject($intID);
+					break;
+
 
 					default:
 						return "METHOD NOT DEFINED IN GET clsProject.php API Side";
@@ -123,6 +127,24 @@ Class Project
                     return false;
             }
             return false;
+		}
+
+		public function deleteProject($intID)
+		{
+			$objDatabase = new Database();
+			//return $objDatabase->delete("employees", "employeeID", $id);
+			$objDatabase->delete("projects","projectID",$intID);
+
+			$objDatabase->delete("projectteam", "projectID", $intID);
+			$objDatabase->delete("sprints", "projectID", $intID);
+			$objDatabase->delete("projectbacklog", "projectID", $intID);
+			$objDatabase->delete("comments", "projectID", $intID);
+			$objDatabase->delete("bugs", "projectID", $intID);
+			$objDatabase->delete("activity", "activityProject", $intID);
+
+
+			return true;
+
 		}
 
 		public function returnAllProjects()

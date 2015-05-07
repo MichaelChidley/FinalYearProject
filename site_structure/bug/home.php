@@ -61,6 +61,12 @@
 	  ?>
 	  </table>
 
-	  <div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>bug/create"><button class="btn btn-primary">Create Bug</button></a></div>
+	  <?php
+	  	if(($objEmployee->isDeveloper($_SESSION['authenticationID']) || ($objEmployee->isAdmin($_SESSION['authenticationID'])) || ($objEmployee->isProjectManager($_SESSION['authenticationID']))))
+	  	{
+	  		echo "<div style='margin-top: 20px;float: left;margin-left:10px'><a href='".$configArray['SITE_URL']."bug/create'><button class=\"btn btn-primary\">Create Bug</button></a></div>";
+	  	}
+
+	  ?>
 
 	</div>

@@ -36,6 +36,29 @@ Class Team
 		return $this->API->getAPIResponse();
 	}
 
+
+	public function createTeam()
+	{
+		$this->API->handleAPICall(array("teamTitle" => $this->teamTitle, "teamDescription" => $this->teamDescription),"team","create");
+		return $this->API->getAPIResponse();
+	}
+
+	public function setTeamTitle($teamTitle)
+	{
+		$this->teamTitle = $teamTitle;
+
+		return true;
+	}
+
+
+
+	public function setTeamDescription($teamDesc)
+	{
+		$this->teamDescription = $teamDesc;
+
+		return true;
+	}
+
 	/*
 	public function getTeamMembersByTeamID($intTeamID)
 	{

@@ -22,8 +22,12 @@ $(document).ready(function()
     handleBugCreateClick();
     handleDeleteEmployee();
 
+    handleDeleteProject();
+
     handleEmployeeViewClick();
     handleEmployeeAddClick();
+
+    handleTeamCreateClick();
 
     handleFooter();
 
@@ -774,6 +778,50 @@ function handleBugMarkFixed()
     });
 }
 
+
+function handleTeamCreateClick()
+{
+    $(".btnCreateTeam").click(function()
+    {
+        if(!handleFormSubmit())
+        {
+            return false;
+        }
+
+        var dataset = {};
+        $('#createTeamForm').find('input, textarea, select, span').each(function(i, field)
+        {
+            dataset[field.name] = field.value;
+        });
+
+        //console.log(dataset);
+
+        dataset = JSON.stringify(dataset);
+
+        $.ajax({
+            url:            SITE_URL+"/includes/lib/createteam.php",
+            type:           "post",
+            data:           "data="+dataset,
+            dataType:       "text",
+            success:        function(html)
+            {
+                console.log(html);
+                    if(html)
+                    {
+                            handleMessageBoxEffect("Team Successfully Created", SITE_URL+"team/");
+                            //$("#projectPageActivityPolling").html(html)
+                           $("#createTeamForm :input").prop("disabled", true);
+                    }
+                    else
+                    {
+                            console.log("FAILED");
+                    }
+            }
+        });
+
+    });
+}
+
 /*
     Overview: Function to return all bug information to be sent of ajax for creation
     In:
@@ -847,6 +895,7 @@ function handleEmployeeAddClick()
 
         dataset['employeeTeam'] = $("select[name=employeeTeam]").find(":selected").attr("name");
 
+        dataset['employeeAccountLevel'] = $("select[name=employeeAccountLevel]").find(":selected").attr("name");
 
         console.log(dataset);
 
@@ -887,6 +936,19 @@ function handleDeleteEmployee()
     $(".deleteEmployee").click(function()
     {
         if(confirm("Are you sure you want to delete this employee?"))
+        {
+            return true;
+        }
+        return false;
+    });
+
+}
+
+function handleDeleteProject()
+{
+    $(".deleteProject").click(function()
+    {
+        if(confirm("Are you sure you want to delete this project?"))
         {
             return true;
         }

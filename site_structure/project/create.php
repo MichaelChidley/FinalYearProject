@@ -2,8 +2,8 @@
 
 	$objTeam = new Team($API);
 
-	if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
-	{
+	if(($objEmployee->isAdmin($_SESSION['authenticationID'])) || ($objEmployee->isProjectManager($_SESSION['authenticationID'])))
+{
 
 
 ?>

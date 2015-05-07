@@ -7,7 +7,10 @@
 
 $objEmployee = new Employee($API);
 
-
+if(!$objEmployee->isAdmin($_SESSION['authenticationID']))
+{
+	die(header("Location:" .$configArray['FALL_BACK']));
+}
 
 //If no action or id is set, we are on the homepage, show the content.
 if((!isset($strGetAction) && (!isset($intGetID))))

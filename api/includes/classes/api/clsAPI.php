@@ -294,8 +294,9 @@ Class API
 																		break;
 
 																		case 'team':
+
 																				$objTeam = new Team();
-																				$this->objFeedback->setFeedback($objTeam->init($_POST['operation'],$_POST['data']));
+																				$this->objFeedback->setFeedback($objTeam->init($this->method,0,$_POST));
 																				return $this->APIResponse();
 																		break;
 

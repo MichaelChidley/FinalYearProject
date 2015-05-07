@@ -76,6 +76,13 @@ Class Project
 		return $this->API->getAPIResponse();
 	}
 
+
+	public function deleteProject($intProjectID)
+	{
+		$this->API->handleAPICall(array(),"project","deleteProject",$intProjectID);
+		return $this->API->getAPIResponse();
+	}
+
 	public function setProjectOwner($ownerID)
 	{
 		$this->ownerID = $ownerID;

@@ -380,7 +380,7 @@ body
 	border: solid 2px #ededed;
 }
 
-.createProjectTable td, .createSprintInfo td, .createSprintInfoAdd td, .createSprintInfoDetails td, .createSprintInfoXP td, .createUnitTesting td, .createBugTable td, .addEmployeeTable td, .eddEmployeeTable td
+.createProjectTable td, .createSprintInfo td, .createSprintInfoAdd td, .createSprintInfoDetails td, .createSprintInfoXP td, .createUnitTesting td, .createBugTable td, .addEmployeeTable td, .eddEmployeeTable td, .createTeamTable td
 {
 	border-top: none !important;
 }

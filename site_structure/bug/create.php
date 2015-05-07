@@ -1,7 +1,7 @@
 <?php
 
-if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType)) || ($objEmployee->isDeveloper($accountType))))
-	{
+if(($objEmployee->isDeveloper($_SESSION['authenticationID']) || ($objEmployee->isAdmin($_SESSION['authenticationID'])) || ($objEmployee->isProjectManager($_SESSION['authenticationID']))))
+	  	{
 
 ?>
 

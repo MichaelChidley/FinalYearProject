@@ -55,7 +55,7 @@
 	  </table>
 
 	  <?php
-	  if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
+	  if(($objEmployee->isProjectManager($_SESSION['authenticationID']) || ($objEmployee->isAdmin($_SESSION['authenticationID']))))
 	{
 		?>
    <div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>project/create"><button class="btn btn-primary">Create Project</button></a></div>

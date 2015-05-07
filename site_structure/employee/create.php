@@ -4,6 +4,10 @@ $objTeam = new Team($API);
 $arrTeams = $API->convertJsonArrayToArray($objTeam->getAllTeams());
 $arrTeams = $arrTeams['response'];
 
+$arrAccountLevels = $API->convertJsonArrayToArray($objEmployee->getAllAccountTypes());
+$arrAccountLevels = $arrAccountLevels['response'];
+
+
 if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($accountType))))
 	{
 
@@ -54,6 +58,23 @@ if(($objEmployee->isProjectManager($accountType) || ($objEmployee->isAdmin($acco
 						foreach($arrTeams as $arrIndTeams)
 						{
 							echo "<option name=".$arrIndTeams['teamID'].">".$arrIndTeams['teamTitle']."</option>";
+						}
+					?>
+				</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td><div class="fourthLevelHeading">Account Type</div></td>
+				<td>
+				<select name='employeeAccountLevel'>
+					<?php
+						foreach($arrAccountLevels as $arrIndAccountLevels)
+						{
+							if($arrIndAccountLevels['accounttypeID'] != 1)
+							{
+								echo "<option name=".$arrIndAccountLevels['accounttypeID'].">".$arrIndAccountLevels['accountType']."</option>";
+							}
 						}
 					?>
 				</select>

@@ -1,10 +1,14 @@
 <?php
 
-$objProject = new Project($API);
-$arrProjects = $API->convertJsonArrayToArray($objProject->getAllProjects());
 
-//print_r($arrProjects);
-$arrProjects = array_reverse($arrProjects['response']);
+$objTeam = new Team($API);
+$arrTeams = $API->convertJsonArrayToArray($objTeam->getAllTeams());
+
+$arrTeams = array_reverse($arrTeams['response']);
+
+//print_r($arrTeams);
+
+
 
 //If no action or id is set, we are on the homepage, show the content.
 if((!isset($strGetAction) && (!isset($intGetID))))

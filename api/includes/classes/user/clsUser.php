@@ -27,6 +27,7 @@ Class User
 				private $userHomeNumber;
 				private $userMobileNumber;
 				private $teamID;
+				private $userLevel;
 
 
 				/*----------------------------------------------------------------------------------
@@ -58,6 +59,7 @@ Class User
 						(isset($arrIndUser['mobilenumber'])) ? $this->setUserMobileNumber($arrIndUser['mobilenumber']) : $bFormFailed = true;
 
 						(isset($arrIndUser['team'])) ? $this->setUserTeam($arrIndUser['team']) : '';
+						(isset($arrIndUser['accountLevel'])) ? $this->setUserLevel($arrIndUser['accountLevel']) : '';
 
 						if($bFormFailed)
 						{
@@ -104,8 +106,8 @@ Class User
 				----------------------------------------------------------------------------------*/
 				public function createUser()
 				{
-					$arrFields = array("firstname","lastname","email","password","dob","homenumber", "mobilenumber");
-					$arrValues = array($this->getUserFirstName(),$this->getUserLastName(),$this->getUserEmail(),$this->getUserPassword(),$this->getUserDOB(),$this->getUserHomeNumber(), $this->getUserMobileNumber());
+					$arrFields = array("firstname","lastname","email","password","dob","homenumber", "mobilenumber", "accounttype");
+					$arrValues = array($this->getUserFirstName(),$this->getUserLastName(),$this->getUserEmail(),$this->getUserPassword(),$this->getUserDOB(),$this->getUserHomeNumber(), $this->getUserMobileNumber(), $this->getUserAccountLevel());
 
 					$objDatabase = new Database();
 					$objFeedback = new Feedback();
@@ -474,6 +476,17 @@ Class User
 				{
 					$this->teamID = $teamID;
 					return true;
+				}
+
+				public function setUserLevel($levelID)
+				{
+					$this->userLevel = $levelID;
+					return true;
+				}
+
+				public function getUserAccountLevel()
+				{
+					return $this->userLevel;
 				}
 
 

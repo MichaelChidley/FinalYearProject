@@ -329,8 +329,8 @@ Class Database
       	Overview:	Function to delete a specific field in the database
 
       	In:      $strTable              String          Table name
-                 $strField              String          Field to update
-                 $strValue              String          New field value
+                 $strField              String          Field to delete
+                 $strValue              String          Field to check
 
 
       	Out:     true/false      bool

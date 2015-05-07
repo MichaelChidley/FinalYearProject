@@ -40,7 +40,9 @@ if($_POST['data'])
 	$strDOB = $arrData['employeeDOB'];
 	$strHomeNumber = $arrData['employeeHomeNumber'];
 	$strMobileNumber = $arrData['employeeMobileNumber'];
-	$intEmployeeTeam = $arrData['employeeTeam'];;
+	$intEmployeeTeam = $arrData['employeeTeam'];
+
+	$intEmployeeLevel = $arrData['employeeAccountLevel'];
 
 	$objEmployee->setFirstname($strFirstname);
 	$objEmployee->setLastname($strLastname);
@@ -50,6 +52,7 @@ if($_POST['data'])
 	$objEmployee->setHomeNumber($strHomeNumber);
 	$objEmployee->setMobileNumber($strMobileNumber);
 	$objEmployee->setTeam($intEmployeeTeam);
+	$objEmployee->setAccountLevel($intEmployeeLevel);
 
 	echo $objEmployee->addEmployee();
 

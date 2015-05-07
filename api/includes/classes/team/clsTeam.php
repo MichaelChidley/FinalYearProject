@@ -38,6 +38,7 @@ Class Team
 
 						if(count($arrTeamInformation)<1)
 						{
+
 							switch($operation)
 							{
 								case "returnAllTeams":
@@ -72,21 +73,22 @@ Class Team
 							}
 						}
 
+								//$arrTeam = $arrTeamInformation['team'];
 
-								$arrTeam = $arrTeamInformation['team'];
+								//foreach($arrTeamInformation as $arrIndTeam)
+								//{
 
-								foreach($arrTeam as $arrIndTeam)
-								{
 												$bFormFailed = false;
 
-												(isset($arrIndTeam['ID'])) ? $this->setTeamID($arrIndTeam['ID']) : '';
+												(isset($arrTeamInformation['ID'])) ? $this->setTeamID($arrTeamInformation['ID']) : '';
 
-												(isset($arrIndTeam['teamTitle'])) ? $this->setTeamTitle($arrIndTeam['teamTitle']) : $bFormFailed = true;
-												(isset($arrIndTeam['teamDescription'])) ? $this->setTeamDescription($arrIndTeam['teamDescription']) : $bFormFailed = true;
+												(isset($arrTeamInformation['teamTitle'])) ? $this->setTeamTitle($arrTeamInformation['teamTitle']) : $bFormFailed = true;
+												(isset($arrTeamInformation['teamDescription'])) ? $this->setTeamDescription($arrTeamInformation['teamDescription']) : $bFormFailed = true;
 
 
 												if($bFormFailed)
 												{
+
 														return false;
 												}
 
@@ -115,7 +117,7 @@ Class Team
 
 												}
 
-								}
+								//}
 
 				}
 

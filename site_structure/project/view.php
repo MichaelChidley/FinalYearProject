@@ -172,8 +172,14 @@
 			  		</div>
 
 
-
-
+			  		<?php
+			  		if(($objEmployee->isAdmin($_SESSION['authenticationID'])) || ($objEmployee->isProjectManager($_SESSION['authenticationID'])))
+					{
+			  			?>
+			  			<div style='margin-top: 20px;float: left;margin-left:10px'><a href="<?=$configArray['SITE_URL'];?>project/delete/<?=$arrProject['projectID'];?>"><button class="btn btn-danger deleteProject">Delete</button></a></div>
+			  			<?php
+			  		}
+			  		?>
 <!--
 			  		<div class="row-fluid contentOffsetTop">
 

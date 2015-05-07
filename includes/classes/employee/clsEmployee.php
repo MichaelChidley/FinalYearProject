@@ -17,6 +17,12 @@ Class Employee
 		return $this->API->getAPIResponse();
 	}
 
+	public function getAllAccountTypes()
+	{
+		$this->API->handleAPICall(array(),"employee","returnAllAccountTypes");
+		return $this->API->getAPIResponse();
+	}
+
 	public function getSingleEmployee($id)
 	{
 		$this->API->handleAPICall(array(),"employee","returnSingleEmployee",$id);
@@ -58,7 +64,7 @@ Class Employee
 	{
 		$this->API->handleAPICall(array("firstname" => $this->firstname, "lastname" => $this->lastname, "email" => $this->email,
 			"password" => md5($this->password), "dob" => $this->dob, "homenumber" => $this->homenumber, "mobilenumber" => $this->mobilenumber,
-			"team" => $this->team), "user", "createEmployee");
+			"team" => $this->team, "accountLevel" => $this->accountLevel), "user", "createEmployee");
 		return $this->API->getAPIResponse();
 	}
 
@@ -162,6 +168,12 @@ Class Employee
 	public function setTeam($team)
 	{
 		$this->team = $team;
+		return true;
+	}
+
+	public function setAccountLevel($accountLevel)
+	{
+		$this->accountLevel = $accountLevel;
 		return true;
 	}
 
