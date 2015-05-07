@@ -34,7 +34,9 @@ Class Sprint
 				switch($operation)
 				{
 					//get operations
-
+					case "getSprintsByProjectID":
+						return $this->getSprintsByProjectID($intID);
+					break;
 
 				}
 			}
@@ -65,6 +67,12 @@ Class Sprint
 			}
 		}
 
+
+		public function getSprintsByProjectID($intID)
+		{
+			$objDatabase = new Database();
+			return $objDatabase->returnAllRowsWhere("sprints", "projectID", $intID);
+		}
 
 
 		public function createSprintDates()

@@ -29,6 +29,13 @@ class Sprint extends Agile
 	}
 
 
+	public function getSprintsByProjectID($intProjectID)
+	{
+		$this->API->handleAPICall(array(),"sprint","getSprintsByProjectID",$intProjectID);
+		return $this->API->getAPIResponse();
+	}
+
+
 	public function createSprintDates()
 	{
 		$objProject = new Project($this->API);

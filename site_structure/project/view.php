@@ -169,6 +169,52 @@
 			  			</div>
 
 			  			<div class='clear'></div>
+
+
+			  			<div class="row-fluid contentOffsetTop">
+
+				  			<div class="col-sm-6">
+				  				<div class="secondLevelHeading">Sprints</div>
+
+				  				<div class='table-responsive'>
+									<table class="table sprintTable">
+									<tr>
+										<th>Start</th>
+										<th>Finish</th>
+										<th>Goal</th>
+										<th></th>
+									</tr>
+					  				<?php
+
+					  					$objSprint = new Sprint($API);
+					  					$arrSprints = $API->convertJsonArrayToArray($objSprint->getSprintsByProjectID($intGetID));
+					  					$arrSprints = $arrSprints['response'];
+					  					//print_r($arrSprints);
+					  					foreach($arrSprints as $arrIndSprints)
+					  					{
+					  						echo "<tr>";
+					  							echo "<td>".$arrIndSprints['sprintStart']."</td>";
+					  							echo "<td>".$arrIndSprints['sprintFinish']."</td>";
+					  							echo "<td>".$arrIndSprints['sprintGoal']."</td>";
+					  							echo "<td><a href='".$configArray['SITE_URL']."sprint/view/".$arrIndSprints['sprintID']."'>View</a></td>";
+					  						echo "</tr>";
+					  					}
+
+
+					  				?>
+
+					  				</table>
+				  				</div>
+
+
+
+				  			</div>
+
+			  			</div>
+
+			  			<div class='clear'></div>
+
+
 			  		</div>
 
 
