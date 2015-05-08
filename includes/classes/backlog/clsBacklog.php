@@ -66,6 +66,15 @@ class Backlog extends Sprint
 	}
 
 
+	public function getSingleBacklogItem($intBacklogID)
+	{
+		$this->API->handleAPICall(array(),"backlog","getSingleBacklogItem", $intBacklogID);
+		return $this->API->getAPIResponse();
+	}
+
+
+
+
 	public function setBacklogItem($itemname)
 	{
 		$this->backlogItem = $itemname;

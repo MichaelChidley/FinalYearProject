@@ -10,7 +10,7 @@
 			$arrUsersInProject = $API->convertJsonArrayToArray($objProject->getProjectUsers($intGetID));
 			$arrUsersInProject = $arrUsersInProject['response'];
 
-	  		if(in_array($_SESSION['authenticationID'], $arrUsersInProject))
+	  		if((in_array($_SESSION['authenticationID'], $arrUsersInProject)) || ($objEmployee->isAdmin($_SESSION['authenticationID'])))
 	  		{
 
 			?>
@@ -116,7 +116,7 @@
 			  					//print_r($arrGetSingleTeamMembers);
 			  					$arrEmailHolder = array();
 
-			  					if(count($arrGetSingleTeamMembers)>1)
+			  					if(count($arrGetSingleTeamMembers)>0)
 			  					{
 				  					foreach($arrGetSingleTeamMembers as $arrIndGetSingleTeamMembers)
 				  					{
@@ -208,6 +208,44 @@
 
 
 
+				  			</div>
+
+
+				  			<div class='col-sm-6'>
+				  				<div class='secondLevelHeading'>Backlog Items <span class='linksmall'><a href="<?=$configArray['SITE_URL'];?>backlog/create/">(Add)</a></div>
+				  				<?php
+				  					$objBacklog = new Backlog($API);
+				  					$arrGetBacklogItems = $API->convertJsonArrayToArray($objBacklog->getBacklogItemByProjectID($intGetID));
+									$arrGetBacklogItems = $arrGetBacklogItems['response'];
+
+								?>
+
+								<div class='table-responsive'>
+									<table class="table sprintTable">
+									<tr>
+										<th>Description</th>
+										<th>Progress</th>
+										<th></th>
+									</tr>
+					  				<?php
+					  					foreach($arrGetBacklogItems as $arrIndBacklog)
+					  					{
+					  						echo "<tr>";
+					  							echo "<td>".$arrIndBacklog['desc']."</td>";
+					  							echo "<td>".$arrIndBacklog['progress']."% </td>";
+					  							echo "<td><a href='".$configArray['SITE_URL']."backlog/view/".$arrIndBacklog['id']."'>View</a></td>";
+					  						echo "</tr>";
+					  					}
+
+
+					  				?>
+
+					  				</table>
+				  				</div>
+
+				  				<?php
+									//print_r($arrGetBacklogItems);
+				  				?>
 				  			</div>
 
 			  			</div>

@@ -21,7 +21,7 @@
 	$styleArray['BOOTSTRAP_JS'] = $configArray['SITE_URL']."theme/bootstrap/js/bootstrap.js";
 
 	//Allowed pages
-	$configPages = array("project","bug","employee","team","logout");
+	$configPages = array("project","bug","employee","team","backlog","logout");
 
 
 	//Basic array to store page meta information
@@ -30,6 +30,7 @@
 	$configArray["bug"]['title'] = "Bugs | ".$configArray['default']['title'];
 	$configArray["employee"]['title'] = "Employees | ".$configArray['default']['title'];
 	$configArray["team"]['title'] = "Teams | ".$configArray['default']['title'];
+	$configArray["backlog"]['title'] = "Backlog | ".$configArray['default']['title'];
 	$configArray["logout"]['title'] = "Logout | ".$configArray['default']['title'];
 
 ?>

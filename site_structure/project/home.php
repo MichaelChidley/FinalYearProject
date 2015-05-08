@@ -16,7 +16,7 @@
 
 	  		$arrUsersInProject = $API->convertJsonArrayToArray($objProject->getProjectUsers($intProjectID));
 	  		//print_r($arrUsersInProject['response']);
-	  		if(in_array($_SESSION['authenticationID'], $arrUsersInProject['response']))
+	  		if((in_array($_SESSION['authenticationID'], $arrUsersInProject['response'])) || ($objEmployee->isAdmin($_SESSION['authenticationID'])))
 	  		{
 	  			echo "<tr class='projectHomeClick' id='".$arrIndProjects['projectID']."'>";
 		  			echo "<td>".$arrIndProjects['projectTitle']."</td>";

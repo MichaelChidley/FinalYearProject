@@ -385,6 +385,10 @@ body
 	border-top: none !important;
 }
 
+.sprintTable td
+{
+	font-size: 14px;
+}
 
 .projectOwnerDetails
 {

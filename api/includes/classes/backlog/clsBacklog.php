@@ -57,6 +57,11 @@ class Backlog extends Sprint
 						return $this->getBacklogItemByProjectID($intID);
 					break;
 
+
+					case "getSingleBacklogItem":
+						return $this->getSingleBacklogItem($intID);
+					break;
+
 				}
 			}
 
@@ -119,7 +124,7 @@ class Backlog extends Sprint
 
 			while($row = mysqli_fetch_array($dbSet, MYSQL_ASSOC))
 			{
-            	array_push($arrBacklogItems, array("desc" => $row['backlogItemDesc'], "progress" => $row['backlogProgress']));
+            	array_push($arrBacklogItems, array("id" => $row['backlogID'], "desc" => $row['backlogItemDesc'], "progress" => $row['backlogProgress']));
 			}
 
             return $arrBacklogItems;
@@ -128,6 +133,14 @@ class Backlog extends Sprint
 		return false;
 
 	}
+
+	public function getSingleBacklogItem($intID)
+	{
+		$objDatabase = new Database();
+
+		return $objDatabase->returnRow("backlog", "backlogID", $intID);
+	}
+
 
 	/*----------------------------------------------------------------------------------
   	Function:	createBacklogItem
